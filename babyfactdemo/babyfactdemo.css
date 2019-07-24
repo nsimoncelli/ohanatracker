@@ -1,0 +1,17 @@
+.headerDesign {
+    height: 70px;
+    color:lightpink;
+}
+.blueColor {
+    background-color: #B9CEF3;
+}
+.footerDesign {
+    height: 50px;
+    color: white;
+}
+.flowerImage {
+    background-image: url(./spring-clipart-5.png);
+    height: 30vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
