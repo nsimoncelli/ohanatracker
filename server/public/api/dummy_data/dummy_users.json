@@ -1,17 +1,14 @@
 [
     {
         "user_id": 1,
-        "user_role": "Mom",
         "user_name": "Steve Min"
     },
     {
         "user_id": 2,
-        "user_role": "Dad",
         "user_name": "Bisham"
     },
     {
         "user_id": 3,
-        "user_role": "Care",
         "user_name": "Elliot Han"
     }
 ]
