@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />  
   <link rel="stylesheet" type="text/css" href="calendarstyle.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title></title>
+  <title>OHANA | CALENDAR</title>
 </head>
 
 <body>
-
-  <div class="calendar">
-    <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand">Icon</a>
-      <form class="form-inline">
-        <h3 class="my-2 my-sm-0">Mom</h3>
-      </form>
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm bg-success">
-          Home Page Button
-        </div>
-        <div class="col-sm bg-danger">
-          Graph Button
-        </div>
-        <div class="col-sm bg-info">
-          Calendar Button
-        </div>
+  <div class="container" style="height: 100vh; background-color:#F6F4F3; color:white;">
+    <div class="banner row py-2" style="background-color: #B9CEF3;">
+      <div class="ohanaIcon col-6">
+        <img src="../styles/images/logo.png" class="img-fluid" style="width: 45px;" alt="">
+      </div>
+      <div class="userProfile col-6 text-right" style="font-size:1.5rem;">Mom</div>
+    </div>
+    <div class="navIcons row my-5">
+      <div class="col-4 homeButtonContainer">
+        <img src="../styles/images/home.png" class="img-fluid" alt="">
+      </div>
+      <div class="col-4 graphButtonContainer">
+        <img src="../styles/images/graph.png" class="img-fluid" alt="">
+      </div>
+      <div class="col-4 calendarButtonContainer">
+        <img src="../styles/images/calendar.png" class="img-fluid" alt="">
       </div>
     </div>
-    <div class="image">
-      <h2>24, Wednesday</h2>
-      <h3>July | 2018</h3>
-    </div>
 
+    <div class="dateInfo row px-4" style="color:black; font-size:1.5rem;">
+      <div class="col-12">24, Wednesday</div>
+      <div class="col-12">July | 2018</div>
+    </div>
+  
     <div class="date">
       <div class="day">S</div>
       <div class="day">M</div>
@@ -76,32 +72,41 @@
       <div class="number">28</div>
       <div class="number">29</div>
       <div class="number">30</div>
-
     </div>
 
-    <ul class="list-group font-weight-bold">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        Current Day:
-        <span> July 24, 2019</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        Last Feeding entry:
-        <span>Mom: </br>2:45pm</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        Latest Nap:
-        <span>Mom: </br>4:00</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        Last Diaper Change:
-        <span>Mom: </br>4:15</span>
-      </li>
-    </ul>
+    <div class="dayOfInputs row">
+      <ul class="list-group col-12 px-4" style="color:black;">
+        <li class="list-group-item text-center">
+          July 24, 2019
+        </li>
+        <li class="list-group-item d-flex justify-content-around">
+            <img src="../styles/images/bottle2.png" alt="" class="img-fluid" style="height: 30px; width: auto;"> 
+            <p style="margin: 0;">Mom</p>
+            <p style="margin: 0;">2:45pm</p>   
+        </li>
+        <li class="list-group-item d-flex justify-content-around">
+            <img src="../styles/images/sleepingbaby3-b.png" alt="" class="img-fluid" style="height: 30px; width: auto;"> 
+            <p style="margin: 0;">Mom</p>
+            <p style="margin: 0;">4:00pm</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-around">
+          <img src="../styles/images/diaper.png" alt="" class="img-fluid" style="height: 30px; width: auto;">
+          <p style="margin: 0;">Mom</p>
+          <p style="margin: 0;">4:15pm</p>
+        </li>
+      </ul>      
+    </div>
+
+
+    
+    <div class="footerMotto row py-2 fixed-bottom" style="background-color: #B9CEF3; color: white;">
+      <div class="mottoContainer col-12 text-center">
+        Ohana means 'family'
+      </div>
+    </div>
+
   </div>
-
-
-
-
+  
 
 
 </body>
