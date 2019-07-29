@@ -11,8 +11,6 @@ export default class NavBar extends React.Component {
 
         changeViewtoHome(){
             this.props.changeView("home");
-
-            
         }
         changeViewtoGraph(){
             this.props.changeView("graph");
