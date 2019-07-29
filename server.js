@@ -21,7 +21,7 @@ app.get('/entries', (req, res, next) => {
     const endDate = date + " 23:59:59.999999"
     cred.connect(err => {
         if (err) throw err;
-        res.locals.con.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\` AS b WHERE finished_at BETWEEN ${startDate} AND ${endDate}`, (err, result) => {
+        res.con.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\` AS b WHERE finished_at BETWEEN ${startDate} AND ${endDate}`, (err, result) => {
             if (err) {
                 return next();
             }
@@ -36,7 +36,6 @@ const timeConvert = require('./time-convert');
 app.get('/graph/:week', (req, res, next) => {
     const now = (timeConvert(new Date().now(), 0)) + ' 23:59:59.999999';
     const weekAgo = (timeConvert(new Date().now(), 7)) + ' 00:00:00.000000';
-    
     const datestampObj = {};
     con.connect(err => {
         if (err) throw err;
