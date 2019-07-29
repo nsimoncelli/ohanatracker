@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './navbar';
 
 export default class App extends React.Component {
 
@@ -9,6 +10,7 @@ export default class App extends React.Component {
             currentUser: "Mom",
             data: []
         }
+        this.setView = this.setView.bind(this);
     }
 
     setView(changedView){
@@ -18,7 +20,10 @@ export default class App extends React.Component {
     }
     render () {
         return (
-            <h1>Hello</h1>
+            <div>
+                <NavBar currentView={this.state.view} changeView={this.setView}></NavBar>
+
+            </div>
         )
     }
 }
