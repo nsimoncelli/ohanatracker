@@ -17,9 +17,11 @@ app.get('/entries', (req, res, next) => {
             errors: ['No date provided'],
         });
     }
+    const startDate = date + " 00:00:00.000000"
+    const endDate = date + " 23:59:59.999999"
     cred.connect(err => {
         if (err) throw err;
-        res.locals.con.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\` AS b WHERE ${date} == b.date`, (err, result) => {
+        res.locals.con.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\` AS b WHERE finished_at BETWEEN ${startDate} AND ${endDate}`, (err, result) => {
             if (err) {
                 return next();
             }
@@ -30,25 +32,28 @@ app.get('/entries', (req, res, next) => {
     });
 })
 
-
+const timeConvert = require('./time-convert');
 app.get('/graph/:week', (req, res, next) => {
-    const now = new Date().now();
-    const weekAgo = now - 604800;
-    const datestampArr = {};
+    const now = (timeConvert(new Date().now(), 0)) + ' 23:59:59.999999';
+    const weekAgo = (timeConvert(new Date().now(), 7)) + ' 00:00:00.000000';
+    
+    const datestampObj = {};
     con.connect(err => {
         if (err) throw err;
-        con.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\`WHERE finished_at BETwEEN FROM_UNIXTIME(${weekAgo}) AND FROM_UNIXTIME(${now})`, function(err, result, fields) {
+        con.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\`WHERE finished_at BETwEEN ${weekAgo} AND ${now}`, function(err, result, fields) {
             if (err) {
                 return next();
             }
             result.forEach(element => {
                 let formatted = element["finished_at"].slice(11);
+                let entryType = element['entry_type'];
                 let date = new Date(formatted);
                 let day = date.getUTCDate();
                 let month = date.getUTCMonth();
-                datestampArr.push(month + '' + day);
+                let combined = month + '' + day;
+                datestampObj.entryType = combined;
                 })
-                datestampArr.sort((a,b) => {
+                datestampObj.sort((a,b) => {
                     return a - b;
                 });
             })
