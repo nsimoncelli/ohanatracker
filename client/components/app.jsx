@@ -4,7 +4,7 @@ import Header from './header';
 import Footer from './footer';
 import NavBar from './navbar';
 import LogActionButtons from './logActionButtons';
-
+import Graph from './graph';
 
 export default class App extends React.Component {
 
@@ -35,19 +35,30 @@ export default class App extends React.Component {
         if(this.state.view ==="userSelect"){
             return(
                 <React.Fragment>
-                    <Header currentUser={this.state.currentUser}/>
+                    <Header changeView={this.setView} currentUser={this.state.currentUser}/>
                     <UserSelect setUser={this.changeUser} changeView={this.setView}/> 
                     <Footer/>
                 </React.Fragment>
             )
         }else if(this.state.view ==="homepage"){
            return( <React.Fragment>
-                      <Header changeView={this.setView} currentUser={this.state.currentUser}/>
-                      <NavBar changeView={this.setView} />
-                      <LogActionButtons changeView={this.setView} />
-                      <Footer/>
-                   </React.Fragment>
-                 )
+
+                    <Header changeView={this.setView} currentUser={this.state.currentUser}/>
+                    <NavBar changeView={this.setView} />
+                    <LogActionButtons changeView={this.setView} />
+                    <Footer/>
+                </React.Fragment>
+           )
+        }else if(this.state.view === "graph") {
+            return (
+                <React.Fragment>
+                    <Header changeView={this.setView} currentUser={this.state.currentUser}/>
+                    <NavBar changeView={this.setView} />
+                    <Graph />
+                    <Footer/>
+                </React.Fragment>
+            )
+
         }
 
     }
