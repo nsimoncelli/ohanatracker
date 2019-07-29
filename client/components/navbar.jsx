@@ -11,8 +11,6 @@ export default class NavBar extends React.Component {
 
         changeViewtoHome(){
             this.props.changeView("home");
-
-            
         }
         changeViewtoGraph(){
             this.props.changeView("graph");
@@ -37,7 +35,7 @@ export default class NavBar extends React.Component {
                         <img src="/images/calendar.png" width="80" />
                         </button>
                         </form>
-                </nav>
+                    </nav>
               </div>
             )
         }
