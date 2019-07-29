@@ -3,3 +3,4 @@ node_modules
 .DS_Store
 mysql_credentials.js
 personal
+519ohana_dump.sql
