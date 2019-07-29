@@ -3,7 +3,9 @@ import React from 'react';
 export default class Header extends React.Component {
     render() {
         return(
-            <h1>header Test</h1>
+            <div>
+                <img src='images/logo.png' alt="Ohana Logo"/>
+            </div>
         )
     }
 }
