@@ -1,6 +1,9 @@
 import React from 'react';
+
 import Header from './header';
 import Footer from './footer';
+import NavBar from './navbar';
+
 
 export default class App extends React.Component {
 
@@ -11,6 +14,7 @@ export default class App extends React.Component {
             currentUser: "Mom",
             data: []
         }
+        this.setView = this.setView.bind(this);
     }
 
     setView(changedView){
@@ -20,11 +24,12 @@ export default class App extends React.Component {
     }
     render () {
         return (
+
             <React.Fragment>
                 <Header currentUser={this.state.currentUser}/>
+                <NavBar currentView={this.state.view} changeView={this.setView} />
                 <Footer />
             </React.Fragment>
-            
         )
     }
 }
