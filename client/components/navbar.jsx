@@ -35,7 +35,7 @@ export default class NavBar extends React.Component {
                         <img src="/images/calendar.png" width="80" />
                         </button>
                         </form>
-                </nav>
+                    </nav>
               </div>
             )
         }

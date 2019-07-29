@@ -3,6 +3,7 @@ import UserSelect from './userselect';
 import Header from './header';
 import Footer from './footer';
 import NavBar from './navbar';
+import LogActionButtons from './logActionButtons';
 
 
 export default class App extends React.Component {
@@ -41,11 +42,12 @@ export default class App extends React.Component {
             )
         }else if(this.state.view ==="homepage"){
            return( <React.Fragment>
-                    <Header currentUser={this.state.currentUser}/>
-                    <NavBar></NavBar>
-                    <Footer/>
-            </React.Fragment>
-           )
+                      <Header currentUser={this.state.currentUser}/>
+                      <NavBar changeView={this.setView} />
+                      <LogActionButtons changeView={this.setView} />
+                      <Footer/>
+                   </React.Fragment>
+                 )
         }
 
     }
