@@ -11,6 +11,9 @@ app.listen(3001, err => {
     console.log('started server on port 3001');
 });
 
+const timeConvert = require('./functions/time-convert.js');
+const formatDate = require('./functions/format-date.js');
+
 const cred = require('../mysql_credentials');
 const connection = mysql.createConnection(cred);
 connection.connect(err => {
@@ -20,7 +23,8 @@ connection.connect(err => {
 
 app.get('/entries', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    const { date } = req.query;
+    const date = timeConvert(req.query.date, 0);
+    console.log(date);
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
     if (!date){
         return res.status(422).send({
@@ -38,10 +42,8 @@ app.get('/entries', (req, res, next) => {
             "entries": result
         }));
     });
-})
+});
 
-const timeConvert = require('./functions/time-convert.js');
-const formatDate = require('./functions/format-date.js');
 app.get('/graph', (req, res, next) => {
     let current = Date.now();
     const now = (timeConvert(current, 0)).slice(11) + ' 23:59:59';
@@ -106,8 +108,8 @@ app.post('/create/naps', (req, res, next) => {
     const entryType = "naps";
     console.log(userId, babyId, otherInfo, finishedAt);
     let query = `INSERT INTO \`baby_entries\` 
-                    (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                    VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
+                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
     
     connection.query(query, (err, result) => {
         if (err) return next(err);
