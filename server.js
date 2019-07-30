@@ -47,6 +47,7 @@ app.get('/graph', (req, res, next) => {
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
+
     let query = `SELECT id, entry_type, other_info, finished_at 
                     FROM \`baby_entries\`WHERE finished_at 
                     BETwEEN "${weekAgo}" AND "${now}"`;
