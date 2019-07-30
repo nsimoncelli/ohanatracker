@@ -51,11 +51,10 @@ app.get('/graph', (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            console.log(result);
             result.forEach(data => {
                 let entryType = data['entry_type'];
-                let baseDate = formatDate(Date.now());
-                let combinedDate = formatDate(data['finished_at']);
+                let baseDate = formatDate(new Date(now));
+                let combinedDate = formatDate(new Date(data['finished_at']));
                 console.log(baseDate, combinedDate);
                 if (entryType) {
                     let x = 7; //difference check between baseDate and combinedDate
