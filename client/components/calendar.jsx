@@ -44,7 +44,7 @@ export default class Calendar extends React.Component{
         for (let dateIndex = 0; dateIndex<7; dateIndex++){
             days.push(
                 <div className="col col-center" key={dateIndex}>
-                    {dateFns.format(dateFns.addDays(startDate, dateIndex), dateFormat)}
+                    {dateFns.format(dateFns.addDays(startDate, dateIndex), dateFormat).substring(0,3)}
                 </div>
             )
         }
