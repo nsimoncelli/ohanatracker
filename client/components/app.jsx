@@ -4,7 +4,7 @@ import Header from './header';
 import Footer from './footer';
 import NavBar from './navbar';
 import LogActionButtons from './logActionButtons';
-
+import Calendar from './calendar';
 
 export default class App extends React.Component {
 
@@ -41,14 +41,26 @@ export default class App extends React.Component {
                 </React.Fragment>
             )
         }else if(this.state.view ==="homepage"){
-           return( <React.Fragment>
+           return( 
+                <React.Fragment>
                       <Header currentUser={this.state.currentUser}/>
                       <NavBar changeView={this.setView} />
                       <LogActionButtons changeView={this.setView} />
                       <Footer/>
                    </React.Fragment>
                  )
+        }else if(this.state.view==="calendar"){
+            return (
+
+                <React.Fragment>
+                      <Header currentUser={this.state.currentUser}/>
+                      <NavBar changeView={this.setView} />
+                      <Calendar></Calendar>
+                      <Footer/>
+                   </React.Fragment>
+            )
         }
+
 
     }
 }
