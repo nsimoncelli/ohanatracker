@@ -12,8 +12,8 @@ export default class App extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            view: "userSelect", 
-            currentUser: "",
+            view: "homepage", 
+            currentUser: "Mom",
             data: []
         }
         this.setView = this.setView.bind(this);
