@@ -230,6 +230,17 @@ main {
 }
 
 
+span {
+  transition: 300ms all ease;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.show {
+  opacity: 1;
+}
+
+
 tbody {
   display:block;
   height:162px;
@@ -243,3 +254,4 @@ thead, tbody tr {
 thead {
   width: calc( 100% - 1em )
 }
+
