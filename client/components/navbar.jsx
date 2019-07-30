@@ -10,7 +10,7 @@ export default class NavBar extends React.Component {
         }
 
         changeViewtoHome(){
-            this.props.changeView("home");
+            this.props.changeView("homepage");
         }
         changeViewtoGraph(){
             this.props.changeView("graph");

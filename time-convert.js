@@ -1,6 +1,12 @@
-exports.getTimeFromInput = function(timestamp, change) {
-    const d = new Date(timestamp*1000);
-    const timeConvert = d.getFullYear() + '-' + (d.getMonth()) + '-' + (d.getDate() - change);
+timeConvert = function(timestamp, change) {
+    const d = new Date(timestamp);
+    if (d.getMonth().length === 1) {
+        const converted = d.getFullYear() + '-0' + (d.getMonth()+1) + '-' + (d.getDate() - change);
+    } else {
+        const converted = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + (d.getDate() - change);
+    }
 
-    return timeConvert;
+    return converted;
 }
+
+module.exports = timeConvert; 
