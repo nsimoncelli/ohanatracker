@@ -1,5 +1,7 @@
 import React from 'react';
 import dateFns from 'date-fns';
+import CalendarDetails from './calendardetails';
+
 
 
 export default class Calendar extends React.Component{
@@ -8,7 +10,8 @@ export default class Calendar extends React.Component{
         super(props)
         this.state={
             currentMonth: new Date(),
-            currentDate: new Date()
+            currentDate: new Date(), 
+            selectedDate: null
         }
         this.renderHeader = this.renderHeader.bind(this);
         this.nextMonth = this.nextMonth.bind(this);
@@ -115,6 +118,7 @@ export default class Calendar extends React.Component{
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}
+            <CalendarDetails currentDate={this.state.selectedDate}/>
         </div>
         )
     }
