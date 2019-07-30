@@ -160,7 +160,7 @@ main {
 
 .calendar .body .cell {
   position: relative;
-  height: 5em;
+  height: 2.5em;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
@@ -227,4 +227,19 @@ main {
   flex-grow: 0;
   flex-basis: calc(100%/7);
   width: calc(100%/7);
+}
+
+
+tbody {
+  display:block;
+  height:162px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 100% - 1em )
 }
