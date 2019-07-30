@@ -19,6 +19,7 @@ connection.connect(err => {
 });
 
 app.get('/entries', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
     const { date } = req.query;
     if (!date){
         return res.status(422).send({
