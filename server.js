@@ -47,7 +47,7 @@ app.get('/graph', (req, res, next) => {
     const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
     connection.connect(() => {
-        connection.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\`WHERE finished_at BETwEEN "${weekAgo}" AND "${now}"`, function(err, result, fields) {
+        connection.query(`SELECT id, entry_type, other_info, finished_at FROM \`baby_entries\`WHERE finished_at BETWEEN "${weekAgo}" AND "${now}"`, function(err, result, fields) {
             if (err) {
                 return next(err);
             }
