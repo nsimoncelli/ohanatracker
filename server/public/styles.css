@@ -160,7 +160,7 @@ main {
 
 .calendar .body .cell {
   position: relative;
-  height: 5em;
+  height: 2.5em;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
@@ -229,6 +229,7 @@ main {
   width: calc(100%/7);
 }
 
+
 span {
   transition: 300ms all ease;
   opacity: 0;
@@ -238,3 +239,19 @@ span {
 .show {
   opacity: 1;
 }
+
+
+tbody {
+  display:block;
+  height:162px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 100% - 1em )
+}
+
