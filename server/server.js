@@ -19,6 +19,7 @@ connection.connect(err => {
 });
 
 app.get('/entries', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
     const { date } = req.query;
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
     if (!date){
@@ -48,6 +49,7 @@ app.get('/graph', (req, res, next) => {
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
+
     let query = `SELECT id, entry_type, other_info, finished_at 
                     FROM \`baby_entries\`WHERE finished_at 
                     BETwEEN "${weekAgo}" AND "${now}"`;
