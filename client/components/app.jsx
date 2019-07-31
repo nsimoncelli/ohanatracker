@@ -22,6 +22,7 @@ export default class App extends React.Component {
         this.postNap = this.postNap.bind(this);
         this.getGraphData = this.getGraphData.bind(this);
         this.postFeedings = this.postFeedings.bind(this);
+        this.postChanges = this.postChanges.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +67,16 @@ export default class App extends React.Component {
         })
     }
 
+    postChanges(userId, babyId, changeType) {
+        fetch(`http://localhost:3001/create/changes?userId=${userId}&babyId=${babyId}&otherInfo=${changeType}`, {
+            method: 'POST',
+        })
+        .then(data => console.log('Request Successful:', data))
+        .catch(error=> {
+            console.error('error:', error);
+        })
+    }
+
     postFeedings(userId, babyId) {
         fetch(`http://localhost:3001/create/feedings?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
             method: 'POST',
@@ -92,8 +103,12 @@ export default class App extends React.Component {
         if(this.state.view ==="userSelect"){
             return (
                 <React.Fragment>
-                    <Header changeView={this.setView} currentUser={this.state.currentUser}/>
-                    <UserSelect setUser={this.changeUser} changeView={this.setView}/>
+                    <Header 
+                        changeView={this.setView} 
+                        currentUser={this.state.currentUser}/>
+                    <UserSelect 
+                        setUser={this.changeUser} 
+                        changeView={this.setView}/>
                     <Footer/>
                 </React.Fragment>
             )
@@ -101,33 +116,53 @@ export default class App extends React.Component {
         }else if(this.state.view==="calendar"){
             return (
                 <React.Fragment>
-                      <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
+                      <Header 
+                        currentView={this.state.view} 
+                        changeView={this.setView} 
+                        currentUser={this.state.currentUser}/>
                       <NavBar changeView={this.setView} />
-                      <Calendar getDateDataFromDatabase={this.getEntries}></Calendar>
+                      <Calendar 
+                        getDateDataFromDatabase={this.getEntries} />
                       <Footer/>
                    </React.Fragment>
             )
         } else if (this.state.view === "homepage") {
            return( <React.Fragment>
-                    <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
+                    <Header 
+                        currentView={this.state.view} 
+                        changeView={this.setView} 
+                        currentUser={this.state.currentUser} />
                     <NavBar changeView={this.setView} />
-                    <LogActionButtons postFeedings={this.postFeedings} postNap={this.postNap}changeView={this.setView} />
+                    <LogActionButtons 
+                        postChanges={this.postChanges} 
+                        postFeedings={this.postFeedings} 
+                        postNap={this.postNap} 
+                        changeView={this.setView} />
                     <Footer/>
                 </React.Fragment>
            )
         } else if(this.state.view === "graph") {
             return (
                 <React.Fragment>
-                    <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
+                    <Header 
+                        currentView={this.state.view} 
+                        changeView={this.setView} 
+                        currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
-                    <Graph feedings={this.state.data.feedings} changes={this.state.data.changes} naps={this.state.data.naps}/>
+                    <Graph 
+                        feedings={this.state.data.feedings} 
+                        changes={this.state.data.changes} 
+                        naps={this.state.data.naps}/>
                     <Footer/>
                 </React.Fragment>
             )
         } else if (this.state.view === "infoPage") {
             return (
                 <React.Fragment>
-                    <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
+                    <Header 
+                        currentView={this.state.view} 
+                        changeView={this.setView} 
+                        currentUser={this.state.currentUser}/>
                     <InfoPage />
                     <Footer />
                 </React.Fragment>
