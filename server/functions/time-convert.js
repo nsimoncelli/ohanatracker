@@ -4,7 +4,7 @@ timeConvert = function( timestamp, change) {
         let d = new Date();
         let date = `${d.getFullYear()}-${(d.getMonth()+1)}-${d.getDate()}`;
         let time = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
-        let converted = date + time;
+        let converted = date + ' ' + time;
         return converted;
 
     } else if (timestamp === "now" && change) {
@@ -12,7 +12,7 @@ timeConvert = function( timestamp, change) {
         d.setDate( d.getDate() - change );
         let date = `${d.getFullYear()}-${(d.getMonth()+1)}-${d.getDate()}`;
         let time = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
-        let converted = date + time;
+        let converted = date + ' ' + time;
         return converted;
     }
 }

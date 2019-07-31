@@ -3,7 +3,6 @@ import dateFns from 'date-fns';
 import CalendarDetails from './calendardetails';
 var format = require('date-fns/format');
 
-
 export default class Calendar extends React.Component{
 
     constructor(props){
@@ -41,7 +40,6 @@ export default class Calendar extends React.Component{
     renderDays(){
         const dateFormat = "dddd";
         const days = [];
-
         let startDate = dateFns.startOfWeek(this.state.currentMonth);
 
         for (let dateIndex = 0; dateIndex<7; dateIndex++){
@@ -51,6 +49,7 @@ export default class Calendar extends React.Component{
                 </div>
             )
         }
+
         return <div className="days row"> {days}</div>
     }
     renderCells(){
@@ -59,7 +58,6 @@ export default class Calendar extends React.Component{
         const monthEnd = dateFns.endOfMonth(monthStart);
         const startDate = dateFns.startOfWeek(monthStart);
         const endDate = dateFns.endOfWeek(monthEnd);
-
         const dateFormat = "D";
         const rows = [];
         let days = [];
@@ -108,7 +106,6 @@ export default class Calendar extends React.Component{
             this.state.selectedDate,
             'YYYY-MM-DD'
         )
-        console.log("formatted date = ", reformattedDate);
         this.props.getDateDataFromDatabase(reformattedDate);
     }
     nextMonth() {
@@ -123,16 +120,18 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-        // console.log("calendar props",this.props, this.state.selectedDate);
+      
         return(
         <div className="calendar">
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}
-            <CalendarDetails getDateDataFromDatabase={this.props.getDateDataFromDatabase} currentDate={this.state.selectedDate}/>
+            <CalendarDetails
+            getDateDataFromDatabase={this.props.getDateDataFromDatabase}
+            currentDate={this.state.selectedDate}
+            dataFromSelectedDate={this.props.individualDateData}
+              />
         </div>
         )
     }
-
-
 }

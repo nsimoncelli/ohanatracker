@@ -29,7 +29,7 @@ class Graph extends React.Component {
           labels: this.createDateArray(),
           datasets: [{
             label: 'Feedings',
-            backgroundColor: 'rgb(1, 1, 132, .2)',
+            backgroundColor: 'rgb(25, 100, 255, .2)',
             borderColor: 'rgb(25, 100, 255, .8)',
             data: this.props.feedings
           }]
@@ -38,7 +38,7 @@ class Graph extends React.Component {
           labels: this.createDateArray(),
           datasets: [{
             label: 'Changes',
-            backgroundColor: 'rgb(1, 1, 132, .2)',
+            backgroundColor: 'rgb(25, 200, 150, .2)',
             borderColor: 'rgb(25, 200, 150, .8)',
             data: this.props.changes
           }]
@@ -47,7 +47,7 @@ class Graph extends React.Component {
           labels: this.createDateArray(),
           datasets: [{
             label: 'Naps',
-            backgroundColor: 'rgb(1, 99, 132, .4)',
+            backgroundColor: 'rgb(230, 0, 150, .2)',
             borderColor: 'rgb(230, 0, 150, .8)',
             data: this.props.naps
           }]
@@ -61,8 +61,6 @@ class Graph extends React.Component {
           </React.Fragment>
         );
       }
-
-
 }
 
 export default Graph;
