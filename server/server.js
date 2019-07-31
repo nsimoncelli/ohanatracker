@@ -25,14 +25,14 @@ app.get('/entries', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     const { date } = req.query;
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
-    if (!date){
+    if (!date) {
         return res.status(422).send({
             errors: ['No date provided'],
         });
     }
     const startDate = date.concat(" 00:00:00");
     const endDate = date.concat(" 23:59:59");
-    let query = `SELECT id, entry_type, other_info, finished_at 
+    let query = `SELECT id, user_id, baby_id, entry_type, other_info, finished_at 
                 FROM \`baby_entries\` WHERE finished_at 
                 BETWEEN "${startDate}" AND "${endDate}"`;
     connection.query(query, (err, result) => {
