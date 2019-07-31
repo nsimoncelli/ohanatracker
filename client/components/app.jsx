@@ -13,7 +13,8 @@ export default class App extends React.Component {
         this.state = {
             view: "homepage",
             currentUser: "Mom",
-            data: []
+            data: [],
+            graphData: []
         }
         this.setView = this.setView.bind(this);
         this.changeUser = this.changeUser.bind(this);
@@ -32,21 +33,19 @@ export default class App extends React.Component {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
-            this.setState({ data:res})
+
+            this.setState({ graphData:res})
         })
         .catch(error => console.error('error: ', error))
     }
 
     getEntries(targetDate) {
-        console.log("target date from calendar", targetDate);
         fetch('http://localhost:3001/entries?date=' + targetDate)
         .then(response => {
             return response.json();
         })
         .then(myJson => {
             this.setState({data: myJson});
-            console.log("data from response", myJson);
         })
         .catch(error => {
             console.error('error: ', error);
