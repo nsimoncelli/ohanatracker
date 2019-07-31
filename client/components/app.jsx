@@ -6,6 +6,7 @@ import NavBar from './navbar';
 import LogActionButtons from './logActionButtons';
 import Calendar from './calendar';
 import Graph from './graph';
+
 export default class App extends React.Component {
     constructor(props){
         super(props)
@@ -17,14 +18,17 @@ export default class App extends React.Component {
         this.setView = this.setView.bind(this);
         this.changeUser = this.changeUser.bind(this);
         this.getEntries = this.getEntries.bind(this);
+        this.postNap = this.postNap.bind(this);
     }
 
     componentDidMount() {
         this.getEntries();
+        this.postNap(1, 3, {});
     }
 
     getEntries(targetDate) {
         fetch('http://localhost:3001/entries?date=' + targetDate)
+
         .then(response => {
             return response.json();
         })
@@ -36,19 +40,31 @@ export default class App extends React.Component {
             console.error('error: ', error);
         })
     }
+
+    postNap(userId, babyId) {
+        fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
+            method: 'POST',
+        })
+        .catch(error=> {
+            console.error('error:', error);
+        })
+    }
+
     setView(changedView){
         this.setState({
             view: changedView
         })
     }
+
     changeUser(newUser){
         this.setState({
             currentUser: newUser
         })
     }
-    render () {
+
+    render() {
         if(this.state.view ==="userSelect"){
-            return(
+            return (
                 <React.Fragment>
                     <Header changeView={this.setView} currentUser={this.state.currentUser}/>
                     <UserSelect setUser={this.changeUser} changeView={this.setView}/> 
@@ -56,7 +72,7 @@ export default class App extends React.Component {
                 </React.Fragment>
             )
         
-        }else if(this.state.view==="calendar"){
+        } else if(this.state.view==="calendar"){
             return (
                 <React.Fragment>
                       <Header changeView={this.setView} currentUser={this.state.currentUser}/>
@@ -66,14 +82,15 @@ export default class App extends React.Component {
                    </React.Fragment>
             )
         } else if (this.state.view === "homepage") {
-           return( <React.Fragment>
+           return ( 
+                <React.Fragment>
                     <Header changeView={this.setView} currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
-                    <LogActionButtons changeView={this.setView} />
+                    <LogActionButtons postNap={this.postNap}changeView={this.setView} />
                     <Footer/>
                 </React.Fragment>
            )
-        }else if(this.state.view === "graph") {
+        } else if(this.state.view === "graph") {
             return (
                 <React.Fragment>
                     <Header changeView={this.setView} currentUser={this.state.currentUser}/>

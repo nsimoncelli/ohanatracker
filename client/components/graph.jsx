@@ -8,7 +8,7 @@ class Graph extends React.Component {
           labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           datasets: [{
             label: 'Feedings',
-            backgroundColor: 'rgb(255, 99, 132, 0)',
+            backgroundColor: 'rgb(25, 100, 255, .2)',
             borderColor: 'rgb(25, 100, 255, .8)',
             data: [2, 4, 5, 1, 6, 3, 8]
           }]
@@ -17,7 +17,7 @@ class Graph extends React.Component {
           labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           datasets: [{
             label: 'Changes',
-            backgroundColor: 'rgb(255, 99, 132, 0)',
+            backgroundColor: 'rgb(25, 200, 150, .2)',
             borderColor: 'rgb(25, 200, 150, .8)',
             data: [5, 3, 2, 7, 4, 9, 5]
           }]
@@ -26,7 +26,7 @@ class Graph extends React.Component {
           labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           datasets: [{
             label: 'Naps',
-            backgroundColor: 'rgb(255, 99, 132, 0)',
+            backgroundColor: 'rgb(230, 0, 150, .2)',
             borderColor: 'rgb(230, 0, 150, .8)',
             data: [1, 8, 2, 4, 7, 6, 3]
           }]

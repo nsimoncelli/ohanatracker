@@ -45,6 +45,7 @@ app.get('/entries', (req, res, next) => {
 });
 
 app.get('/graph', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let current = Date.now();
     const now = (timeConvert(current, 0)).slice(11) + ' 23:59:59';
     const weekAgo = (timeConvert(current, 7)).slice(11) + ' 00:00:00';
@@ -92,6 +93,7 @@ app.get('/graph', (req, res, next) => {
 });
 
 app.post('/create/naps', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     // userId = user_id(db)
     // babyId
