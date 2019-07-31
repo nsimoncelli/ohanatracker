@@ -40,8 +40,6 @@ class Graph extends React.Component {
           </React.Fragment>
         );
       }
-
-
 }
 
 export default Graph;

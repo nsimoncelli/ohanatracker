@@ -27,7 +27,6 @@ export default class App extends React.Component {
         this.postNap = this.postNap.bind(this);
         this.getGraphData = this.getGraphData.bind(this);
         this.receiveActionState = this.receiveActionState.bind(this);
-
         this.postFeedings = this.postFeedings.bind(this);
         this.postChanges = this.postChanges.bind(this);
     }
@@ -47,15 +46,14 @@ export default class App extends React.Component {
         })
         .then(res => res.json())
         .then(res => {
-
             this.setState({ graphData:res})
+
         })
         .catch(error => console.error('error: ', error))
     }
 
     getEntries(targetDate) {
         fetch('http://localhost:3001/entries?date=' + targetDate)
-
         .then(response => {
             return response.json();
         })
@@ -153,7 +151,6 @@ export default class App extends React.Component {
                         postFeedings={this.postFeedings} 
                         postNap={this.postNap} 
                         changeView={this.setView} />
-               
                     <Footer/>
                 </React.Fragment>
            )
