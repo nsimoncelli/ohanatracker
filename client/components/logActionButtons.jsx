@@ -11,6 +11,7 @@ class LogActionButtons extends React.Component {
         this.feedingClickHandler = this.feedingClickHandler.bind(this);
         this.nappingClickHandler = this.nappingClickHandler.bind(this);
         this.getCurrentTime = this.getCurrentTime.bind(this);
+        this.handlePostNap = this.handlePostNap.bind(this);
     }
 
     showNotification() {
@@ -50,6 +51,11 @@ class LogActionButtons extends React.Component {
         return dateTime;
     }
 
+    handlePostNap() {
+        this.props.postNap(1, 2);
+        console.log('hello');
+    }
+
     render() {
         return(
             <div className="inputContainer row py-5 mt-4">
@@ -63,7 +69,7 @@ class LogActionButtons extends React.Component {
                         <div className="feedingButtonContainer col-6">
                             <img src="/images/bottle2.png" height="150px" width="auto" onClick={this.feedingClickHandler} />
                         </div>
-                        <div className="nappingButtonContainer col-6">
+                        <div onClick={this.handlePostNap} className="nappingButtonContainer col-6">
                             <img src="/images/sleepingbaby3-b.png" height="150px" width="auto" onClick={this.nappingClickHandler} />    
                         </div>
                     </div>

@@ -45,14 +45,9 @@ app.get('/entries', (req, res, next) => {
 
 app.get('/graph', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-<<<<<<< HEAD
     let current = Date.now();
     const now = (timeConvert(current, 0)).slice(11) + ' 23:59:59';
     const weekAgo = (timeConvert(current, 7)).slice(11) + ' 00:00:00';
-=======
-    const now = (timeConvert("now", 0)).slice(0,9) + ' 23:59:59';
-    const weekAgo = (timeConvert("now", 7)).slice(0,9) + ' 00:00:00';
->>>>>>> dev
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
