@@ -45,8 +45,9 @@ app.get('/entries', (req, res, next) => {
 
 app.get('/graph', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    const now = (timeConvert("now", 0)).slice(0,9) + ' 23:59:59';
-    const weekAgo = (timeConvert("now", 7)).slice(0,9) + ' 00:00:00';
+    let current = Date.now();
+    const now = (timeConvert(current, 0)).slice(11) + ' 23:59:59';
+    const weekAgo = (timeConvert(current, 7)).slice(11) + ' 00:00:00';
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -91,6 +92,7 @@ app.get('/graph', (req, res, next) => {
 });
 
 app.post('/create/naps', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     // userId = user_id(db)
     // babyId
@@ -121,6 +123,7 @@ app.post('/create/naps', (req, res, next) => {
 });
 
 app.post('/create/changes', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     console.log(otherInfo);
     if (!userId || !babyId || !otherInfo) {
@@ -161,8 +164,8 @@ app.post('/create/changes', (req, res, next) => {
 })
 
 app.post('/create/feedings', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
-
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
