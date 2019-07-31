@@ -44,6 +44,7 @@ app.get('/entries', (req, res, next) => {
 });
 
 app.get('/graph', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
     const now = (timeConvert("now", 0)).slice(0,9) + ' 23:59:59';
     const weekAgo = (timeConvert("now", 7)).slice(0,9) + ' 00:00:00';
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -108,7 +109,7 @@ app.post('/create/naps', (req, res, next) => {
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
                 VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
-    
+
     connection.query(query, (err, result) => {
         if (err) return next(err);
         const output = {
@@ -135,7 +136,7 @@ app.post('/create/changes', (req, res, next) => {
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
                 VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
-    
+
     connection.query(query, (err, result) => {
         if (err) return next(err);
         const output = {
