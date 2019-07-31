@@ -43,6 +43,7 @@ export default class App extends React.Component {
     }
 
     getEntries(targetDate) {
+        console.log("target date from calendar", targetDate);
         fetch('http://localhost:3001/entries?date=' + targetDate)
 
         .then(response => {
@@ -50,7 +51,7 @@ export default class App extends React.Component {
         })
         .then(myJson => {
             this.setState({data: myJson});
-            return(myJson)
+            console.log("data from response", myJson);
         })
         .catch(error => {
             console.error('error: ', error);
@@ -122,7 +123,9 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                       <NavBar changeView={this.setView} />
                       <Calendar 
+                        individualDateData={this.state.data} 
                         getDateDataFromDatabase={this.getEntries} />
+
                       <Footer/>
                    </React.Fragment>
             )

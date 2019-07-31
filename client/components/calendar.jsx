@@ -1,7 +1,7 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import CalendarDetails from './calendardetails';
-
+var format = require('date-fns/format');
 
 
 export default class Calendar extends React.Component{
@@ -70,6 +70,7 @@ export default class Calendar extends React.Component{
             for (var dayIndex = 0; dayIndex <7; dayIndex++){
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
+                // console.log("console logged day", day)
                 days.push(
                     <div
                     className={`col cell ${
@@ -100,11 +101,15 @@ export default class Calendar extends React.Component{
         this.setState({
             selectedDate: day
         })
-        // this.props.getDateDataFromDatabase(this.selectedDate)
-        this.setState({
-            selectedDateData: this.props.getDateDataFromDatabase(this.selectedDate)
-        })
-        console.log("state after fetch call ", this.state.selectedDateData)
+        if(this.state.selectedDate===null){
+            return;
+        }
+        var reformattedDate= format(
+            this.state.selectedDate,
+            'YYYY-MM-DD'
+        )
+        console.log("formatted date = ", reformattedDate);
+        this.props.getDateDataFromDatabase(reformattedDate);
     }
     nextMonth() {
         this.setState({
@@ -118,12 +123,13 @@ export default class Calendar extends React.Component{
     }
 
     render(){
+        // console.log("calendar props",this.props, this.state.selectedDate);
         return(
         <div className="calendar">
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}
-            <CalendarDetails currentDate={this.state.selectedDate}/>
+            <CalendarDetails getDateDataFromDatabase={this.props.getDateDataFromDatabase} currentDate={this.state.selectedDate}/>
         </div>
         )
     }
