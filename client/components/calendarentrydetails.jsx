@@ -24,7 +24,7 @@ export default class CalendarEntryDetails extends React.Component{
           }
 
         render(){
-            // console.log("props from db", this.props.children.finished_at);
+            console.log("props from db", this.props.children);
             // var finalBabyTime= this.formatAMPM(this.props.children.finished_at);
             // var babyEventTime = new Date(this.props.children.finished_at);
             // this.formatAMPM(new Date(this.props.children.finished_at));
@@ -39,7 +39,15 @@ export default class CalendarEntryDetails extends React.Component{
             }else if(this.props.children.entry_type==="changes"){
                 entryType = "changing";
             }
-            
+            var backgroundColorForDiv = "";
+
+            if (this.props.children.user_id===1){
+                backgroundColorForDiv = "#B9CEF3"
+            }else if (this.props.children.user_id===2){
+                backgroundColorForDiv = "#FFA8CC"
+            }else if(this.props.children.user_id===3){
+                backgroundColorForDiv = "#9BE79E"
+            }
             var changeType = ""
             if(this.props.children.other_info.change_type===1){
                 changeType = "Pee";
@@ -50,7 +58,7 @@ export default class CalendarEntryDetails extends React.Component{
             }
             
             return (
-                <tr>
+                <tr style ={{backgroundColor: backgroundColorForDiv}}>
                     <th scope="row">{finalBabyTime}</th>
                     <td>{entryType}</td>
                     <td>{changeType}</td>
