@@ -29,8 +29,8 @@ export default class App extends React.Component {
             return response.json();
         })
         .then(myJson => {
-            console.log(myJson);
             this.setState({data: myJson});
+            return(myJson)
         })
         .catch(error => {
             console.error('error: ', error);
@@ -61,7 +61,7 @@ export default class App extends React.Component {
                 <React.Fragment>
                       <Header changeView={this.setView} currentUser={this.state.currentUser}/>
                       <NavBar changeView={this.setView} />
-                      <Calendar></Calendar>
+                      <Calendar getDateDataFromDatabase={this.getEntries}></Calendar>
                       <Footer/>
                    </React.Fragment>
             )

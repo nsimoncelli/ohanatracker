@@ -100,6 +100,11 @@ export default class Calendar extends React.Component{
         this.setState({
             selectedDate: day
         })
+        // this.props.getDateDataFromDatabase(this.selectedDate)
+        this.setState({
+            selectedDateData: this.props.getDateDataFromDatabase(this.selectedDate)
+        })
+        console.log("state after fetch call ", this.state.selectedDateData)
     }
     nextMonth() {
         this.setState({
