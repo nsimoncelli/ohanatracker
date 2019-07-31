@@ -7,6 +7,7 @@ import LogActionButtons from './logActionButtons';
 import Calendar from './calendar';
 import Graph from './graph';
 import InfoPage from './infopage';
+
 export default class App extends React.Component {
     constructor(props){
         super(props)
