@@ -53,8 +53,11 @@ export default class CalendarDetails extends React.Component{
 
 
         render() {
+          // console.log("calendar details props", this.props);
           var selectedDate = "Select a Date";
-
+          // var currentDateData= this.props.getDataFromDataBase(this.props.currentDate);
+          // console.log("calendar details data = ", currentDateData);
+          
           if(this.props.currentDate){
             var dateToString = this.props.currentDate.toString();
             selectedDate = dateToString.substr(0,15);
