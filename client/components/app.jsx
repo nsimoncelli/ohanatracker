@@ -10,17 +10,31 @@ export default class App extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            view: "homepage", 
+            view: "homepage",
             currentUser: "Mom",
             data: []
         }
         this.setView = this.setView.bind(this);
         this.changeUser = this.changeUser.bind(this);
         this.getEntries = this.getEntries.bind(this);
+        this.getGraphData = this.getGraphData.bind(this);
     }
 
     componentDidMount() {
         this.getEntries();
+        this.getGraphData();
+    }
+
+    getGraphData() {
+    fetch('http://localhost:3001/graph', {
+        method: 'GET'
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            this.setState({ data:res})
+        })
+        .catch(error => console.error('error: ', error))
     }
 
     getEntries(targetDate) {
@@ -51,11 +65,11 @@ export default class App extends React.Component {
             return(
                 <React.Fragment>
                     <Header changeView={this.setView} currentUser={this.state.currentUser}/>
-                    <UserSelect setUser={this.changeUser} changeView={this.setView}/> 
+                    <UserSelect setUser={this.changeUser} changeView={this.setView}/>
                     <Footer/>
                 </React.Fragment>
             )
-        
+
         }else if(this.state.view==="calendar"){
             return (
                 <React.Fragment>
