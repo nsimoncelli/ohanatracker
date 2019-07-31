@@ -21,11 +21,11 @@ export default class App extends React.Component {
         this.getEntries = this.getEntries.bind(this);
         this.postNap = this.postNap.bind(this);
         this.getGraphData = this.getGraphData.bind(this);
+        this.postFeedings = this.postFeedings.bind(this);
     }
 
     componentDidMount() {
         this.getEntries();
-        this.postNap(1, 3, {});
         this.getGraphData();
     }
 
@@ -60,6 +60,17 @@ export default class App extends React.Component {
         fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
             method: 'POST',
         })
+        .then(data => console.log('Request Successful:', data))
+        .catch(error=> {
+            console.error('error:', error);
+        })
+    }
+
+    postFeedings(userId, babyId) {
+        fetch(`http://localhost:3001/create/feedings?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
+            method: 'POST',
+        })
+        .then(data => console.log('Request Successful:', data))
         .catch(error=> {
             console.error('error:', error);
         })
@@ -100,7 +111,7 @@ export default class App extends React.Component {
            return( <React.Fragment>
                     <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
-                    <LogActionButtons postNap={this.postNap}changeView={this.setView} />
+                    <LogActionButtons postFeedings={this.postFeedings} postNap={this.postNap}changeView={this.setView} />
                     <Footer/>
                 </React.Fragment>
            )

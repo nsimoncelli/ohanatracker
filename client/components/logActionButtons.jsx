@@ -15,6 +15,7 @@ class LogActionButtons extends React.Component {
         this.getCurrentTime = this.getCurrentTime.bind(this);
         this.handlePostNap = this.handlePostNap.bind(this);
         this.cancelDiapering = this.cancelDiapering.bind(this);
+        this.handlePostFeedings = this.handlePostFeedings.bind(this);
     }
 
     showNotification() {
@@ -25,7 +26,7 @@ class LogActionButtons extends React.Component {
                 show: false,
                 view: 'main'
             });
-        }, 1000);
+        }, 1500);
     }
 
     diaperClickHandler() {
@@ -35,7 +36,7 @@ class LogActionButtons extends React.Component {
 
     feedingClickHandler() {
         this.showNotification();
-        console.log(this.getCurrentTime());
+        this.handlePostFeedings();
     }
 
     nappingClickHandler() {
@@ -44,10 +45,10 @@ class LogActionButtons extends React.Component {
         if(this.state.awake === true){
             this.setState({ awake : awakeState})
         } else if(this.state.awake === false) {
+            this.handlePostNap();
             this.setState({ awake : awakeState})
         }
 
-        
         this.showNotification();
         console.log(this.getCurrentTime());
     }
@@ -66,8 +67,11 @@ class LogActionButtons extends React.Component {
     }
 
     handlePostNap() {
-        this.props.postNap(1, 2);
-        console.log('hello');
+        this.props.postNap(1, 5);
+    }
+
+    handlePostFeedings() {
+        this.props.postFeedings(1,3);
     }
 
     render() {
@@ -111,9 +115,6 @@ class LogActionButtons extends React.Component {
                             <div className="diapering2 col-6">
                                 <img src="/images/poop4.png" height="150px" width="auto" onClick={this.feedingClickHandler} />    
                             </div>
-                        </div>
-                        <div onClick={this.handlePostNap} className="nappingButtonContainer col-6">
-                            <img src="/images/sleepingbaby3-b.png" height="150px" width="auto" onClick={this.nappingClickHandler} />
                         </div>
                         <div className="cancelButton row my-3">
                             <div className="cancelButtonContainer col-12 text-center">

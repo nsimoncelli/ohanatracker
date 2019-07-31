@@ -123,6 +123,7 @@ app.post('/create/naps', (req, res, next) => {
 });
 
 app.post('/create/changes', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     console.log(otherInfo);
     if (!userId || !babyId || !otherInfo) {
@@ -163,8 +164,8 @@ app.post('/create/changes', (req, res, next) => {
 })
 
 app.post('/create/feedings', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
-
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
