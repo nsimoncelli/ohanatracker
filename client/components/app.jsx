@@ -47,7 +47,7 @@ export default class App extends React.Component {
         .then(res => res.json())
         .then(res => {
             this.setState({ graphData:res})
-
+            this.setState({ data:res})
         })
         .catch(error => console.error('error: ', error))
     }
