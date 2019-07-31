@@ -6,11 +6,7 @@ import NavBar from './navbar';
 import LogActionButtons from './logActionButtons';
 import Calendar from './calendar';
 import Graph from './graph';
-<<<<<<< HEAD
-
-=======
 import InfoPage from './infopage';
->>>>>>> dev
 export default class App extends React.Component {
     constructor(props){
         super(props)
