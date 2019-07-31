@@ -175,7 +175,7 @@ app.post('/create/feedings', (req, res, next) => {
     (!req.query.date) ? datetime = "now" : datetime = req.query.date;
     const finishedAt = timeConvert(datetime, 0);
     const entryType = "feedings";
-    
+    console.log(finishedAt);
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
                 VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
