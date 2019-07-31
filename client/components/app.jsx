@@ -31,7 +31,7 @@ export default class App extends React.Component {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
+            console.log(res);
             this.setState({ data:res})
         })
         .catch(error => console.error('error: ', error))
@@ -92,7 +92,7 @@ export default class App extends React.Component {
                 <React.Fragment>
                     <Header changeView={this.setView} currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
-                    <Graph getEntries={this.getEntries} />
+                    <Graph feedings={this.state.data.feedings} changes={this.state.data.changes} naps={this.state.data.naps}/>
                     <Footer/>
                 </React.Fragment>
             )
