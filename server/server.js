@@ -23,7 +23,7 @@ connection.connect(err => {
 
 app.get('/entries', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    const date = timeConvert(req.query.date, 0);
+    const { date } = req.query;
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
     if (!date){
         return res.status(422).send({
@@ -50,7 +50,7 @@ app.get('/graph', (req, res, next) => {
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
-
+    console.log(now, weekAgo);
     let query = `SELECT id, entry_type, other_info, finished_at 
                     FROM \`baby_entries\`WHERE finished_at 
                     BETwEEN "${weekAgo}" AND "${now}"`;
@@ -104,11 +104,11 @@ app.post('/create/naps', (req, res, next) => {
     let datetime;
     (!req.query.date) ? datetime = "now" : datetime = req.query.date;
     const finishedAt = timeConvert(datetime, 0);
+    const startedAt = timeConvert(req.query.startedAt, 0);
     const entryType = "naps";
-    console.log(userId, babyId, otherInfo, finishedAt);
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                VALUES (NULL, "${babyId}", "${userId}", "${startedAt}", "${finishedAt}", "${entryType}", "${otherInfo}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);
