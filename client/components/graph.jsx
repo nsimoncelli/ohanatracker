@@ -2,13 +2,14 @@ import React from 'react';
 import {Line} from 'react-chartjs-2';
 
 class Graph extends React.Component {
-
     render() {
+        let today = new Date();
+        let date = (today.getMonth()+1)+'-'+ today.getDate() +'-'+ today.getFullYear();
         let data = {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          labels: [date],
           datasets: [{
             label: 'Feedings',
-            backgroundColor: 'rgb(255, 99, 132, 0)',
+            backgroundColor: 'rgb(255, 99, 132, .2)',
             borderColor: 'rgb(25, 100, 255, .8)',
             data: this.props.feedings
           }]
@@ -17,7 +18,7 @@ class Graph extends React.Component {
           labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           datasets: [{
             label: 'Changes',
-            backgroundColor: 'rgb(255, 99, 132, 0)',
+            backgroundColor: 'rgb(255, 99, 132, .2)',
             borderColor: 'rgb(25, 200, 150, .8)',
             data: this.props.changes
           }]
@@ -26,7 +27,7 @@ class Graph extends React.Component {
           labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           datasets: [{
             label: 'Naps',
-            backgroundColor: 'rgb(255, 99, 132, 0)',
+            backgroundColor: 'rgb(255, 99, 132, .4)',
             borderColor: 'rgb(230, 0, 150, .8)',
             data: this.props.naps
           }]

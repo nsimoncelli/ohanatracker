@@ -132,7 +132,7 @@ app.post('/create/changes', (req, res, next) => {
     if (otherInfo == 1) {
         changeType = `{\\"change_type\\": 1}`;
     } else if (otherInfo == 2) {
-        changeType = `{\\"change_type\\": 2}`;  
+        changeType = `{\\"change_type\\": 2}`;
     } else if (otherInfo == 3) {
         changeType = '{\\"change_type\\": 3}';
     } else {
@@ -172,7 +172,7 @@ app.post('/create/feedings', (req, res, next) => {
     (!req.query.date) ? datetime = "now" : datetime = req.query.date;
     const finishedAt = timeConvert(datetime, 0);
     const entryType = "feedings";
-    
+
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
                 VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
