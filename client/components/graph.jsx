@@ -10,7 +10,7 @@ class Graph extends React.Component {
             label: 'Feedings',
             backgroundColor: 'rgb(25, 100, 255, .2)',
             borderColor: 'rgb(25, 100, 255, .8)',
-            data: [2, 4, 5, 1, 6, 3, 8]
+            data: this.props.feedings
           }]
         };
         let data2 = {
@@ -19,7 +19,7 @@ class Graph extends React.Component {
             label: 'Changes',
             backgroundColor: 'rgb(25, 200, 150, .2)',
             borderColor: 'rgb(25, 200, 150, .8)',
-            data: [5, 3, 2, 7, 4, 9, 5]
+            data: this.props.changes
           }]
         };
         let data3 = {
@@ -28,7 +28,7 @@ class Graph extends React.Component {
             label: 'Naps',
             backgroundColor: 'rgb(230, 0, 150, .2)',
             borderColor: 'rgb(230, 0, 150, .8)',
-            data: [1, 8, 2, 4, 7, 6, 3]
+            data: this.props.naps
           }]
         };
         return (

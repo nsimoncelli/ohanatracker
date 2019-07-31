@@ -11,7 +11,7 @@ export default class App extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            view: "homepage", 
+            view: "homepage",
             currentUser: "Mom",
             data: []
         }
@@ -19,11 +19,25 @@ export default class App extends React.Component {
         this.changeUser = this.changeUser.bind(this);
         this.getEntries = this.getEntries.bind(this);
         this.postNap = this.postNap.bind(this);
+        this.getGraphData = this.getGraphData.bind(this);
     }
 
     componentDidMount() {
         this.getEntries();
         this.postNap(1, 3, {});
+        this.getGraphData();
+    }
+
+    getGraphData() {
+    fetch('http://localhost:3001/graph', {
+        method: 'GET'
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            this.setState({ data:res})
+        })
+        .catch(error => console.error('error: ', error))
     }
 
     getEntries(targetDate) {
@@ -67,12 +81,12 @@ export default class App extends React.Component {
             return (
                 <React.Fragment>
                     <Header changeView={this.setView} currentUser={this.state.currentUser}/>
-                    <UserSelect setUser={this.changeUser} changeView={this.setView}/> 
+                    <UserSelect setUser={this.changeUser} changeView={this.setView}/>
                     <Footer/>
                 </React.Fragment>
             )
-        
-        } else if(this.state.view==="calendar"){
+
+        }else if(this.state.view==="calendar"){
             return (
                 <React.Fragment>
                       <Header changeView={this.setView} currentUser={this.state.currentUser}/>
@@ -95,7 +109,7 @@ export default class App extends React.Component {
                 <React.Fragment>
                     <Header changeView={this.setView} currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
-                    <Graph getEntries={this.getEntries} />
+                    <Graph feedings={this.state.data.feedings} changes={this.state.data.changes} naps={this.state.data.naps}/>
                     <Footer/>
                 </React.Fragment>
             )
