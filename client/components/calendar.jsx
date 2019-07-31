@@ -1,7 +1,7 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import CalendarDetails from './calendardetails';
-
+var format = require('date-fns/format');
 
 
 export default class Calendar extends React.Component{
@@ -101,7 +101,15 @@ export default class Calendar extends React.Component{
         this.setState({
             selectedDate: day
         })
-        this.props.getDateDataFromDatabase("2019-07-28");
+        if(this.state.selectedDate===null){
+            return;
+        }
+        var reformattedDate= format(
+            this.state.selectedDate,
+            'YYYY-MM-DD'
+        )
+        console.log("formatted date = ", reformattedDate);
+        this.props.getDateDataFromDatabase(reformattedDate);
     }
     nextMonth() {
         this.setState({
@@ -115,7 +123,7 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-        console.log("calendar props",this.props, this.state.selectedDate);
+        // console.log("calendar props",this.props, this.state.selectedDate);
         return(
         <div className="calendar">
             {this.renderHeader()}

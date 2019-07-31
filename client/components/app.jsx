@@ -39,6 +39,7 @@ export default class App extends React.Component {
     }
 
     getEntries(targetDate) {
+        console.log("target date from calendar", targetDate);
         fetch('http://localhost:3001/entries?date=' + targetDate)
         .then(response => {
             return response.json();
