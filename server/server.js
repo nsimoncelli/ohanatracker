@@ -25,14 +25,14 @@ app.get('/entries', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     const { date } = req.query;
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
-    if (!date){
+    if (!date) {
         return res.status(422).send({
             errors: ['No date provided'],
         });
     }
     const startDate = date.concat(" 00:00:00");
     const endDate = date.concat(" 23:59:59");
-    let query = `SELECT id, entry_type, other_info, finished_at 
+    let query = `SELECT id, user_id, baby_id, entry_type, other_info, finished_at 
                 FROM \`baby_entries\` WHERE finished_at 
                 BETWEEN "${startDate}" AND "${endDate}"`;
     connection.query(query, (err, result) => {
@@ -45,8 +45,8 @@ app.get('/entries', (req, res, next) => {
 
 app.get('/graph', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    const now = (timeConvert("now", 0)).slice(0,9) + ' 23:59:59';
-    const weekAgo = (timeConvert("now", 7)).slice(0,9) + ' 00:00:00';
+    const now = (timeConvert("now", 0)).slice(0, 9) + ' 23:59:59';
+    const weekAgo = (timeConvert("now", 7)).slice(0, 9) + ' 00:00:00';
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -91,6 +91,7 @@ app.get('/graph', (req, res, next) => {
 });
 
 app.post('/create/naps', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     // userId = user_id(db)
     // babyId
@@ -104,11 +105,12 @@ app.post('/create/naps', (req, res, next) => {
     let datetime;
     (!req.query.date) ? datetime = "now" : datetime = req.query.date;
     const finishedAt = timeConvert(datetime, 0);
-    const startedAt = timeConvert(req.query.startedAt, 0);
+    let startedAt;
+    (!req.query.startedAt) ? startedAt = null : startedAt = timeConvert(req.query.startedAt);
     const entryType = "naps";
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", "${startedAt}", "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                VALUES (NULL, "${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${entryType}", "${otherInfo}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);
@@ -121,6 +123,7 @@ app.post('/create/naps', (req, res, next) => {
 });
 
 app.post('/create/changes', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     console.log(otherInfo);
     if (!userId || !babyId || !otherInfo) {
@@ -161,8 +164,8 @@ app.post('/create/changes', (req, res, next) => {
 })
 
 app.post('/create/feedings', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
-
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
@@ -172,7 +175,7 @@ app.post('/create/feedings', (req, res, next) => {
     (!req.query.date) ? datetime = "now" : datetime = req.query.date;
     const finishedAt = timeConvert(datetime, 0);
     const entryType = "feedings";
-    
+    console.log(finishedAt);
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
                 VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
