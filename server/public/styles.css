@@ -229,17 +229,9 @@ main {
   width: calc(100%/7);
 }
 
-
-span {
-  transition: 300ms all ease;
-  opacity: 0;
-  will-change: opacity;
+.hide {
+  display: none;
 }
-
-.show {
-  opacity: 1;
-}
-
 
 tbody {
   display:block;
@@ -253,5 +245,33 @@ thead, tbody tr {
 }
 thead {
   width: calc( 100% - 1em )
+}
+
+
+
+.stopwatchContainer {
+  height: 350px;
+  width: 254px;
+  background-color: black;
+  position: relative;
+  color: white;
+  font-size: 3rem;
+}
+.counterContainer {
+  border: white solid 5px;
+  height: 200px;
+  width: 194px;
+  border-radius: 100px;
+  position: absolute;
+  margin: 25px 25px;
+}
+.counter {
+  text-align: center;
+  padding: 73px;
+}
+.controls {
+  left: 107px;
+  top: 260px;
+  position: absolute;
 }
 
