@@ -229,7 +229,7 @@ main {
   width: calc(100%/7);
 }
 
-
+/* 
 span {
   transition: 300ms all ease;
   opacity: 0;
@@ -238,7 +238,7 @@ span {
 
 .show {
   opacity: 1;
-}
+} */
 
 
 tbody {
