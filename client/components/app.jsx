@@ -15,7 +15,11 @@ export default class App extends React.Component {
             view: "homepage",
             currentUser: "Mom",
             data: [],
+
+            graphData: [],
+
             awake: true,
+
         }
         this.setView = this.setView.bind(this);
         this.changeUser = this.changeUser.bind(this);
@@ -42,7 +46,8 @@ export default class App extends React.Component {
         })
         .then(res => res.json())
         .then(res => {
-            this.setState({ data:res})
+            this.setState({ graphData:res})
+
         })
         .catch(error => console.error('error: ', error))
     }

@@ -106,7 +106,6 @@ export default class Calendar extends React.Component{
             this.state.selectedDate,
             'YYYY-MM-DD'
         )
-        console.log("formatted date = ", reformattedDate);
         this.props.getDateDataFromDatabase(reformattedDate);
     }
     nextMonth() {
@@ -121,13 +120,17 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-
+      
         return(
         <div className="calendar">
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}
-            <CalendarDetails getDateDataFromDatabase={this.props.getDateDataFromDatabase} currentDate={this.state.selectedDate}/>
+            <CalendarDetails
+            getDateDataFromDatabase={this.props.getDateDataFromDatabase}
+            currentDate={this.state.selectedDate}
+            dataFromSelectedDate={this.props.individualDateData}
+              />
         </div>
         )
     }
