@@ -14,13 +14,16 @@ export default class App extends React.Component {
         this.state = {
             view: "homepage",
             currentUser: "Mom",
-            data: []
+            data: [],
+            awake: true,
         }
         this.setView = this.setView.bind(this);
         this.changeUser = this.changeUser.bind(this);
         this.getEntries = this.getEntries.bind(this);
         this.postNap = this.postNap.bind(this);
         this.getGraphData = this.getGraphData.bind(this);
+        this.receiveActionState = this.receiveActionState.bind(this);
+
         this.postFeedings = this.postFeedings.bind(this);
         this.postChanges = this.postChanges.bind(this);
     }
@@ -30,10 +33,14 @@ export default class App extends React.Component {
         this.getGraphData();
     }
 
+    receiveActionState(awakeState){
+        this.setState({ awake : awakeState })        
+    }
+
     getGraphData() {
-    fetch('http://localhost:3001/graph', {
-        method: 'GET'
-    })
+        fetch('http://localhost:3001/graph', {
+            method: 'GET'
+        })
         .then(res => res.json())
         .then(res => {
             console.log(res);
@@ -136,11 +143,15 @@ export default class App extends React.Component {
                         changeView={this.setView} 
                         currentUser={this.state.currentUser} />
                     <NavBar changeView={this.setView} />
+
                     <LogActionButtons 
+                        awakeState={this.state.awake}
+                        sendNapState={this.receiveActionState}
                         postChanges={this.postChanges} 
                         postFeedings={this.postFeedings} 
                         postNap={this.postNap} 
                         changeView={this.setView} />
+               
                     <Footer/>
                 </React.Fragment>
            )

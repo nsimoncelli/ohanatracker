@@ -6,7 +6,8 @@ class LogActionButtons extends React.Component {
         this.state = {
             view: 'main',
             show: false,
-            awake: true,
+            startAt: null,
+            finsihAt: null,
         };
         this.showNotification = this.showNotification.bind(this);
         this.diaperClickHandler = this.diaperClickHandler.bind(this);
@@ -15,6 +16,8 @@ class LogActionButtons extends React.Component {
         this.getCurrentTime = this.getCurrentTime.bind(this);
         this.handlePostNap = this.handlePostNap.bind(this);
         this.cancelDiapering = this.cancelDiapering.bind(this);
+        this.sendAwakeState = this.sendAwakeState.bind(this);
+
         this.handlePostFeedings = this.handlePostFeedings.bind(this);
         this.handlePostChange1 = this.handlePostChange1.bind(this);
         this.handlePostChange2 = this.handlePostChange2.bind(this);
@@ -41,16 +44,14 @@ class LogActionButtons extends React.Component {
     }
 
     nappingClickHandler() {
-        let awakeState = !this.state.awake;
+        if(this.props.awakeState === true){
+            this.sendAwakeState();
+        } else if(this.props.awakeState === false) {
+            this.sendAwakeState();
+        } 
+        this.showNotification();
+        console.log(this.getCurrentTime());
 
-        if(this.state.awake === true){
-            this.setState({ awake : awakeState})
-        } else if(this.state.awake === false) {
-            this.handlePostNap();
-            this.showNotification();
-            this.setState({ awake : awakeState})
-        }
-        //console.log(this.getCurrentTime());
     }
 
     cancelDiapering() {
@@ -65,6 +66,10 @@ class LogActionButtons extends React.Component {
         let dateTime = `date: ${date} ${time}`;
         return dateTime;
     }
+
+    sendAwakeState() {
+        let newAwakeState = !this.props.awakeState;
+        this.props.sendNapState(newAwakeState);
 
     handlePostNap(userId, babyId) {
         this.props.postNap(1, 5);
@@ -98,7 +103,7 @@ class LogActionButtons extends React.Component {
                             <div className="feedingButtonContainer col-6">
                                 <img src="/images/bottle2.png" height="150px" width="auto" onClick={this.handlePostFeedings} />
                             </div>
-                            <div className="nappingButtonContainer col-6">{this.state.awake ? 
+                            <div className="nappingButtonContainer col-6">{this.props.awakeState ? 
                                 <img src="/images/napButtonIcon.png" height="150px" width="auto" onClick={this.nappingClickHandler} /> :
                                 <img src="/images/sleeping-baby2.png" height="150px" width="auto" onClick={this.nappingClickHandler} />}        
                             </div>
