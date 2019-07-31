@@ -229,17 +229,9 @@ main {
   width: calc(100%/7);
 }
 
-
-span {
-  transition: 300ms all ease;
-  opacity: 0;
-  will-change: opacity;
+.hide {
+  display: none;
 }
-
-.show {
-  opacity: 1;
-}
-
 
 tbody {
   display:block;
