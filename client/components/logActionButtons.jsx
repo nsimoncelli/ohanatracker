@@ -5,7 +5,8 @@ class LogActionButtons extends React.Component {
         super(props);
         this.state = {
             view: 'main',
-            show: false
+            show: false,
+            awake: true,
         };
         this.showNotification = this.showNotification.bind(this);
         this.diaperClickHandler = this.diaperClickHandler.bind(this);
@@ -20,11 +21,10 @@ class LogActionButtons extends React.Component {
         });
         setTimeout(() => {
              this.setState({
-                asleep: null,
                 show: false,
                 view: 'main'
             });
-        }, 1500);
+        }, 1000);
     }
 
     diaperClickHandler() {
@@ -38,6 +38,15 @@ class LogActionButtons extends React.Component {
     }
 
     nappingClickHandler() {
+        let awakeState = !this.state.awake;
+
+        if(this.state.awake === true){
+            this.setState({ awake : awakeState})
+        } else if(this.state.awake === false) {
+            this.setState({ awake : awakeState})
+        }
+
+        
         this.showNotification();
         console.log(this.getCurrentTime());
     }
@@ -69,8 +78,9 @@ class LogActionButtons extends React.Component {
                             <div className="feedingButtonContainer col-6">
                                 <img src="/images/bottle2.png" height="150px" width="auto" onClick={this.feedingClickHandler} />
                             </div>
-                            <div className="nappingButtonContainer col-6">
-                                <img src="/images/sleepingbaby3-b.png" height="150px" width="auto" onClick={this.nappingClickHandler} />    
+                            <div className="nappingButtonContainer col-6">{this.state.awake ? 
+                                <img src="/images/napButtonIcon.png" height="150px" width="auto" onClick={this.nappingClickHandler} /> :
+                                <img src="/images/sleeping-baby2.png" height="150px" width="auto" onClick={this.nappingClickHandler} />}        
                             </div>
                         </div>
                     </div>
@@ -88,12 +98,12 @@ class LogActionButtons extends React.Component {
                                 <img src="/images/diaper.png" height="150px" width="auto" onClick={this.diaperClickHandler} />
                             </div>
                         </div>
-                        <div className="feedingNapping row text-center">
-                            <div className="feedingButtonContainer col-6">
+                        <div className="diaperingButtonContainer row text-center">
+                            <div className="diapering1 col-6">
                                 <img src="/images/pee3.png" height="150px" width="auto" onClick={this.feedingClickHandler} />
                             </div>
-                            <div className="nappingButtonContainer col-6">
-                                <img src="/images/poop4.png" height="150px" width="auto" onClick={this.nappingClickHandler} />    
+                            <div className="diapering2 col-6">
+                                <img src="/images/poop4.png" height="150px" width="auto" onClick={this.feedingClickHandler} />    
                             </div>
                         </div>
                         <div className="cancelButton row my-3">
