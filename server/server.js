@@ -94,7 +94,7 @@ app.post('/create/naps', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
     // userId = user_id(db)
     // babyId
-    // otherInfo -> {}, changes -> {"change_type": 1/2/3}
+    // otherInfo -> {}, changes -> otherInfo = 1/2/3
     //date = same format above post MVP.
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
@@ -122,20 +122,33 @@ app.post('/create/naps', (req, res, next) => {
 
 app.post('/create/changes', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
-
+    console.log(otherInfo);
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         });
     }
+    let changeType;
+    if (otherInfo == 1) {
+        changeType = `{\\"change_type\\": 1}`;
+    } else if (otherInfo == 2) {
+        changeType = `{\\"change_type\\": 2}`;  
+    } else if (otherInfo == 3) {
+        changeType = '{\\"change_type\\": 3}';
+    } else {
+        return res.status(422).send({
+            "error": ["otherInfo must be 1,2, or 3"]
+        });
+    }
+
     let datetime;
     (!req.query.date) ? datetime = "now" : datetime = req.query.date;
     const finishedAt = timeConvert(datetime, 0);
     const entryType = "changes";
-    console.log(userId, babyId, otherInfo, finishedAt);
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
+
+                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${changeType}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);
