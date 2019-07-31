@@ -72,6 +72,7 @@ class LogActionButtons extends React.Component {
         let newAwakeState = !this.props.awakeState;
         this.props.sendNapState(newAwakeState);
     }
+    
     handlePostNap(userId, babyId) {
         this.props.postNap(1, 5);
     }
@@ -85,6 +86,7 @@ class LogActionButtons extends React.Component {
         this.props.postChanges(1, 1, 1); // hard coded id's for now
         this.showNotification();
     }
+
     handlePostChange2(userId, babyId) {
         this.props.postChanges(1, 2, 2);
         this.showNotification();
@@ -143,11 +145,8 @@ class LogActionButtons extends React.Component {
                         <span className={this.state.show ? 'col-12' : 'hide'}>New baby entry has been made!</span>
                     </div>
                 </div>
-    
             )
         }
-    
-        
     }
 }
 

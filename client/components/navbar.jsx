@@ -18,7 +18,6 @@ export default class NavBar extends React.Component {
         changeViewtoCalendar(){
             this.props.changeView("calendar");
         }
-        
 
         render(){
             return(
