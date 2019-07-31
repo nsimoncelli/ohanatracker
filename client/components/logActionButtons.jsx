@@ -47,6 +47,7 @@ class LogActionButtons extends React.Component {
         if(this.props.awakeState === true){
             this.sendAwakeState();
         } else if(this.props.awakeState === false) {
+            this.handlePostNap();
             this.sendAwakeState();
         } 
         this.showNotification();
@@ -70,7 +71,7 @@ class LogActionButtons extends React.Component {
     sendAwakeState() {
         let newAwakeState = !this.props.awakeState;
         this.props.sendNapState(newAwakeState);
-
+    }
     handlePostNap(userId, babyId) {
         this.props.postNap(1, 5);
     }
