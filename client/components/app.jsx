@@ -6,7 +6,11 @@ import NavBar from './navbar';
 import LogActionButtons from './logActionButtons';
 import Calendar from './calendar';
 import Graph from './graph';
+<<<<<<< HEAD
 
+=======
+import InfoPage from './infopage';
+>>>>>>> dev
 export default class App extends React.Component {
     constructor(props){
         super(props)
@@ -89,16 +93,15 @@ export default class App extends React.Component {
         }else if(this.state.view==="calendar"){
             return (
                 <React.Fragment>
-                      <Header changeView={this.setView} currentUser={this.state.currentUser}/>
+                      <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
                       <NavBar changeView={this.setView} />
                       <Calendar getDateDataFromDatabase={this.getEntries}></Calendar>
                       <Footer/>
                    </React.Fragment>
             )
         } else if (this.state.view === "homepage") {
-           return ( 
-                <React.Fragment>
-                    <Header changeView={this.setView} currentUser={this.state.currentUser}/>
+           return( <React.Fragment>
+                    <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
                     <LogActionButtons postNap={this.postNap}changeView={this.setView} />
                     <Footer/>
@@ -107,10 +110,18 @@ export default class App extends React.Component {
         } else if(this.state.view === "graph") {
             return (
                 <React.Fragment>
-                    <Header changeView={this.setView} currentUser={this.state.currentUser}/>
+                    <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
                     <Graph feedings={this.state.data.feedings} changes={this.state.data.changes} naps={this.state.data.naps}/>
                     <Footer/>
+                </React.Fragment>
+            )
+        } else if (this.state.view === "infoPage") {
+            return (
+                <React.Fragment>
+                    <Header currentView={this.state.view} changeView={this.setView} currentUser={this.state.currentUser}/>
+                    <InfoPage />
+                    <Footer />
                 </React.Fragment>
             )
         }
