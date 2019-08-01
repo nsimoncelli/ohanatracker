@@ -52,6 +52,7 @@ class Graph extends React.Component {
             data: this.props.naps
           }]
         };
+        console.log(data, data2, data3);
         return (
           <React.Fragment>
             <br/>

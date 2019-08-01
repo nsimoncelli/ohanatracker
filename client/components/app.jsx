@@ -47,7 +47,6 @@ export default class App extends React.Component {
         .then(res => res.json())
         .then(res => {
             this.setState({ graphData:res})
-            this.setState({ data:res})
         })
         .catch(error => console.error('error: ', error))
     }
@@ -163,9 +162,9 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                     <NavBar changeView={this.setView} />
                     <Graph 
-                        feedings={this.state.data.feedings} 
-                        changes={this.state.data.changes} 
-                        naps={this.state.data.naps}/>
+                        feedings={this.state.graphData.feedings} 
+                        changes={this.state.graphData.changes} 
+                        naps={this.state.graphData.naps}/>
                     <Footer/>
                 </React.Fragment>
             )
