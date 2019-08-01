@@ -19,13 +19,14 @@ export default class CalendarDetails extends React.Component{
             return (
 
               <div className="table-wrapper-scroll-y my-custom-scrollbar dayEntryDetails border-top">
-              <h4 className="my-2">{selectedDate}</h4>
+              <h4 className="my-2 text-center">{selectedDate}</h4>
                 <table className="table table-bordered table-striped my-0">
                   <thead>
                     <tr>
                       <th scope="col">Time</th>
-                      <th scope="col">Entry Type</th>
+                      <th scope="col">Type</th>
                       <th scope="col">Reason</th>
+                      <th scope="col">Modify</th>
                     </tr>
                   </thead>
                   <tbody>
