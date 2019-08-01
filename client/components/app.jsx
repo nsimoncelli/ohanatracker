@@ -72,14 +72,16 @@ export default class App extends React.Component {
         })
     }
 
-    postNap(userId, babyId) {
-        fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
+    postNap(userId, babyId, startedAt) {
+      
+        fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data))
         .catch(error=> {
             console.error('error:', error);
         })
+      
     }
 
     postChanges(userId, babyId, changeType) {
