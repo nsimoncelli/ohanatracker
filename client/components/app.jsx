@@ -15,12 +15,11 @@ export default class App extends React.Component {
             view: "homepage",
             currentUser: "Mom",
             data: [],
-
             graphData: [],
-
             awake: true,
+            infoPageView: 'mainInfo',
+            allCalendarEntries: []
 
-            infoPageView: 'mainInfo'
 
         }
         this.setView = this.setView.bind(this);
@@ -32,11 +31,14 @@ export default class App extends React.Component {
         this.postFeedings = this.postFeedings.bind(this);
         this.postChanges = this.postChanges.bind(this);
         this.receiveInfoPageView = this.receiveInfoPageView.bind(this);
+        this.getAllCalendarEntries = this.getAllCalendarEntries.bind(this);
     }
 
     componentDidMount() {
         this.getEntries();
         this.getGraphData();
+        this.getAllCalendarEntries();
+        
     }
 
     receiveActionButtonState(awakeState){
@@ -66,6 +68,19 @@ export default class App extends React.Component {
         })
         .then(myJson => {
             this.setState({data: myJson});
+        })
+        .catch(error => {
+            console.error('error: ', error);
+        })
+    }
+    getAllCalendarEntries() {
+        fetch('http://localhost:3001/entries/all')
+        .then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            this.setState({allCalendarEntries: myJson});
+            // console.log("all entries result", myJson);
         })
         .catch(error => {
             console.error('error: ', error);
@@ -141,7 +156,8 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                       <NavBar changeView={this.setView} />
                       <Calendar
-                        calendarData ={this.state.graphData}
+                        getAllCalendarEntries={this.getAllCalendarEntries}
+                        calendarData ={this.state.allCalendarEntries}
                         individualDateData={this.state.data} 
                         getDateDataFromDatabase={this.getEntries} />
 
