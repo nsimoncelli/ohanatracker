@@ -70,6 +70,27 @@ export default class Calendar extends React.Component{
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
                 var reformattedDay = format(day, "YYYY-MM-DD");
+                var calendarDivBackgroundColor= "white";
+                var calendarDataDateFromDB = this.props.calendarData.data;
+                var calendarColorIndex = 0;
+
+                for (var calendarDataIndex = 0; calendarDataIndex < calendarDataDateFromDB.length; calendarDataIndex++){
+                    var cutData =calendarDataDateFromDB[calendarDataIndex].finished_at;
+                    cutData = cutData.substr(0,10);
+                    if(cutData===reformattedDay){
+                        calendarColorIndex++
+                    }
+                }
+
+                if(calendarColorIndex>0 && calendarColorIndex<=2){
+                    calendarDivBackgroundColor = "#FFA9E7";
+                }else if(calendarColorIndex>2 && calendarColorIndex<6){
+                    calendarDivBackgroundColor = "#FF84E8"
+                }else if(calendarColorIndex>=6 && calendarColorIndex <9){
+                    calendarDivBackgroundColor = "#7F2CCB"
+                }else if (calendarColorIndex>9){
+                    calendarDivBackgroundColor = "#414361"
+                }
                 days.push(
                     <div
                     className={`col cell ${
@@ -78,7 +99,7 @@ export default class Calendar extends React.Component{
                         : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                     }`}
                     key={reformattedDay}
-                    // style={{backgroundColor: }}
+                    style={{backgroundColor: calendarDivBackgroundColor}}
                     onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
                   >
                     <span className="number">{formattedDate}</span>
@@ -122,7 +143,7 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-        // console.log("calendar props", this.props);
+        console.log("calendar props", this.props.calendarData.data);
         return(
         <div className="calendar">
             {this.renderHeader()}
