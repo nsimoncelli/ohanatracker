@@ -34,16 +34,19 @@ class LogActionButtons extends React.Component {
         }, 1500);
     }
 
-    diaperClickHandler() {
+    diaperClickHandler(e) {
+        e.preventDefault();
         let diaperingView = "diapering";
         this.setState({view : diaperingView})
     }
 
-    feedingClickHandler() {
+    feedingClickHandler(e) {
+        e.preventDefault();
         this.showNotification();
     }
 
-    nappingClickHandler() {
+    nappingClickHandler(e) {
+        e.preventDefault();
         if(this.props.awakeState === true){
             this.sendAwakeState();
         } else if(this.props.awakeState === false) {
@@ -55,7 +58,8 @@ class LogActionButtons extends React.Component {
 
     }
 
-    cancelDiapering() {
+    cancelDiapering(e) {
+        e.preventDefault();
         let mainView = 'main';
         this.setState({view : mainView})
     }

@@ -4,8 +4,7 @@ import CalendarEntryDetails from './calendarentrydetails';
 export default class CalendarDetails extends React.Component{
 
         constructor(props){
-            super(props);
-            
+            super(props); 
         }
 
 
@@ -19,14 +18,14 @@ export default class CalendarDetails extends React.Component{
           // console.log("calendar props", this.props);
             return (
 
-              <div className="table-wrapper-scroll-y my-custom-scrollbar dayEntryDetails">
-              <h3>{selectedDate}</h3>
-                <table className="table table-bordered table-striped mb-0">
+              <div className="table-wrapper-scroll-y my-custom-scrollbar dayEntryDetails border-top">
+              <h4 className="my-2">{selectedDate}</h4>
+                <table className="table table-bordered table-striped my-0">
                   <thead>
                     <tr>
                       <th scope="col">Time</th>
                       <th scope="col">Entry Type</th>
-                      <th scope="col">Change Reason</th>
+                      <th scope="col">Reason</th>
                     </tr>
                   </thead>
                   <tbody>
