@@ -61,16 +61,12 @@ app.get('/graph', async (req, res, next) => {
         connection.query(query, (err, result) => {
             if (err) return next(err);
             result.forEach(data => {
-                console.log(data);
                 if (data['entry_type'] === "changes") {
                     changesArr[x] = data['COUNT(*)'];
-                    console.log("changes",changesArr[x]);
                 } else if (data['entry_type'] === "naps") {
                     napsArr[x] = data['COUNT(*)'];
-                    console.log("naps", napsArr[x]);
                 } else if (data['entry_type'] === "feedings") {
                     feedingsArr[x] = data['COUNT(*)'];
-                    console.log("feedings", feedingsArr[x]);
                 }
                 x++;
             });
@@ -84,6 +80,17 @@ app.get('/graph', async (req, res, next) => {
         });
     };
 });
+
+app.get('/entries/all', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', "*");
+    let query = `SELECT * FROM \`baby_entries\` GROUP BY finished_at`;
+    connection.query(query, (err, result) => {
+        if (err) return next(err);
+        res.send(JSON.stringify({
+            data: result
+        }));
+    })
+})
 
 app.post('/create/naps', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
