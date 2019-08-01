@@ -142,8 +142,8 @@ export default class App extends React.Component {
                         changeView={this.setView} 
                         currentUser={this.state.currentUser} />
                     <NavBar changeView={this.setView} />
-
                     <LogActionButtons 
+                        currentUser={this.state.currentUser}
                         awakeState={this.state.awake}
                         sendNapState={this.receiveActionState}
                         postChanges={this.postChanges} 

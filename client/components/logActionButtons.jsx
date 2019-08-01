@@ -7,7 +7,8 @@ class LogActionButtons extends React.Component {
             view: 'main',
             show: false,
             startAt: null,
-            finsihAt: null,
+            finishedAt: null,
+            currentUser: null
         };
         this.showNotification = this.showNotification.bind(this);
         this.diaperClickHandler = this.diaperClickHandler.bind(this);
@@ -17,10 +18,8 @@ class LogActionButtons extends React.Component {
         this.handlePostNap = this.handlePostNap.bind(this);
         this.cancelDiapering = this.cancelDiapering.bind(this);
         this.sendAwakeState = this.sendAwakeState.bind(this);
-
         this.handlePostFeedings = this.handlePostFeedings.bind(this);
-        this.handlePostChange1 = this.handlePostChange1.bind(this);
-        this.handlePostChange2 = this.handlePostChange2.bind(this);
+        this.handlePostChange = this.handlePostChange.bind(this);
     }
 
     showNotification() {
@@ -49,8 +48,8 @@ class LogActionButtons extends React.Component {
         } else if(this.props.awakeState === false) {
             this.handlePostNap();
             this.sendAwakeState();
+            this.showNotification();
         } 
-        this.showNotification();
         console.log(this.getCurrentTime());
 
     }
@@ -73,22 +72,31 @@ class LogActionButtons extends React.Component {
         this.props.sendNapState(newAwakeState);
     }
     
-    handlePostNap(userId, babyId) {
-        this.props.postNap(1, 5);
+    handleCurrentUser() {
+        if(this.props.currentUser === "Mom") {
+            return 1;
+        } else if(this.props.currentUser === "Dad") {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 
-    handlePostFeedings(userId, babyId) {
-        this.props.postFeedings(1,3);
+    handlePostNap() {
+        this.props.postNap(this.handleCurrentUser(), 1);
+    }
+
+    handlePostFeedings() {
+        this.props.postFeedings(this.handleCurrentUser(), 1);
         this.showNotification();
     }
 
-    handlePostChange1(userId, babyId) {
-        this.props.postChanges(1, 1, 1); // hard coded id's for now
-        this.showNotification();
-    }
-
-    handlePostChange2(userId, babyId) {
-        this.props.postChanges(1, 2, 2);
+    handlePostChange(event) {
+        if(event.target.id==="pee") {
+            this.props.postChanges(this.handleCurrentUser(), 1, 1); 
+        } else {
+            this.props.postChanges(this.handleCurrentUser(), 1, 2); 
+        }
         this.showNotification();
     }
 
@@ -128,10 +136,10 @@ class LogActionButtons extends React.Component {
                         </div>
                         <div className="diaperingButtonContainer row text-center">
                             <div className="diapering1 col-6">
-                                <img src="/images/pee3.png" height="150px" width="auto" onClick={this.handlePostChange1} />
+                                <img src="/images/pee3.png" id="pee" height="150px" width="auto" onClick={this.handlePostChange} />
                             </div>
                             <div className="diapering2 col-6">
-                                <img src="/images/poop4.png" height="150px" width="auto" onClick={this.handlePostChange2} />    
+                                <img src="/images/poop4.png" id="poop" height="150px" width="auto" onClick={this.handlePostChange} />    
                             </div>
                         </div>
                         <div className="cancelButton row my-3">
