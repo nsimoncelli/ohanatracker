@@ -43,6 +43,17 @@ app.get('/entries', (req, res, next) => {
     });
 });
 
+app.get('/entries/all', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', "*");
+    let query = `SELECT * FROM \`baby_entries\``;
+    connection.query(query, (err, result) => {
+        if (err) return next(err);
+        res.send(JSON.stringify({
+            data: result
+        }));
+    })
+});
+
 app.get('/graph', async (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
@@ -80,17 +91,6 @@ app.get('/graph', async (req, res, next) => {
         });
     };
 });
-
-app.get('/entries/all', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', "*");
-    let query = `SELECT * FROM \`baby_entries\` GROUP BY finished_at`;
-    connection.query(query, (err, result) => {
-        if (err) return next(err);
-        res.send(JSON.stringify({
-            data: result
-        }));
-    })
-})
 
 app.post('/create/naps', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
