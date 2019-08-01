@@ -20,15 +20,18 @@ export default class App extends React.Component {
 
             awake: true,
 
+            infoPageView: 'mainInfo'
+
         }
         this.setView = this.setView.bind(this);
         this.changeUser = this.changeUser.bind(this);
         this.getEntries = this.getEntries.bind(this);
         this.postNap = this.postNap.bind(this);
         this.getGraphData = this.getGraphData.bind(this);
-        this.receiveActionState = this.receiveActionState.bind(this);
+        this.receiveActionButtonState = this.receiveActionButtonState.bind(this);
         this.postFeedings = this.postFeedings.bind(this);
         this.postChanges = this.postChanges.bind(this);
+        this.receiveInfoPageView = this.receiveInfoPageView.bind(this);
     }
 
     componentDidMount() {
@@ -36,8 +39,13 @@ export default class App extends React.Component {
         this.getGraphData();
     }
 
-    receiveActionState(awakeState){
+    receiveActionButtonState(awakeState){
         this.setState({ awake : awakeState })        
+    }
+
+    receiveInfoPageView(newPageView){
+        console.log(newPageView)
+        this.setState({ infoPageView : newPageView })
     }
 
     getGraphData() {
@@ -110,7 +118,9 @@ export default class App extends React.Component {
         if(this.state.view ==="userSelect"){
             return (
                 <React.Fragment>
-                    <Header 
+                    <Header
+                        sendInfoPageView={this.receiveInfoPageView}
+                        infoPageView={this.state.infoPageView} 
                         changeView={this.setView} 
                         currentUser={this.state.currentUser}/>
                     <UserSelect 
@@ -123,7 +133,9 @@ export default class App extends React.Component {
         }else if(this.state.view==="calendar"){
             return (
                 <React.Fragment>
-                      <Header 
+                      <Header
+                        sendInfoPageView={this.receiveInfoPageView}
+                        infoPageView={this.state.infoPageView} 
                         currentView={this.state.view} 
                         changeView={this.setView} 
                         currentUser={this.state.currentUser}/>
@@ -133,20 +145,21 @@ export default class App extends React.Component {
                         individualDateData={this.state.data} 
                         getDateDataFromDatabase={this.getEntries} />
 
-                      <Footer/>
                    </React.Fragment>
             )
         } else if (this.state.view === "homepage") {
            return( <React.Fragment>
-                    <Header 
+                    <Header
+                        sendInfoPageView={this.receiveInfoPageView}
+                        infoPageView={this.state.infoPageView} 
                         currentView={this.state.view} 
                         changeView={this.setView} 
                         currentUser={this.state.currentUser} />
                     <NavBar changeView={this.setView} />
-
                     <LogActionButtons 
+                        currentUser={this.state.currentUser}
                         awakeState={this.state.awake}
-                        sendNapState={this.receiveActionState}
+                        sendNapState={this.receiveActionButtonState}
                         postChanges={this.postChanges} 
                         postFeedings={this.postFeedings} 
                         postNap={this.postNap} 
@@ -157,7 +170,9 @@ export default class App extends React.Component {
         } else if(this.state.view === "graph") {
             return (
                 <React.Fragment>
-                    <Header 
+                    <Header
+                        sendInfoPageView={this.receiveInfoPageView}
+                        infoPageView={this.state.infoPageView} 
                         currentView={this.state.view} 
                         changeView={this.setView} 
                         currentUser={this.state.currentUser}/>
@@ -172,11 +187,15 @@ export default class App extends React.Component {
         } else if (this.state.view === "infoPage") {
             return (
                 <React.Fragment>
-                    <Header 
+                    <Header
+                        sendInfoPageView={this.receiveInfoPageView}
+                        infoPageView={this.state.infoPageView}  
                         currentView={this.state.view} 
                         changeView={this.setView} 
                         currentUser={this.state.currentUser}/>
-                    <InfoPage />
+                    <InfoPage 
+                        infoPageView={this.state.infoPageView} 
+                        sendInfoPageView={this.receiveInfoPageView} />
                     <Footer />
                 </React.Fragment>
             )

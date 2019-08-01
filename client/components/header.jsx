@@ -11,17 +11,21 @@ export default class Header extends React.Component {
         this.props.changeView('userSelect')
     }
     handleInfoPage(e) {
-        let previousView = this.props.currentView; //this is for infoPage conditional
         e.preventDefault();
-        if (this.props.currentView === 'homepage') {
+
+        if (this.props.infoPageView === 'teamMembers' || this.props.infoPageView === 'mission' || this.props.infoPageView === 'howTo') {          
+            this.props.sendInfoPageView('mainInfo');
+        } else if (this.props.infoPageView === 'mainInfo') {
             this.props.changeView('infoPage')
-        } else if (this.props.currentView === 'graph') {
-            this.props.changeView('infoPage')
-        } else if (this.props.currentView === 'calendar') {
-            this.props.changeView('infoPage')
-        } else {
-            this.props.changeView('homepage')
         }
+
+
+        if (this.props.currentView === 'homepage' || this.props.currentView === 'graph' || this.props.currentView === 'calendar') {
+            this.props.changeView('infoPage');
+        } else if (this.props.currentView === 'infoPage' && this.props.infoPageView === 'mainInfo') {
+            this.props.changeView('homepage');
+        }
+
     }
     render() {
         return(

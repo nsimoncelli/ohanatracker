@@ -43,51 +43,53 @@ app.get('/entries', (req, res, next) => {
     });
 });
 
-app.get('/graph', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    const now = (timeConvert("now", 0)).slice(0, 9) + ' 23:59:59';
-    const weekAgo = (timeConvert("now", 7)).slice(0, 9) + ' 00:00:00';
-    const feedingsArr = [0, 0, 0, 0, 0, 0, 0, 0];
-    const changesArr = [0, 0, 0, 0, 0, 0, 0, 0];
-    const napsArr = [0, 0, 0, 0, 0, 0, 0, 0];
-    console.log(now, weekAgo);
-    let query = `SELECT id, entry_type, other_info, finished_at 
-                    FROM \`baby_entries\`WHERE finished_at 
-                    BETwEEN "${weekAgo}" AND "${now}"`;
+app.get('/entries/all', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', "*");
+    let query = `SELECT * FROM \`baby_entries\``;
     connection.query(query, (err, result) => {
         if (err) return next(err);
-        result.forEach(data => {
-            let entryType = data['entry_type'];
-            let baseDate = formatDate(now);
-            let combinedDate = formatDate(data['finished_at']);
-            if (entryType) {
-                let x = 7;
-                let i = 0;
-                while ( x >=0 ) {
-                    if ((baseDate-combinedDate) === x) {
-                        switch(entryType) {
-                            case "feedings":
-                                feedingsArr[i] += 1;
-                                break;
-                            case "naps":
-                                napsArr[i] += 1;
-                                break;
-                            case "changes":
-                                changesArr[i] += 1;
-                                break;
-                        }
-                    }
-                x--;
-                i++;
+        res.send(JSON.stringify({
+            data: result
+        }));
+    })
+});
+
+app.get('/graph', async (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
+    const changesArr = [0, 0, 0, 0, 0, 0, 0];
+    const napsArr = [0, 0, 0, 0, 0, 0, 0];
+    for (let i = 7; i >= 0; i--) {
+        let x = 0;
+        let dateBase = (timeConvert("now", i)).slice(0, 9) + ' 00:00:00';
+        let dateEnd = dateBase.slice(0, 9) + ' 23:59:59';
+        dateBase = dateBase.replace(/  +/g, ' ');
+        console.log(dateBase, dateEnd);
+        let query = `SELECT COUNT(*), entry_type FROM \`baby_entries\` 
+                WHERE finished_at 
+                BETWEEN "${dateBase}" AND "${dateEnd}" 
+                GROUP BY entry_type`;
+        connection.query(query, (err, result) => {
+            if (err) return next(err);
+            result.forEach(data => {
+                if (data['entry_type'] === "changes") {
+                    changesArr[x] = data['COUNT(*)'];
+                } else if (data['entry_type'] === "naps") {
+                    napsArr[x] = data['COUNT(*)'];
+                } else if (data['entry_type'] === "feedings") {
+                    feedingsArr[x] = data['COUNT(*)'];
                 }
+                x++;
+            });
+            if (i === 0) {
+                res.send(JSON.stringify({
+                    "feedings": feedingsArr,
+                    "naps": napsArr,
+                    "changes": changesArr
+                }));
             }
         });
-        res.send(JSON.stringify({
-            "feedings": feedingsArr,
-            "naps": napsArr,
-            "changes": changesArr
-        }));
-    });
+    };
 });
 
 app.post('/create/naps', (req, res, next) => {
@@ -96,7 +98,7 @@ app.post('/create/naps', (req, res, next) => {
     // userId = user_id(db)
     // babyId
     // otherInfo -> {}, changes -> otherInfo = 1/2/3
-    //date = same format above post MVP.
+    //date = same format above post MVP.    
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]

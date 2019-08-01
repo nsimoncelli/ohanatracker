@@ -34,11 +34,8 @@
 
 /* GENERAL */
 
-* {
-  box-sizing: border-box;
-}
-
 body {
+    box-sizing: border-box;
     font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     font-size: 1em;
     font-weight: 300;
@@ -235,7 +232,7 @@ main {
 
 tbody {
   display:block;
-  height:162px;
+  height:255px;
   overflow:auto;
 }
 thead, tbody tr {
@@ -245,33 +242,5 @@ thead, tbody tr {
 }
 thead {
   width: calc( 100% - 1em )
-}
-
-
-
-.stopwatchContainer {
-  height: 350px;
-  width: 254px;
-  background-color: black;
-  position: relative;
-  color: white;
-  font-size: 3rem;
-}
-.counterContainer {
-  border: white solid 5px;
-  height: 200px;
-  width: 194px;
-  border-radius: 100px;
-  position: absolute;
-  margin: 25px 25px;
-}
-.counter {
-  text-align: center;
-  padding: 73px;
-}
-.controls {
-  left: 107px;
-  top: 260px;
-  position: absolute;
 }
 
