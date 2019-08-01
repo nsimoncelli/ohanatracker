@@ -96,7 +96,7 @@ app.post('/create/naps', (req, res, next) => {
     // userId = user_id(db)
     // babyId
     // otherInfo -> {}, changes -> otherInfo = 1/2/3
-    //date = same format above post MVP.
+    //date = same format above post MVP.    
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]

@@ -6,9 +6,8 @@ class LogActionButtons extends React.Component {
         this.state = {
             view: 'main',
             show: false,
-            startAt: null,
+            startedAt: null,
             finishedAt: null,
-            currentUser: null
         };
         this.showNotification = this.showNotification.bind(this);
         this.diaperClickHandler = this.diaperClickHandler.bind(this);
