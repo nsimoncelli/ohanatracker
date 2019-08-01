@@ -128,7 +128,8 @@ export default class App extends React.Component {
                         changeView={this.setView} 
                         currentUser={this.state.currentUser}/>
                       <NavBar changeView={this.setView} />
-                      <Calendar 
+                      <Calendar
+                        calendarData ={this.state.graphData}
                         individualDateData={this.state.data} 
                         getDateDataFromDatabase={this.getEntries} />
 

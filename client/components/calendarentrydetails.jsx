@@ -24,11 +24,7 @@ export default class CalendarEntryDetails extends React.Component{
           }
 
         render(){
-            console.log("props from db", this.props.children);
-            // var finalBabyTime= this.formatAMPM(this.props.children.finished_at);
-            // var babyEventTime = new Date(this.props.children.finished_at);
-            // this.formatAMPM(new Date(this.props.children.finished_at));
-            // babyEventTime = new Date(babyEventTime.getTime() + (babyEventTime.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT
+          
            
             var finalBabyTime = this.formatAMPM(this.props.children.finished_at)
             var entryType = "";
