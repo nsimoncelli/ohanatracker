@@ -10,6 +10,7 @@ export default class CalendarEntryDetails extends React.Component{
         this.formatAMPM = this.formatAMPM.bind(this);
     }
 
+
     formatAMPM(date) {
         date = new Date(date);
         date = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT

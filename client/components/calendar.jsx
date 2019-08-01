@@ -10,7 +10,8 @@ export default class Calendar extends React.Component{
         this.state={
             currentMonth: new Date(),
             currentDate: new Date(), 
-            selectedDate: null
+            selectedDate: null,
+            allEntryData: []
         }
         this.renderHeader = this.renderHeader.bind(this);
         this.nextMonth = this.nextMonth.bind(this);
@@ -68,7 +69,7 @@ export default class Calendar extends React.Component{
             for (var dayIndex = 0; dayIndex <7; dayIndex++){
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
-                // console.log("console logged day", day)
+                var reformattedDay = format(day, "YYYY-MM-DD");
                 days.push(
                     <div
                     className={`col cell ${
@@ -76,7 +77,8 @@ export default class Calendar extends React.Component{
                         ? "disabled"
                         : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                     }`}
-                    key={day}
+                    key={reformattedDay}
+                    // style={{backgroundColor: }}
                     onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
                   >
                     <span className="number">{formattedDate}</span>
@@ -86,7 +88,7 @@ export default class Calendar extends React.Component{
                 day = dateFns.addDays(day, 1);
             }
             rows.push(
-                <div className="row" key={day}>
+                <div className="row">
                     {days}
                 </div>
             );
@@ -120,7 +122,7 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-      
+        // console.log("calendar props", this.props);
         return(
         <div className="calendar">
             {this.renderHeader()}
