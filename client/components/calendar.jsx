@@ -20,18 +20,18 @@ export default class Calendar extends React.Component{
     renderHeader(){
         const dateFormat = "MMMM YYYY";
         return (
-            <div className="header row flex-middle">
-                <div className="col col-start">
+            <div className="header row flex-middle py-2">
+                <div className="col-2 col-start">
                     <div className="icon" onClick={this.prevMonth}>
                         chevron_left
                     </div>
                 </div>
                 <div className="col col-center">
-                    <span>
+                    <span style={{"fontSize":"1.25rem"}}>
                         {dateFns.format(this.state.currentMonth, dateFormat)}
                     </span>
                 </div>
-                <div className="col col-end" onClick={this.nextMonth}>
+                <div className="col-2 col-end" onClick={this.nextMonth}>
                     <div className="icon"> chevron_right</div>
                 </div>
             </div>
