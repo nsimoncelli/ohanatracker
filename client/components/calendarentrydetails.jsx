@@ -1,5 +1,6 @@
 import React from 'react';
 import dateFns from 'date-fns';
+import DeleteModal from './deletemodal';
 var format = require('date-fns/format');
 
 

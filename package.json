@@ -27,7 +27,8 @@
     "mysql": "^2.17.1",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-modal": "^3.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
