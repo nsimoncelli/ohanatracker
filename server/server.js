@@ -203,11 +203,11 @@ app.post('/create/naps', (req, res, next) => {
     }
     let datetime = (req.query.date) || "now";
     const finishedAt = timeConvert(datetime, 0);
-    let startedAt = (req.query.startedAt) ? timeConvert(req.query.startedAt) : null;
+    //let startedAt = (req.query.startedAt) ? timeConvert(req.query.startedAt) : null;
     const entryType = "naps";
     let query = `INSERT INTO \`baby_entries\` 
                 ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES ("${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                VALUES ("${babyId}", "${userId}", "${startedAt}", "${finishedAt}", "${entryType}", "${otherInfo}")`;
     connection.query(query, (err, result) => {
         if (err) return next(err);
         const output = {
