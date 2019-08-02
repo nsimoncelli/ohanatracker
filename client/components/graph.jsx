@@ -25,43 +25,42 @@ class Graph extends React.Component {
         return dateStringArr;
     }
     componentDidMount(){
-      console.log(this.props.feedings)
+      console.log(this.props.feedingsData)
     }
     render() {
-        let data = {
+        let feedings = {
           labels: this.createDateArray(),
           datasets: [{
             label: 'Feedings',
             backgroundColor: 'rgb(25, 100, 255, .2)',
             borderColor: 'rgb(25, 100, 255, .8)',
-            data: this.props.feedings
+            data: this.props.feedings.feedings
           }]
         };
-        let data2 = {
+        let diaperChanges = {
           labels: this.createDateArray(),
           datasets: [{
             label: 'Changes',
             backgroundColor: 'rgb(25, 200, 150, .2)',
             borderColor: 'rgb(25, 200, 150, .8)',
-            data: this.props.changes
+            data: this.props.changes.changes
           }]
         };
-        let data3 = {
+        let naps = {
           labels: this.createDateArray(),
           datasets: [{
             label: 'Naps',
             backgroundColor: 'rgb(230, 0, 150, .2)',
             borderColor: 'rgb(230, 0, 150, .8)',
-            data: this.props.naps
+            data: this.props.naps.naps
           }]
         };
-        console.log(data, data2, data3);
         return (
           <React.Fragment>
             <br/>
-            <Line data={data}/>
-            <Line data={data2}/>
-            <Line data={data3}/>
+            <Line data={feedings}/>
+            <Line data={diaperChanges}/>
+            <Line data={naps}/>
           </React.Fragment>
         );
       }

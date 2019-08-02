@@ -240,9 +240,9 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         getGraphData={this.getGraphData} />
                     <Graph
-                        feedings={this.state.napsData}
+                        feedings={this.state.feedingsData}
                         changes={this.state.diaperChangesData}
-                        naps={this.state.feedingsData}/>
+                        naps={this.state.napsData}/>
                     <Footer/>
                 </React.Fragment>
             )
