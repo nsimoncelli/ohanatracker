@@ -22,7 +22,7 @@ export default class CalendarDetails extends React.Component{
             <tr>
               <th scope="col">Time</th>
               <th scope="col">Type</th>
-              <th scope="col">Reason</th>
+              <th scope="col">Edit</th>
               <th scope="col">Modify</th>
             </tr>
           </thead>
