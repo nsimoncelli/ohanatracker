@@ -189,7 +189,7 @@ app.get('/graph/naps', async (req, res, next) => {
             })
         });
 });
-app.post('/naps', (req, res, next) => {
+app.post('/create/naps', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
         // userId = user_id(db)
@@ -219,7 +219,7 @@ app.post('/naps', (req, res, next) => {
     })
 });
 
-app.post('/changes', (req, res, next) => {
+app.post('/create/changes', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
@@ -258,7 +258,7 @@ app.post('/changes', (req, res, next) => {
     })
 })
 
-app.post('/feedings', (req, res, next) => {
+app.post('/create/feedings', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
