@@ -52,7 +52,7 @@ export default class App extends React.Component {
     }
 
     getGraphData() {
-        fetch('http://localhost:3001/graph', {
+        fetch('http://localhost:3001/graph/changes', {
             method: 'GET'
         })
         .then(res => res.json())
