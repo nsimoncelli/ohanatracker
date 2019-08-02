@@ -12,7 +12,6 @@ app.listen(3001, err => {
 });
 
 const timeConvert = require('./functions/time-convert.js');
-const formatDate = require('./functions/format-date.js');
 
 const cred = require('../mysql_credentials');
 const connection = mysql.createConnection(cred);
@@ -26,7 +25,7 @@ app.get('/entries', (req, res, next) => {
     const { date } = req.query;
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
     if (!date) {
-        return res.status(422).send({
+        return res.status(400).send({
             errors: ['No date provided'],
         });
     }
@@ -54,66 +53,162 @@ app.get('/entries/all', (req, res, next) => {
     })
 });
 
-app.get('/graph', async (req, res, next) => {
+app.get('/graph/changes', async (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
-    const napsArr = [0, 0, 0, 0, 0, 0, 0];
-    for (let i = 7; i >= 0; i--) {
-        let x = 6;
-        let dateBase = (timeConvert("now", i)).slice(0, 9) + ' 00:00:00';
-        let dateEnd = dateBase.slice(0, 9) + ' 23:59:59';
-        dateBase = dateBase.replace(/  +/g, ' ');
-        console.log(dateBase, dateEnd);
-        let query = `SELECT COUNT(*), entry_type FROM \`baby_entries\` 
-                WHERE finished_at 
-                BETWEEN "${dateBase}" AND "${dateEnd}" 
-                GROUP BY entry_type`;
-        connection.query(query, (err, result) => {
+// look up cross joins to get this down to 1 query
+    let today = timeConvert("now", 0).slice(0, 9);
+    let entryType = "changes";
+        let query = `SELECT COUNT(*),
+                        dates.date,
+                        b.entry_type
+                    from \`baby_entries\` as b
+                    RIGHT JOIN (
+                        SELECT "${today}" as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 1 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 2 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 3 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 4 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 5 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 6 DAY) as date
+                    ) as dates ON b.date = dates.date AND b.entry_type = "${entryType}"
+                    GROUP BY b.entry_type, dates.date
+                    ORDER BY b.date ASC, b.entry_type ASC`;
+        connection.query( query, (err, result) => {
             if (err) return next(err);
-            result.forEach(data => {
-                if (data['entry_type'] === "changes") {
-                    changesArr[x] = data['COUNT(*)'];
-                } else if (data['entry_type'] === "naps") {
-                    napsArr[x] = data['COUNT(*)'];
-                } else if (data['entry_type'] === "feedings") {
-                    feedingsArr[x] = data['COUNT(*)'];
+            let i = 0;
+            result.forEach(res => {
+                if(res["entry_type"] === null) {
+                    changesArr[i] = 0;
+                    i++;
+                } else {
+                    changesArr[i] = res["COUNT(*)"];
+                    i++;
                 }
-                x--;
-            });
-            if (i === 0) {
-                res.send(JSON.stringify({
-                    "feedings": feedingsArr,
-                    "naps": napsArr,
-                    "changes": changesArr
-                }));
-            }
+                console.log(i);
+            })
+            res.json({
+                "changes": changesArr
+            })
         });
-    };
 });
 
+app.get('/graph/feedings', async (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
+// look up cross joins to get this down to 1 query
+    let today = timeConvert("now", 0).slice(0, 9);
+    let entryType = "feedings";
+        let query = `SELECT COUNT(*),
+                        dates.date,
+                        b.entry_type
+                    from \`baby_entries\` as b
+                    RIGHT JOIN (
+                        SELECT "${today}" as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 1 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 2 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 3 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 4 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 5 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 6 DAY) as date
+                    ) as dates ON b.date = dates.date AND b.entry_type = "${entryType}"
+                    GROUP BY b.entry_type, dates.date
+                    ORDER BY b.date ASC, b.entry_type ASC`;
+        connection.query( query, (err, result) => {
+            if (err) return next(err);
+            let i = 0;
+            result.forEach(res => {
+                if(res["entry_type"] === null) {
+                    feedingsArr[i] = 0;
+                    i++;
+                } else {
+                    feedingsArr[i] = res["COUNT(*)"];
+                    i++;
+                }
+                console.log(i);
+            })
+            res.json({
+                "changes": feedingsArr
+            })
+        });
+});
+app.get('/graph/naps', async (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const napsArr = [0, 0, 0, 0, 0, 0, 0];
+// look up cross joins to get this down to 1 query
+    let today = timeConvert("now", 0).slice(0, 9);
+    let entryType = "naps";
+        let query = `SELECT COUNT(*),
+                        dates.date,
+                        b.entry_type
+                    from \`baby_entries\` as b
+                    RIGHT JOIN (
+                        SELECT "${today}" as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 1 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 2 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 3 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 4 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 5 DAY) as date
+                            UNION ALL
+                        SELECT DATE_SUB("${today}", INTERVAL 6 DAY) as date
+                    ) as dates ON b.date = dates.date AND b.entry_type = "${entryType}"
+                    GROUP BY b.entry_type, dates.date
+                    ORDER BY b.date ASC, b.entry_type ASC`;
+        connection.query( query, (err, result) => {
+            if (err) return next(err);
+            let i = 0;
+            result.forEach(res => {
+                if(res["entry_type"] === null) {
+                    napsArr[i] = 0;
+                    i++;
+                } else {
+                    napsArr[i] = res["COUNT(*)"];
+                    i++;
+                }
+                console.log(i);
+            })
+            res.json({
+                "changes": napsArr
+            })
+        });
+});
 app.post('/create/naps', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
-    // userId = user_id(db)
-    // babyId
-    // otherInfo -> {}, changes -> otherInfo = 1/2/3
-    //date = same format above post MVP.    
+        // userId = user_id(db)
+        // babyId
+        // otherInfo -> {}, changes -> otherInfo = 1/2/3
+        //date = same format above post MVP.    
     if (!userId || !babyId || !otherInfo) {
-        return res.status(422).send({
+        return res.status(400).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-    let datetime;
-    (!req.query.date) ? datetime = "now" : datetime = req.query.date;
-    const finishedAt = timeConvert(datetime, 0);
-    let startedAt;
-    (!req.query.startedAt) ? startedAt = null : startedAt = timeConvert(req.query.startedAt);
+
+    const finishedAt = timeConvert("now", 0);
+    const date = finishedAt.slice(0,9);
+    const startedAt = (req.query.startedAt) ? timeConvert(req.query.startedAt) : null;
     const entryType = "naps";
     let query = `INSERT INTO \`baby_entries\` 
-                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${entryType}", "${otherInfo}")`;
-
+                ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
+                VALUES ("${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
     connection.query(query, (err, result) => {
         if (err) return next(err);
         const output = {
@@ -127,9 +222,8 @@ app.post('/create/naps', (req, res, next) => {
 app.post('/create/changes', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
-    console.log(otherInfo);
     if (!userId || !babyId || !otherInfo) {
-        return res.status(422).send({
+        return res.status(400).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         });
     }
@@ -146,14 +240,13 @@ app.post('/create/changes', (req, res, next) => {
         });
     }
 
-    let datetime;
-    (!req.query.date) ? datetime = "now" : datetime = req.query.date;
-    const finishedAt = timeConvert(datetime, 0);
+    const finishedAt = timeConvert("now", 0);
+    const date = finishedAt.slice(0,9);
     const entryType = "changes";
     let query = `INSERT INTO \`baby_entries\` 
-                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
+                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
 
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${changeType}")`;
+                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${date}", "${entryType}", "${changeType}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);
@@ -169,18 +262,16 @@ app.post('/create/feedings', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
-        return res.status(422).send({
+        return res.status(400).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-    let datetime;
-    (!req.query.date) ? datetime = "now" : datetime = req.query.date;
-    const finishedAt = timeConvert(datetime, 0);
+    const finishedAt = timeConvert("now", 0);
+    const date = finishedAt.slice(0,9);
     const entryType = "feedings";
-    console.log(finishedAt);
     let query = `INSERT INTO \`baby_entries\` 
-                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
+                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);
