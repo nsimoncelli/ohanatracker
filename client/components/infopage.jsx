@@ -90,11 +90,11 @@ export default class InfoPage extends React.Component {
             return(
                 <div className="container missionContainer text-center py-3">
                     <div className="row my-3">
-                        <div className="col-12 p-1">
+                        <div className="col-12 p-2">
                             <h1>Our Mission</h1>
                         </div>
                     </div>
-                    <div className="row text-center">
+                    <div className="row text-center missionStatement">
                         <p>Ohana helps new parents track information about their child.
                             With a simple click of a button: feeding times, naps, and diaper changes are recorded.
                         </p>
@@ -111,18 +111,18 @@ export default class InfoPage extends React.Component {
             )
         } else if (this.props.infoPageView === 'howTo') {
             return(
-                <div className="container howToContainer text-center my-3">
-                    <div className="row">
-                        <div className="col-12">
+                <div className="container howToContainer text-center py-3">
+                    <div className="row my-3">
+                        <div className="col-12 p-2">
                             <h1>How To</h1>
                         </div>
                     </div>
-                    <div className="row">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nulla,
-                            fugiat pariatur laudantium cumque ullam nostrum. Animi ullam error tempora
-                            excepturi voluptatum magni voluptas facere incidunt, fugit repellat. Beatae,
-                            praesentium mollitia labore ullam nobis velit soluta nihil, minima libero
-                            est debitis laborum voluptatum? Placeat blanditiis laboriosam quas inventore
+                    <div className="row howToStatement">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nulla, 
+                            fugiat pariatur laudantium cumque ullam nostrum. Animi ullam error tempora 
+                            excepturi voluptatum magni voluptas facere incidunt, fugit repellat. Beatae, 
+                            praesentium mollitia labore ullam nobis velit soluta nihil, minima libero 
+                            est debitis laborum voluptatum? Placeat blanditiis laboriosam quas inventore 
                             nihil dicta?
                         </p>
                     </div>

@@ -282,6 +282,21 @@ app.post('/create/feedings', (req, res, next) => {
         res.json(output);
     })
 });
+
+app.post('/delete', (req, res, next) => {
+    const { id } = req.query;
+    let query = `DELETE FROM \`baby_entries\` 
+                    WHERE \`baby_entries\`.\`id\` = ${id}`
+    connection.query(query, (err, result) => {
+        if (err) return next(err);
+        const output = {
+            success: true,
+            data: result
+        }
+        res.json(output);
+    })
+});
+
 app.all('*', (err, req, res, next) => {
     res.sendStatus(500);
 });

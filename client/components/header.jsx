@@ -33,9 +33,13 @@ export default class Header extends React.Component {
                         <img  style={{ width: 45 }} src='images/logo.png' className='img-fluid' alt="Ohana Logo"/>
                     </button>
                 </div>
-                <div  style={{fontSize: "1.5rem"}} className="col-6 text-right">
-                    <button type="button" style={{backgroundColor: 'transparent', border: 'none', color:"white"}} onClick={this.handleUserChange}>
-                        {this.props.currentUser}
+                <div  className="col-6 text-right" style={{}} >
+                    <button 
+                        className="btn btn-lg"
+                        type="button" 
+                        style={{backgroundColor: 'transparent', border: 'none', color:"white", fontSize: "1.5rem"}} 
+                        onClick={this.handleUserChange}>
+                            {this.props.currentUser}
                     </button>
                 </div>
             </div>

@@ -20,20 +20,22 @@ export default class NavBar extends React.Component {
 
         render(){
             return(
-                <div className="d-flex justify-content-center">
-                    <nav className="navbar navbar-light justify-content-sm-start">
-                        <form className="form-inline">
-                        <button onClick={this.changeViewtoHome}  className="btn" type="button">
+                <div className="row py-3">
+                    <div className="homepageButtonContainer col-4">
+                        <button onClick={this.changeViewtoHome}  className="btn p-2" type="button">
                             <img src="/images/home.png" width="80" />
                         </button>
-                        <button onClick={this.changeViewtoGraph} className="btn" type="button">
+                    </div>
+                    <div className="homepageButtonContainer col-4">
+                        <button onClick={this.changeViewtoGraph} className="btn p-2" type="button">
                             <img src="/images/graph.png" width="80" />
                         </button>
-                        <button onClick={this.changeViewtoCalendar} className="btn" type="button">
-                        <img src="/images/calendar.png" width="80" />
+                    </div>
+                    <div className="homepageButtonContainer col-4">
+                        <button onClick={this.changeViewtoCalendar} className="btn p-2" type="button">
+                            <img src="/images/calendar.png" width="80" />
                         </button>
-                        </form>
-                    </nav>
+                    </div>
               </div>
             )
         }
