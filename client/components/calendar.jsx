@@ -151,9 +151,9 @@ export default class Calendar extends React.Component{
             {this.renderDays()}
             {this.renderCells()}
             <CalendarDetails
-            getDateDataFromDatabase={this.props.getDateDataFromDatabase}
-            currentDate={this.state.selectedDate}
-            dataFromSelectedDate={this.props.individualDateData}
+                getDateDataFromDatabase={this.props.getDateDataFromDatabase}
+                currentDate={this.state.selectedDate}
+                dataFromSelectedDate={this.props.individualDateData}
               />
         </div>
         )
