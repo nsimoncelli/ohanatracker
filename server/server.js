@@ -189,7 +189,7 @@ app.get('/graph/naps', async (req, res, next) => {
             })
         });
 });
-app.post('/create/naps', (req, res, next) => {
+app.post('/naps', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
         // userId = user_id(db)
@@ -219,7 +219,7 @@ app.post('/create/naps', (req, res, next) => {
     })
 });
 
-app.post('/create/changes', (req, res, next) => {
+app.post('/changes', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
@@ -258,7 +258,7 @@ app.post('/create/changes', (req, res, next) => {
     })
 })
 
-app.post('/create/feedings', (req, res, next) => {
+app.post('/feedings', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
@@ -282,6 +282,21 @@ app.post('/create/feedings', (req, res, next) => {
         res.json(output);
     })
 });
+
+app.post('/delete', (req, res, next) => {
+    const { id } = req.query;
+    let query = `DELETE FROM \`baby_entries\` 
+                    WHERE \`baby_entries\`.\`id\` = ${id}`
+    connection.query(query, (err, result) => {
+        if (err) return next(err);
+        const output = {
+            success: true,
+            data: result
+        }
+        res.json(output);
+    })
+});
+
 app.all('*', (err, req, res, next) => {
     res.sendStatus(500);
 });
