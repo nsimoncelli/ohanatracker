@@ -80,7 +80,6 @@ export default class App extends React.Component {
         })
         .then(myJson => {
             this.setState({allCalendarEntries: myJson});
-            // console.log("all entries result", myJson);
         })
         .catch(error => {
             console.error('error: ', error);

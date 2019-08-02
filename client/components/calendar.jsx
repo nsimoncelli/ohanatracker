@@ -1,6 +1,7 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import CalendarDetails from './calendardetails';
+import DeleteModal from './deletemodal';
 var format = require('date-fns/format');
 
 export default class Calendar extends React.Component{
@@ -70,7 +71,7 @@ export default class Calendar extends React.Component{
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
                 var reformattedDay = format(day, "YYYY-MM-DD");
-                var calendarDivBackgroundColor= "white";
+                var calendarDivBackgroundColor= "#FFFFFF";
                 var calendarDataDateFromDB = this.props.calendarData.data;
                 var calendarColorIndex = 0;
 
@@ -83,22 +84,19 @@ export default class Calendar extends React.Component{
                 }
 
                 if(calendarColorIndex>0 && calendarColorIndex<=2){
-                    calendarDivBackgroundColor = "#FFA9E7";
+                    calendarDivBackgroundColor = "#F3E0EC";
                 }else if(calendarColorIndex>2 && calendarColorIndex<6){
-                    calendarDivBackgroundColor = "#FF84E8"
+                    calendarDivBackgroundColor = "#E0BAD7"
                 }else if(calendarColorIndex>=6 && calendarColorIndex <9){
-                    calendarDivBackgroundColor = "#7F2CCB"
+                    calendarDivBackgroundColor = "#BC9CB9"
                 }else if (calendarColorIndex>=9){
-                    // console.log("calendar color index > 9", calendarColorIndex);
-                    calendarDivBackgroundColor = "#414361"
+                    calendarDivBackgroundColor = "#AF5E9B"
                 }
-                // console.log("calendar coolor index and reformatted day =", calendarDivBackgroundColor, reformattedDay);
+            
                 days.push(
                     <div
                     className={`col cell ${
-                      !dateFns.isSameMonth(day, monthStart)
-                        ? "disabled"
-                        : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                         dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                     }`}
                     key={reformattedDay}
                     style={{backgroundColor: calendarDivBackgroundColor}}
@@ -148,6 +146,7 @@ export default class Calendar extends React.Component{
         // console.log("calendar props", this.props.calendarData.data);
         return(
         <div className="calendar">
+
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}

@@ -24,8 +24,8 @@
 
 :root {
   --main-color: #1a8fff;
-  --text-color: #777;
-  --text-color-light: #ccc;
+  /* --text-color: #777; */
+  /* --text-color-light: #ccc; */
   --border-color: #eee;
   --bg-color: #f9f9f9;
   --neutral-color: #fff;
@@ -172,7 +172,7 @@ main {
 
 .calendar .body .selected {
   border-left: 10px solid transparent;
-  border-image: linear-gradient(45deg, #1a8fff 0%,#53cbf1 40%);
+  border-image: linear-gradient(45deg, #018774 0%,#00579D 40%);
   border-image-slice: 1;
 }
 
