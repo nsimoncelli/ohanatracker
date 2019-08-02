@@ -7,12 +7,13 @@ import LogActionButtons from './logActionButtons';
 import Calendar from './calendar';
 import Graph from './graph';
 import InfoPage from './infopage';
+import Login from './login';
 
 export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "homepage",
+            view: "login",
             currentUser: "Mom",
             data: [],
             napsData: [],
@@ -257,6 +258,13 @@ export default class App extends React.Component {
                         infoPageView={this.state.infoPageView}
                         sendInfoPageView={this.receiveInfoPageView} />
                     <Footer />
+                </React.Fragment>
+            )
+        } else if(this.state.view === "login") {
+            return (
+                <React.Fragment>
+                    <Login 
+                        changeView={this.setView} />
                 </React.Fragment>
             )
         }

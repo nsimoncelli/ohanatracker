@@ -250,3 +250,11 @@ thead, tbody tr {
 .userSelectContainer {
   font-size: 1.75rem;
 }
+
+/*  Log In Page  */
+.loginPage {
+  background-image: url(./images/sunflower.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: 0;
+}
