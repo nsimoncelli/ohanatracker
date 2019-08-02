@@ -94,15 +94,19 @@ export default class InfoPage extends React.Component {
                             <h1>Our Mission</h1>
                         </div>
                     </div>
-                    <div className="row missionStatement">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nulla, 
-                            fugiat pariatur laudantium cumque ullam nostrum. Animi ullam error tempora 
-                            excepturi voluptatum magni voluptas facere incidunt, fugit repellat. Beatae, 
-                            praesentium mollitia labore ullam nobis velit soluta nihil, minima libero 
-                            est debitis laborum voluptatum? Placeat blanditiis laboriosam quas inventore 
-                            nihil dicta?
-                        </p>    
-                    </div>                
+                    <div className="row text-center missionStatement">
+                        <p>Ohana helps new parents track information about their child.
+                            With a simple click of a button: feeding times, naps, and diaper changes are recorded.
+                        </p>
+                        <p>
+                            Ohana's graphical reports and detailed calendar allow parents and caretakers
+                            to stay organized.
+                        </p>
+                        <p>
+                            It takes a village to raise a child.
+                        </p>
+                        <p>Welcome to Ohana</p>
+                    </div>
                 </div>
             )
         } else if (this.props.infoPageView === 'howTo') {
@@ -120,8 +124,8 @@ export default class InfoPage extends React.Component {
                             praesentium mollitia labore ullam nobis velit soluta nihil, minima libero 
                             est debitis laborum voluptatum? Placeat blanditiis laboriosam quas inventore 
                             nihil dicta?
-                        </p>    
-                    </div> 
+                        </p>
+                    </div>
                 </div>
             )
         }
