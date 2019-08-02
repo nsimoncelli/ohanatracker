@@ -10,7 +10,8 @@ export default class Calendar extends React.Component{
         this.state={
             currentMonth: new Date(),
             currentDate: new Date(), 
-            selectedDate: null
+            selectedDate: null,
+            allEntryData: []
         }
         this.renderHeader = this.renderHeader.bind(this);
         this.nextMonth = this.nextMonth.bind(this);
@@ -68,7 +69,30 @@ export default class Calendar extends React.Component{
             for (var dayIndex = 0; dayIndex <7; dayIndex++){
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
-                // console.log("console logged day", day)
+                var reformattedDay = format(day, "YYYY-MM-DD");
+                var calendarDivBackgroundColor= "white";
+                var calendarDataDateFromDB = this.props.calendarData.data;
+                var calendarColorIndex = 0;
+
+                for (var calendarDataIndex = 0; calendarDataIndex < calendarDataDateFromDB.length; calendarDataIndex++){
+                    var cutData =calendarDataDateFromDB[calendarDataIndex].finished_at;
+                    cutData = cutData.substr(0,10);
+                    if(cutData===reformattedDay){
+                        calendarColorIndex++
+                    }
+                }
+
+                if(calendarColorIndex>0 && calendarColorIndex<=2){
+                    calendarDivBackgroundColor = "#FFA9E7";
+                }else if(calendarColorIndex>2 && calendarColorIndex<6){
+                    calendarDivBackgroundColor = "#FF84E8"
+                }else if(calendarColorIndex>=6 && calendarColorIndex <9){
+                    calendarDivBackgroundColor = "#7F2CCB"
+                }else if (calendarColorIndex>=9){
+                    // console.log("calendar color index > 9", calendarColorIndex);
+                    calendarDivBackgroundColor = "#414361"
+                }
+                // console.log("calendar coolor index and reformatted day =", calendarDivBackgroundColor, reformattedDay);
                 days.push(
                     <div
                     className={`col cell ${
@@ -76,7 +100,8 @@ export default class Calendar extends React.Component{
                         ? "disabled"
                         : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                     }`}
-                    key={day}
+                    key={reformattedDay}
+                    style={{backgroundColor: calendarDivBackgroundColor}}
                     onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
                   >
                     <span className="number">{formattedDate}</span>
@@ -120,7 +145,6 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-      
         return(
         <div className="calendar">
             {this.renderHeader()}

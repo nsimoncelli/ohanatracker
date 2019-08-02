@@ -34,11 +34,8 @@
 
 /* GENERAL */
 
-* {
-  box-sizing: border-box;
-}
-
 body {
+    box-sizing: border-box;
     font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     font-size: 1em;
     font-weight: 300;
@@ -235,7 +232,7 @@ main {
 
 tbody {
   display:block;
-  height:215px;
+  height:255px;
   overflow:auto;
 }
 thead, tbody tr {
@@ -243,7 +240,7 @@ thead, tbody tr {
   width:100%;
   table-layout:fixed;
 }
-thead {
+/* thead {
   width: calc( 100% - 1em )
-}
+} */
 
