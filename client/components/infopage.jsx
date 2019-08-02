@@ -10,35 +10,38 @@ export default class InfoPage extends React.Component {
 
     missionButtonHandler(e) {
         e.preventDefault();
-        let missionView = 'mission';
-        this.props.sendInfoPageView(missionView);
+        this.props.sendInfoPageView('mission');
     }
 
     teamButtonHandler(e) {
         e.preventDefault();
-        let teamView = 'teamMembers';
-        this.props.sendInfoPageView(teamView);
+        this.props.sendInfoPageView('teamMembers');
     }
 
     howToButtonHandler(e) {
         e.preventDefault();
-        let howToView = 'howTo';
-        this.props.sendInfoPageView(howToView);
+        this.props.sendInfoPageView('howTo');
     }
 
     render() {
         if (this.props.infoPageView === 'mainInfo') {
             return(
-                <div className="container">
+                <div className="container p-4">
                     <div className='row text-center'>
                         <div className="missionButtonContainer col-12 my-3">
-                            <button className="btn" onClick={this.missionButtonHandler}>Our Mission</button>
+                            <button type="button" className="btn" onClick={this.missionButtonHandler}>
+                                <h1>Our Mission</h1>
+                            </button>
                         </div>
                         <div className="teamButtonContainer col-12 my-3">
-                            <button className="btn" onClick={this.teamButtonHandler}>Our Team</button>
+                            <button type="button" className="btn" onClick={this.teamButtonHandler}>
+                                <h1>Our Team</h1>
+                            </button>
                         </div>
                         <div className="howToButtonContainer col-12 my-3">
-                            <button className="btn" onClick={this.howToButtonHandler}>How To</button>
+                            <button type="button" className="btn" onClick={this.howToButtonHandler}>
+                                <h1>How To</h1>
+                            </button>
                         </div>
                     </div>
                 </div>
