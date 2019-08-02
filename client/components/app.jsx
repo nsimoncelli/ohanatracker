@@ -18,8 +18,8 @@ export default class App extends React.Component {
             graphData: [],
             awake: true,
             infoPageView: 'mainInfo',
-            allCalendarEntries: []
-
+            allCalendarEntries: [],
+            startedAt: null
 
         };
         this.setView = this.setView.bind(this);
@@ -32,6 +32,7 @@ export default class App extends React.Component {
         this.postChanges = this.postChanges.bind(this);
         this.receiveInfoPageView = this.receiveInfoPageView.bind(this);
         this.getAllCalendarEntries = this.getAllCalendarEntries.bind(this);
+        this.getCurrentTime = this.getCurrentTime.bind(this);
     }
 
     componentDidMount() {
@@ -87,14 +88,16 @@ export default class App extends React.Component {
         })
     }
 
-    postNap(userId, babyId) {
-        fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
+    postNap(userId, babyId, startedAt) {
+      
+        fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data))
         .catch(error=> {
             console.error('error:', error);
         })
+      
     }
 
     postChanges(userId, babyId, changeType) {
@@ -127,6 +130,10 @@ export default class App extends React.Component {
         this.setState({
             currentUser: newUser
         })
+    }
+
+    getCurrentTime(dateTime) {
+        this.setState({startedAt: dateTime})
     }
 
     render() {
@@ -181,9 +188,11 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}
                         awakeState={this.state.awake}
                         sendNapState={this.receiveActionButtonState}
-                        postChanges={this.postChanges}
-                        postFeedings={this.postFeedings}
-                        postNap={this.postNap}
+                        postChanges={this.postChanges} 
+                        postFeedings={this.postFeedings} 
+                        postNap={this.postNap} 
+                        getCurrentTime={this.getCurrentTime}
+                        startedTime={this.state.startedAt}
                         changeView={this.setView} />
                     <Footer/>
                 </React.Fragment>

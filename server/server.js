@@ -94,11 +94,11 @@ app.get('/graph', async (req, res, next) => {
 
 app.post('/create/naps', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
-    const { userId, babyId, otherInfo } = req.query;
-    // userId = user_id(db)
-    // babyId
-    // otherInfo -> {}, changes -> otherInfo = 1/2/3
-    //date = same format above post MVP.    
+    const { userId, babyId, otherInfo, startedAt } = req.query;
+        // userId = user_id(db)
+        // babyId
+        // otherInfo -> {}, changes -> otherInfo = 1/2/3
+        //date = same format above post MVP.    
     if (!userId || !babyId || !otherInfo) {
         return res.status(422).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
@@ -107,12 +107,12 @@ app.post('/create/naps', (req, res, next) => {
     let datetime;
     (!req.query.date) ? datetime = "now" : datetime = req.query.date;
     const finishedAt = timeConvert(datetime, 0);
-    let startedAt;
-    (!req.query.startedAt) ? startedAt = null : startedAt = timeConvert(req.query.startedAt);
+    //let startedAt;
+    //(!req.query.startedAt) ? startedAt = null : startedAt = timeConvert(req.query.startedAt);
     const entryType = "naps";
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                VALUES (NULL, "${babyId}", "${userId}", "${startedAt}", "${finishedAt}", "${entryType}", "${otherInfo}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);

@@ -6,14 +6,12 @@ class LogActionButtons extends React.Component {
         this.state = {
             view: 'main',
             show: false,
-            startedAt: null,
-            finishedAt: null,
+            startedAt: null
         };
         this.showNotification = this.showNotification.bind(this);
         this.diaperClickHandler = this.diaperClickHandler.bind(this);
         this.feedingClickHandler = this.feedingClickHandler.bind(this);
         this.nappingClickHandler = this.nappingClickHandler.bind(this);
-        this.getCurrentTime = this.getCurrentTime.bind(this);
         this.handlePostNap = this.handlePostNap.bind(this);
         this.cancelDiapering = this.cancelDiapering.bind(this);
         this.sendAwakeState = this.sendAwakeState.bind(this);
@@ -47,13 +45,12 @@ class LogActionButtons extends React.Component {
         e.preventDefault();
         if(this.props.awakeState === true){
             this.sendAwakeState();
+            this.getCurrentTime(e);
         } else if(this.props.awakeState === false) {
             this.handlePostNap();
             this.sendAwakeState();
             this.showNotification();
         } 
-        console.log(this.getCurrentTime());
-
     }
 
     cancelDiapering(e) {
@@ -62,12 +59,14 @@ class LogActionButtons extends React.Component {
         this.setState({view : mainView})
     }
 
-    getCurrentTime() {
+    getCurrentTime(e) {
         let today = new Date();
         let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        let dateTime = `date: ${date} ${time}`;
-        return dateTime;
+        let dateTime = `${date}+${time}`;
+        if (e.currentTarget.id==="napButton") {
+            this.props.getCurrentTime(dateTime)
+        }
     }
 
     sendAwakeState() {
@@ -86,7 +85,8 @@ class LogActionButtons extends React.Component {
     }
 
     handlePostNap() {
-        this.props.postNap(this.handleCurrentUser(), 1);
+        //let startedAt = this.state.startedAt;
+        this.props.postNap(this.handleCurrentUser(), 1, this.props.startedTime);
     }
 
     handlePostFeedings() {
@@ -118,8 +118,8 @@ class LogActionButtons extends React.Component {
                                 <img src="/images/bottle2.png" height="150px" width="auto" onClick={this.handlePostFeedings} />
                             </div>
                             <div className="nappingButtonContainer col-6">{this.props.awakeState ? 
-                                <img src="/images/napButtonIcon.png" height="150px" width="auto" onClick={this.nappingClickHandler} /> :
-                                <img src="/images/sleeping-baby2.png" height="150px" width="auto" onClick={this.nappingClickHandler} />}        
+                                <img src="/images/napButtonIcon.png" id="napButton" height="150px" width="auto" onClick={this.nappingClickHandler} /> :
+                                <img src="/images/sleeping-baby2.png" id="babyButton" height="150px" width="auto" onClick={this.nappingClickHandler} />}        
                             </div>
                         </div>
                     </div>
