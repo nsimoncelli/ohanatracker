@@ -10,89 +10,87 @@ export default class InfoPage extends React.Component {
 
     missionButtonHandler(e) {
         e.preventDefault();
-        let missionView = 'mission';
-        this.props.sendInfoPageView(missionView);
+        this.props.sendInfoPageView('mission');
     }
 
     teamButtonHandler(e) {
         e.preventDefault();
-        let teamView = 'teamMembers';
-        this.props.sendInfoPageView(teamView);
+        this.props.sendInfoPageView('teamMembers');
     }
 
     howToButtonHandler(e) {
         e.preventDefault();
-        let howToView = 'howTo';
-        this.props.sendInfoPageView(howToView);
+        this.props.sendInfoPageView('howTo');
     }
 
     render() {
         if (this.props.infoPageView === 'mainInfo') {
             return(
-                <div className="container">
+                <div className="container py-3">
                     <div className='row text-center'>
                         <div className="missionButtonContainer col-12 my-3">
-                            <button className="btn" onClick={this.missionButtonHandler}>Our Mission</button>
+                            <button type="button" className="btn" onClick={this.missionButtonHandler}>
+                                <h1>Our Mission</h1>
+                            </button>
                         </div>
                         <div className="teamButtonContainer col-12 my-3">
-                            <button className="btn" onClick={this.teamButtonHandler}>Our Team</button>
+                            <button type="button" className="btn" onClick={this.teamButtonHandler}>
+                                <h1>Our Team</h1>
+                            </button>
                         </div>
                         <div className="howToButtonContainer col-12 my-3">
-                            <button className="btn" onClick={this.howToButtonHandler}>How To</button>
+                            <button type="button" className="btn" onClick={this.howToButtonHandler}>
+                                <h1>How To</h1>
+                            </button>
                         </div>
                     </div>
                 </div>
             )
         } else if (this.props.infoPageView === 'teamMembers') {
             return(
-                <div className="container membersContainer text-center my-3">
-                    <div className="row">
+                <div className="container membersContainer text-center py-3">
+                    <div className="row my-3">
                         <div className="col-12">
                             <h1>Our Team</h1>
                         </div>
                     </div>
-                    <div className="row teamLead my-3">
+                    <div className="row pt-3 align-items-center">
                         <img src="images/Steve.png" alt="" className="col-4"/>
                         <div className="col-8">
-                            <p style={{"fontSize":"1.25rem"}}>Steve Min</p>
-                            <p>Team Lead</p>
+                            <p style={{"fontSize":"1.65rem"}}>Steve Min</p>
                         </div>
                     </div>
-                    <div className="row frontEndLead my-3">
+                    <div className="row pt-3 align-items-center">
                         <img src="images/Nick.png" alt="" className="col-4"/>
                         <div className="col-8">
-                            <p className="m-1 p-2" style={{"fontSize":"1.25rem"}}>Nick Simoncelli</p>
-                            <p>Front-End Lead</p>
+                            <p style={{"fontSize":"1.65rem"}}>Nick Simoncelli</p>
                         </div>
                     </div>
-                    <div className="row backEndLead my-3">
+                    <div className="row pt-3 align-items-center">
                         <img src="images/Tony.jpeg" alt="" className="col-4"/>
                         <div className="col-8">
-                            <p className="m-1 p-2" style={{"fontSize":"1.25rem"}}>Tony Jin</p>
-                            <p>Back End-Lead</p>
+                            <p style={{"fontSize":"1.65rem"}}>Tony Jin</p>
                         </div>
                     </div>
-                    <div className="row support1 my-3">
+                    <div className="row pt-3 align-items-center">
                         <img src="images/Elliot.jpeg" alt="" className="col-4"/>
                         <div className="col-8">
-                            <p className="m-1 p-2" style={{"fontSize":"1.25rem"}}>Elliot Han</p>
-                            <p>Support</p>
+                            <p style={{"fontSize":"1.65rem"}}>Elliot Han</p>
                         </div>
                     </div>
-                    <div className="row support2 my-3">
+                    <div className="row pt-3 align-items-center">
                         <img src="images/Bisham.JPG" alt="" className="col-4"/>
                         <div className="col-8">
-                            <p className="m-1 p-2" style={{"fontSize":"1.25rem"}}>Bisham Mohabir</p>
-                            <p>Support</p>
+                            <p style={{"fontSize":"1.65rem"}}>Bisham Mohabir</p>
                         </div>
                     </div>
                 </div>
             )
         } else if (this.props.infoPageView === "mission") {
             return(
-                <div className="container missionContainer text-center my-3">
-                    <div className="row">
-                        <div className="col-12">
+                <div className="container missionContainer text-center py-3">
+                    <div className="row my-3">
+                        <div className="col-12 p-1">
                             <h1>Our Mission</h1>
                         </div>
                     </div>

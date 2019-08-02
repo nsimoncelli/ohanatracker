@@ -12,7 +12,7 @@ export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "homepage",
+            view: "infoPage",
             currentUser: "Mom",
             data: [],
             graphData: [],
@@ -47,7 +47,6 @@ export default class App extends React.Component {
     }
 
     receiveInfoPageView(newPageView){
-        console.log(newPageView)
         this.setState({ infoPageView : newPageView })
     }
 
