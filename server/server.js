@@ -201,6 +201,7 @@ app.post('/create/naps', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
+
     const finishedAt = timeConvert("now", 0);
     const date = finishedAt.slice(0,9);
     const startedAt = (req.query.startedAt) ? timeConvert(req.query.startedAt) : null;
