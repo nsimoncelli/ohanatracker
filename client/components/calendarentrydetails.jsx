@@ -62,6 +62,7 @@ export default class CalendarEntryDetails extends React.Component{
                 <th scope="row">{finalBabyTime}</th>
                 <td>{entryType}</td>
                 <td>{changeType}</td>
+                <td><img src="/images/x-button.png" height="25px" width="auto" /></td>
             </tr>
         )
     }

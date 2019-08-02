@@ -60,7 +60,7 @@ app.get('/graph', async (req, res, next) => {
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
     const napsArr = [0, 0, 0, 0, 0, 0, 0];
     for (let i = 7; i >= 0; i--) {
-        let x = 0;
+        let x = 6;
         let dateBase = (timeConvert("now", i)).slice(0, 9) + ' 00:00:00';
         let dateEnd = dateBase.slice(0, 9) + ' 23:59:59';
         dateBase = dateBase.replace(/  +/g, ' ');
@@ -79,7 +79,7 @@ app.get('/graph', async (req, res, next) => {
                 } else if (data['entry_type'] === "feedings") {
                     feedingsArr[x] = data['COUNT(*)'];
                 }
-                x++;
+                x--;
             });
             if (i === 0) {
                 res.send(JSON.stringify({

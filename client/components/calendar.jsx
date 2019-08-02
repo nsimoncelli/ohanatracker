@@ -88,9 +88,11 @@ export default class Calendar extends React.Component{
                     calendarDivBackgroundColor = "#FF84E8"
                 }else if(calendarColorIndex>=6 && calendarColorIndex <9){
                     calendarDivBackgroundColor = "#7F2CCB"
-                }else if (calendarColorIndex>9){
+                }else if (calendarColorIndex>=9){
+                    // console.log("calendar color index > 9", calendarColorIndex);
                     calendarDivBackgroundColor = "#414361"
                 }
+                // console.log("calendar coolor index and reformatted day =", calendarDivBackgroundColor, reformattedDay);
                 days.push(
                     <div
                     className={`col cell ${
@@ -109,7 +111,7 @@ export default class Calendar extends React.Component{
                 day = dateFns.addDays(day, 1);
             }
             rows.push(
-                <div className="row">
+                <div className="row" key={day}>
                     {days}
                 </div>
             );
