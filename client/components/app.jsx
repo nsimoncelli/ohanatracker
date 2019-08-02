@@ -13,7 +13,7 @@ export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "login",
+            view: "homepage",
             currentUser: "Mom",
             data: [],
             napsData: [],
@@ -23,7 +23,6 @@ export default class App extends React.Component {
             infoPageView: 'mainInfo',
             allCalendarEntries: [],
             startedAt: null
-
         };
         this.setView = this.setView.bind(this);
         this.changeUser = this.changeUser.bind(this);
