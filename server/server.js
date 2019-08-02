@@ -140,7 +140,7 @@ app.get('/graph/feedings', async (req, res, next) => {
                 console.log(i);
             })
             res.json({
-                "changes": feedingsArr
+                "feedings": feedingsArr
             })
         });
 });
@@ -185,7 +185,7 @@ app.get('/graph/naps', async (req, res, next) => {
                 console.log(i);
             })
             res.json({
-                "changes": napsArr
+                "naps": napsArr
             })
         });
 });
