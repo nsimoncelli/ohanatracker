@@ -244,3 +244,9 @@ thead, tbody tr {
   width: calc( 100% - 1em )
 } */
 
+
+
+/* ********USER SELECT STYLING******** */
+.userSelectContainer {
+  font-size: 1.75rem;
+}

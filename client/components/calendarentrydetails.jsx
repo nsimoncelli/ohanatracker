@@ -8,8 +8,17 @@ export default class CalendarEntryDetails extends React.Component{
     constructor(props){
         super(props)
         this.formatAMPM = this.formatAMPM.bind(this);
+        this.modifyClickHandler = this.modifyClickHandler.bind(this);
+        this.deleteClickHandler = this.deleteClickHandler.bind(this);
     }
 
+    modifyClickHandler() {
+        console.log('ID TO MODIFY:', this.props.children.id)
+    }
+
+    deleteClickHandler() {
+        console.log('ID TO DELETE:', this.props.children.id)
+    }
 
     formatAMPM(date) {
         date = new Date(date);
@@ -37,8 +46,10 @@ export default class CalendarEntryDetails extends React.Component{
             entryType = <img src="/images/napButtonIcon.png" height="25px" width="auto" />;
         }else if(this.props.children.entry_type==="feedings"){
             entryType = <img src="/images/bottle2.png" height="25px" width="auto" />;
-        }else if(this.props.children.entry_type==="changes"){
-            entryType = <img src="/images/diaper.png" height="25px" width="auto" />;
+        }else if(this.props.children.other_info==='{"change_type": 1}'){
+            entryType = <img src="/images/pee3.png" height="25px" width="auto" />;
+        }else if(this.props.children.other_info==='{"change_type": 2}'){
+            entryType = <img src="/images/poop4.png" height="25px" width="auto" />;
         }
 
         var backgroundColorForDiv = "";
@@ -50,19 +61,34 @@ export default class CalendarEntryDetails extends React.Component{
             backgroundColorForDiv = "#EAFFFC"
         }
 
-        var changeType;
-        if(this.props.children.other_info==='{"change_type": 1}'){
-            changeType = <img src="/images/poop4.png" height="25px" width="auto" />
-        }else if(this.props.children.other_info==='{"change_type": 2}'){
-            changeType = <img src="/images/poop4.png" height="25px" width="auto" />;
-        }
+        // if(this.props.children.other_info==='{"change_type": 1}'){
+        //     changeType = this.props.children.other_info==='{"change_type": 1}'
+        // }else if(this.props.children.other_info==='{"change_type": 2}'){
+        //     changeType = <img src="/images/poop4.png" height="25px" width="auto" />;
+        // }
         
         return (
             <tr style ={{backgroundColor: backgroundColorForDiv}} className="text-center">
                 <th scope="row">{finalBabyTime}</th>
                 <td>{entryType}</td>
-                <td>{changeType}</td>
-                <td><img src="/images/x-button.png" height="25px" width="auto" /></td>
+                <td>
+                    <button 
+                        onClick={this.modifyClickHandler}
+                        type="button" 
+                        className="btn" 
+                        style={{backgroundColor: 'transparent', border: 'none'}}>
+                            <img src="/images/edit.png" height="25px" width="auto" />
+                    </button>
+                </td>
+                <td>
+                    <button 
+                        onClick={this.deleteClickHandler}
+                        type="button" 
+                        className="btn" 
+                        style={{backgroundColor: 'transparent', border: 'none'}}>
+                            <img src="/images/x-button.png" height="25px" width="auto" />
+                    </button>
+                </td>
             </tr>
         )
     }
