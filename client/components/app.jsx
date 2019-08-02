@@ -15,7 +15,9 @@ export default class App extends React.Component {
             view: "homepage",
             currentUser: "Mom",
             data: [],
-            graphData: [],
+            napsData: [],
+            feedingsData: [],
+            diaperChangesData: [],
             awake: true,
             infoPageView: 'mainInfo',
             allCalendarEntries: [],
@@ -26,7 +28,9 @@ export default class App extends React.Component {
         this.changeUser = this.changeUser.bind(this);
         this.getEntries = this.getEntries.bind(this);
         this.postNap = this.postNap.bind(this);
-        this.getGraphData = this.getGraphData.bind(this);
+        this.getNapsData = this.getNapsData.bind(this);
+        this.getFeedingsData = this.getFeedingsData.bind(this);
+        this.getDiaperChangesData = this.getDiaperChangesData.bind(this);
         this.receiveActionButtonState = this.receiveActionButtonState.bind(this);
         this.postFeedings = this.postFeedings.bind(this);
         this.postChanges = this.postChanges.bind(this);
@@ -37,9 +41,10 @@ export default class App extends React.Component {
 
     componentDidMount() {
         this.getEntries();
-        this.getGraphData();
+        this.getNapsData();
+        this.getFeedingsData();
+        this.getDiaperChangesData();
         this.getAllCalendarEntries();
-
     }
 
     receiveActionButtonState(awakeState){
@@ -47,19 +52,44 @@ export default class App extends React.Component {
     }
 
     receiveInfoPageView(newPageView){
-        console.log(newPageView)
+        console.log(newPageView);
         this.setState({ infoPageView : newPageView })
     }
 
-    getGraphData() {
-        fetch('http://localhost:3001/graph', {
+    getNapsData() {
+        fetch('http://localhost:3001/graph/naps', {
             method: 'GET'
         })
         .then(res => res.json())
         .then(res => {
-            this.setState({ graphData:res})
+            console.log(res);
+            this.setState({ napsData:res})
         })
         .catch(error => console.error('error: ', error))
+    }
+
+    getFeedingsData() {
+        fetch('http://localhost:3001/graph/feedings', {
+            method: 'GET'
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                this.setState({ feedingsData:res})
+            })
+            .catch(error => console.error('error: ', error))
+    }
+
+    getDiaperChangesData() {
+        fetch('http://localhost:3001/graph/changes', {
+            method: 'GET'
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                this.setState({ diaperChangesData:res})
+            })
+            .catch(error => console.error('error: ', error))
     }
 
     getEntries(targetDate) {
@@ -89,7 +119,7 @@ export default class App extends React.Component {
     }
 
     postNap(userId, babyId, startedAt) {
-      
+
         fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
             method: 'POST',
         })
@@ -97,7 +127,7 @@ export default class App extends React.Component {
         .catch(error=> {
             console.error('error:', error);
         })
-      
+
     }
 
     postChanges(userId, babyId, changeType) {
@@ -188,9 +218,9 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}
                         awakeState={this.state.awake}
                         sendNapState={this.receiveActionButtonState}
-                        postChanges={this.postChanges} 
-                        postFeedings={this.postFeedings} 
-                        postNap={this.postNap} 
+                        postChanges={this.postChanges}
+                        postFeedings={this.postFeedings}
+                        postNap={this.postNap}
                         getCurrentTime={this.getCurrentTime}
                         startedTime={this.state.startedAt}
                         changeView={this.setView} />
@@ -210,9 +240,9 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         getGraphData={this.getGraphData} />
                     <Graph
-                        feedings={this.state.graphData.feedings}
-                        changes={this.state.graphData.changes}
-                        naps={this.state.graphData.naps}/>
+                        feedings={this.state.napsData}
+                        changes={this.state.diaperChangesData}
+                        naps={this.state.feedingsData}/>
                     <Footer/>
                 </React.Fragment>
             )
