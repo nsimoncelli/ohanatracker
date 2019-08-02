@@ -24,6 +24,9 @@ class Graph extends React.Component {
 
         return dateStringArr;
     }
+    componentDidMount(){
+      console.log(this.props.feedings)
+    }
     render() {
         let data = {
           labels: this.createDateArray(),
