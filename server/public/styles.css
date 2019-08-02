@@ -232,7 +232,7 @@ main {
 
 tbody {
   display:block;
-  height:255px;
+  height:214px;
   overflow:auto;
 }
 thead, tbody tr {
@@ -243,10 +243,3 @@ thead, tbody tr {
 /* thead {
   width: calc( 100% - 1em )
 } */
-
-
-
-/* ********USER SELECT STYLING******** */
-.userSelectContainer {
-  font-size: 1.75rem;
-}

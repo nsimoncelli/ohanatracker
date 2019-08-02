@@ -18,11 +18,11 @@ export default class CalendarDetails extends React.Component{
       <h4 className="my-2 text-center">{selectedDate}</h4>
         <table className="table table-bordered table-striped my-0">
           <thead>
-            <tr>
+            <tr className="text-center">
               <th scope="col">Time</th>
               <th scope="col">Type</th>
               <th scope="col">Edit</th>
-              <th scope="col">Modify</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
