@@ -19,7 +19,7 @@ export default class App extends React.Component {
             feedingsData: [],
             diaperChangesData: [],
             awake: true,
-            infoPageView: 'mainInfo',
+            infoPageView: 'mission',
             allCalendarEntries: [],
             startedAt: null
 
@@ -61,7 +61,6 @@ export default class App extends React.Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             this.setState({ napsData:res})
         })
         .catch(error => console.error('error: ', error))
@@ -73,7 +72,6 @@ export default class App extends React.Component {
         })
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 this.setState({ feedingsData:res})
             })
             .catch(error => console.error('error: ', error))
@@ -85,7 +83,6 @@ export default class App extends React.Component {
         })
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 this.setState({ diaperChangesData:res})
             })
             .catch(error => console.error('error: ', error))
