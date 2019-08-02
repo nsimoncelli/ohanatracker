@@ -8,12 +8,12 @@ export default class NavBar extends React.Component {
             this.changeViewtoGraph = this.changeViewtoGraph.bind(this);
             this.changeViewtoCalendar = this.changeViewtoCalendar.bind(this);
         }
-
         changeViewtoHome(){
             this.props.changeView("homepage");
         }
         changeViewtoGraph(){
             this.props.changeView("graph");
+            this.props.getGraphData();
         }
         changeViewtoCalendar(){
             this.props.changeView("calendar");
