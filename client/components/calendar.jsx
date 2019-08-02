@@ -143,7 +143,6 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-        console.log("calendar props", this.props.calendarData.data);
         return(
         <div className="calendar">
             {this.renderHeader()}

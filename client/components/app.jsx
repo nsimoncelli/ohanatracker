@@ -18,8 +18,8 @@ export default class App extends React.Component {
             graphData: [],
             awake: true,
             infoPageView: 'mainInfo',
-            allCalendarEntries: []
-
+            allCalendarEntries: [],
+            startedAt: null
 
         }
         this.setView = this.setView.bind(this);
@@ -32,6 +32,7 @@ export default class App extends React.Component {
         this.postChanges = this.postChanges.bind(this);
         this.receiveInfoPageView = this.receiveInfoPageView.bind(this);
         this.getAllCalendarEntries = this.getAllCalendarEntries.bind(this);
+        this.getCurrentTime = this.getCurrentTime.bind(this);
     }
 
     componentDidMount() {
@@ -131,6 +132,10 @@ export default class App extends React.Component {
         })
     }
 
+    getCurrentTime(dateTime) {
+        this.setState({startedAt: dateTime})
+    }
+
     render() {
         if(this.state.view ==="userSelect"){
             return (
@@ -181,6 +186,8 @@ export default class App extends React.Component {
                         postChanges={this.postChanges} 
                         postFeedings={this.postFeedings} 
                         postNap={this.postNap} 
+                        getCurrentTime={this.getCurrentTime}
+                        startedTime={this.state.startedAt}
                         changeView={this.setView} />
                     <Footer/>
                 </React.Fragment>
