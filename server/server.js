@@ -191,7 +191,7 @@ app.get('/graph/naps', async (req, res, next) => {
 });
 app.post('/create/naps', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
-    const { userId, babyId, otherInfo, startedAt } = req.query;
+    const { userId, babyId, otherInfo } = req.query;
         // userId = user_id(db)
         // babyId
         // otherInfo -> {}, changes -> otherInfo = 1/2/3
@@ -201,13 +201,14 @@ app.post('/create/naps', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-    let datetime = (req.query.date) || "now";
-    const finishedAt = timeConvert(datetime, 0);
-    //let startedAt = (req.query.startedAt) ? timeConvert(req.query.startedAt) : null;
+
+    const finishedAt = timeConvert("now", 0);
+    const date = finishedAt.slice(0,9);
+    const startedAt = (req.query.startedAt) ? timeConvert(req.query.startedAt) : null;
     const entryType = "naps";
     let query = `INSERT INTO \`baby_entries\` 
-                ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES ("${babyId}", "${userId}", "${startedAt}", "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
+                VALUES ("${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
     connection.query(query, (err, result) => {
         if (err) return next(err);
         const output = {
@@ -221,7 +222,6 @@ app.post('/create/naps', (req, res, next) => {
 app.post('/create/changes', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
-    console.log(otherInfo);
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
@@ -240,14 +240,13 @@ app.post('/create/changes', (req, res, next) => {
         });
     }
 
-    let datetime;
-    (!req.query.date) ? datetime = "now" : datetime = req.query.date;
-    const finishedAt = timeConvert(datetime, 0);
+    const finishedAt = timeConvert("now", 0);
+    const date = finishedAt.slice(0,9);
     const entryType = "changes";
     let query = `INSERT INTO \`baby_entries\` 
-                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
+                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
 
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${changeType}")`;
+                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${date}", "${entryType}", "${changeType}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);
@@ -267,14 +266,12 @@ app.post('/create/feedings', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-    let datetime;
-    (!req.query.date) ? datetime = "now" : datetime = req.query.date;
-    const finishedAt = timeConvert(datetime, 0);
+    const finishedAt = timeConvert("now", 0);
+    const date = finishedAt.slice(0,9);
     const entryType = "feedings";
-    console.log(finishedAt);
     let query = `INSERT INTO \`baby_entries\` 
-                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${entryType}", "${otherInfo}")`;
+                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
+                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
 
     connection.query(query, (err, result) => {
         if (err) return next(err);
