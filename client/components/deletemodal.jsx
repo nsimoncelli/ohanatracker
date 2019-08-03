@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactModal from 'react-modal';
 
 export default class DeleteModal extends React.Component{
 

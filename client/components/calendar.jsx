@@ -145,7 +145,6 @@ export default class Calendar extends React.Component{
     render(){
         return(
         <div className="calendar">
-
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}

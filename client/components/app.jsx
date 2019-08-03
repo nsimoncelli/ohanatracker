@@ -8,11 +8,12 @@ import Calendar from './calendar';
 import Graph from './graph';
 import InfoPage from './infopage';
 
+
 export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "homepage",
+            view: "userSelect",
             currentUser: "Mom",
             data: [],
             napsData: [],
@@ -158,6 +159,10 @@ export default class App extends React.Component {
 
     getCurrentTime(dateTime) {
         this.setState({startedAt: dateTime})
+    }
+
+    changeModalState(newModalState){
+        this.setState({showModal : newModalState})
     }
 
     render() {

@@ -7,15 +7,19 @@ export default class CalendarDetails extends React.Component{
       super(props); 
   }
 
-  render() {
-    var selectedDate = "Select a Date";
+  displaySelectedDate() {
+    let selectedDate = "Select a Date";
     if(this.props.currentDate){
-      var dateToString = this.props.currentDate.toString();
+      let dateToString = this.props.currentDate.toString();
       selectedDate = dateToString.substr(0,15);
     }
+    return selectedDate;
+  }
+
+  render() {
     return (
       <div className="table-wrapper-scroll-y my-custom-scrollbar dayEntryDetails border-top">
-      <h4 className="my-2 text-center">{selectedDate}</h4>
+      <h4 className="my-2 text-center">{this.displaySelectedDate()}</h4>
         <table className="table table-bordered table-striped my-0">
           <thead>
             <tr className="text-center">

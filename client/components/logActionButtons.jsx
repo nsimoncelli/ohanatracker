@@ -151,7 +151,7 @@ export default class LogActionButtons extends React.Component {
                     </div>
                     <div className="row text-center my-5">
                         <span className={this.state.show ? 'col-12' : 'hide'}>New baby entry has been made!</span>
-                    </div>                    
+                    </div>
                 </div>
             )
         }
