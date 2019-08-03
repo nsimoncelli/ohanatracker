@@ -18,7 +18,7 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     deleteClickHandler() {
-        console.log('ID TO DELETE:', this.props.children.id)
+        this.props.delete(this.props.children.id);
     }
 
     formatAMPM(date) {
@@ -35,11 +35,7 @@ export default class CalendarEntryDetails extends React.Component{
         }
 
     render(){
-        // var finalBabyTime= this.formatAMPM(this.props.children.finished_at);
-        // var babyEventTime = new Date(this.props.children.finished_at);
-        // this.formatAMPM(new Date(this.props.children.finished_at));
-        // babyEventTime = new Date(babyEventTime.getTime() + (babyEventTime.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT
-        
+       
         var finalBabyTime = this.formatAMPM(this.props.children.finished_at)
         
         var entryType;
@@ -62,12 +58,6 @@ export default class CalendarEntryDetails extends React.Component{
             backgroundColorForDiv = "#EAFFFC"
         }
 
-        // if(this.props.children.other_info==='{"change_type": 1}'){
-        //     changeType = this.props.children.other_info==='{"change_type": 1}'
-        // }else if(this.props.children.other_info==='{"change_type": 2}'){
-        //     changeType = <img src="/images/poop4.png" height="25px" width="auto" />;
-        // }
-        
         return (
             <tr style ={{backgroundColor: backgroundColorForDiv}} className="text-center">
                 <th scope="row">{finalBabyTime}</th>
