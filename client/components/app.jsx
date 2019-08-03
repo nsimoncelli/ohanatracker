@@ -37,6 +37,7 @@ export default class App extends React.Component {
         this.receiveInfoPageView = this.receiveInfoPageView.bind(this);
         this.getAllCalendarEntries = this.getAllCalendarEntries.bind(this);
         this.getCurrentTime = this.getCurrentTime.bind(this);
+        this.removeEntry = this.removeEntry.bind(this);
     }
 
     componentDidMount() {
@@ -94,7 +95,8 @@ export default class App extends React.Component {
             return response.json();
         })
         .then(myJson => {
-            this.setState({data: myJson});
+            console.log("entries", myJson.entries)
+            this.setState({data: myJson.entries});
         })
         .catch(error => {
             console.error('error: ', error);
@@ -113,16 +115,30 @@ export default class App extends React.Component {
         })
     }
 
+    updateEntry(id, newData){
+        fetch('http://localhost:3001/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
+        .then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+           console.log("successfull update", myJson);
+        })
+        .catch(error => {
+            console.error('error: ', error);
+        })
+    }
+
     postNap(userId, babyId, startedAt) {
 
         fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
             method: 'POST',
         })
-        .then(data => console.log('Request Successful:', data))
+        .then(data => console.log('Request Successful:', data)
+        )
         .catch(error=> {
             console.error('error:', error);
         })
-
+        this.getAllCalendarEntries();
     }
 
     postChanges(userId, babyId, changeType) {
@@ -133,6 +149,7 @@ export default class App extends React.Component {
         .catch(error=> {
             console.error('error:', error);
         })
+        this.getAllCalendarEntries();
     }
 
     postFeedings(userId, babyId) {
@@ -143,6 +160,7 @@ export default class App extends React.Component {
         .catch(error=> {
             console.error('error:', error);
         })
+        this.getAllCalendarEntries();
     }
 
     setView(changedView){
@@ -161,8 +179,26 @@ export default class App extends React.Component {
         this.setState({startedAt: dateTime})
     }
 
+<<<<<<< HEAD
     changeModalState(newModalState){
         this.setState({showModal : newModalState})
+=======
+    removeEntry(id){
+        console.log("id", id)
+        fetch('http://localhost:3001/delete?id='+id, {"method": "POST"})
+        .then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            console.log("my json in delete", myJson);
+            this.setState({
+                data: this.state.data.filter(entry=>entry.id!==id)
+            })
+        })
+        .catch(error => {
+            console.error('error: ', error);
+        })
+>>>>>>> dev
     }
 
     render() {
@@ -192,8 +228,13 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                       <NavBar
                           changeView={this.setView}
-                          getGraphData={this.getGraphData}/>
+                          getNapsData={this.getNapsData}
+                          getFeedingsData={this.getFeedingsData}
+                          getDiaperChangesData={this.getDiaperChangesData}
+                      />
                       <Calendar
+                        updateEntry={this.updateEntry}
+                        removeEntry={this.removeEntry}
                         getAllCalendarEntries={this.getAllCalendarEntries}
                         calendarData ={this.state.allCalendarEntries}
                         individualDateData={this.state.data}
@@ -211,7 +252,9 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser} />
                     <NavBar
                         changeView={this.setView}
-                        getGraphData={this.getGraphData}
+                        getNapsData={this.getNapsData}
+                        getFeedingsData={this.getFeedingsData}
+                        getDiaperChangesData={this.getDiaperChangesData}
                     />
                     <LogActionButtons
                         currentUser={this.state.currentUser}
@@ -237,7 +280,10 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                     <NavBar
                         changeView={this.setView}
-                        getGraphData={this.getGraphData} />
+                        getNapsData={this.getNapsData}
+                        getFeedingsData={this.getFeedingsData}
+                        getDiaperChangesData={this.getDiaperChangesData}
+                    />
                     <Graph
                         feedings={this.state.feedingsData}
                         changes={this.state.diaperChangesData}

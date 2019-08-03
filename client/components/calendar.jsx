@@ -143,12 +143,15 @@ export default class Calendar extends React.Component{
     }
 
     render(){
+        // console.log("data from db", this.props);
         return(
         <div className="calendar">
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}
             <CalendarDetails
+                updateEntry={this.props.updateEntry}
+                removeEntry={this.props.removeEntry}
                 getDateDataFromDatabase={this.props.getDateDataFromDatabase}
                 currentDate={this.state.selectedDate}
                 dataFromSelectedDate={this.props.individualDateData}

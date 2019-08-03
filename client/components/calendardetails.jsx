@@ -31,9 +31,13 @@ export default class CalendarDetails extends React.Component{
           </thead>
           <tbody>
             {
-              this.props.dataFromSelectedDate.entries.map(babyInfo=>{
+              this.props.dataFromSelectedDate.map(babyInfo=>{
                 return(
-                  <CalendarEntryDetails key={babyInfo.id}>
+                  <CalendarEntryDetails 
+                  updateEntry={this.props.updateEntry}
+                  key={babyInfo.id}
+                  delete={this.props.removeEntry}
+                  >
                     {babyInfo}
                   </CalendarEntryDetails>)
                 }
