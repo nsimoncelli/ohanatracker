@@ -12,6 +12,7 @@ app.listen(3001, err => {
 });
 
 const timeConvert = require('./functions/time-convert.js');
+const dateTest = require('./functions/date-test.js');
 
 const cred = require('../mysql_credentials');
 const connection = mysql.createConnection(cred);
@@ -28,6 +29,12 @@ app.get('/entries', (req, res, next) => {
         return res.status(400).send({
             errors: ['No date provided'],
         });
+    }
+    console.log(dateTest(date));
+    if (!dateTest(date)) {
+        return res.status(400).send({
+            errors: ["date must be in the following format YYYY-MM-DD"]
+        })
     }
     const startDate = date.concat(" 00:00:00");
     const endDate = date.concat(" 23:59:59");
@@ -57,7 +64,7 @@ app.get('/graph/changes', async (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
-    let today = timeConvert("now", 0).slice(0, 9);
+    let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "changes";
         let query = `SELECT COUNT(*),
                         dates.date,
@@ -91,7 +98,6 @@ app.get('/graph/changes', async (req, res, next) => {
                     changesArr[i] = res["COUNT(*)"];
                     i++;
                 }
-                console.log(i);
             })
             res.json({
                 "changes": changesArr
@@ -103,7 +109,7 @@ app.get('/graph/feedings', async (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
-    let today = timeConvert("now", 0).slice(0, 9);
+    let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "feedings";
         let query = `SELECT COUNT(*),
                         dates.date,
@@ -137,7 +143,6 @@ app.get('/graph/feedings', async (req, res, next) => {
                     feedingsArr[i] = res["COUNT(*)"];
                     i++;
                 }
-                console.log(i);
             })
             res.json({
                 "feedings": feedingsArr
@@ -148,7 +153,7 @@ app.get('/graph/naps', async (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     const napsArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
-    let today = timeConvert("now", 0).slice(0, 9);
+    let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "naps";
         let query = `SELECT COUNT(*),
                         dates.date,
@@ -203,12 +208,12 @@ app.post('/create/naps', (req, res, next) => {
     }
 
     const finishedAt = timeConvert("now", 0);
-    const date = finishedAt.slice(0,9);
-    const startedAt = (req.query.startedAt) ? req.query.startedAt : null;
+    const date = finishedAt.slice(0,11);
+    const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
     const entryType = "naps";
     let query = `INSERT INTO \`baby_entries\` 
                 ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
-                VALUES ("${babyId}", "${userId}", "${startedAt}", "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
+                VALUES ("${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
     connection.query(query, (err, result) => {
         if (err) return next(err);
         const output = {
@@ -241,7 +246,7 @@ app.post('/create/changes', (req, res, next) => {
     }
 
     const finishedAt = timeConvert("now", 0);
-    const date = finishedAt.slice(0,9);
+    const date = finishedAt.slice(0,11);
     const entryType = "changes";
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
@@ -267,7 +272,7 @@ app.post('/create/feedings', (req, res, next) => {
         })
     }
     const finishedAt = timeConvert("now", 0);
-    const date = finishedAt.slice(0,9);
+    const date = finishedAt.slice(0,11);
     const entryType = "feedings";
     let query = `INSERT INTO \`baby_entries\` 
                 (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
