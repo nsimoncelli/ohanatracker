@@ -187,7 +187,10 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                       <NavBar
                           changeView={this.setView}
-                          getGraphData={this.getGraphData}/>
+                          getNapsData={this.getNapsData}
+                          getFeedingsData={this.getFeedingsData}
+                          getDiaperChangesData={this.getDiaperChangesData}
+                      />
                       <Calendar
                         getAllCalendarEntries={this.getAllCalendarEntries}
                         calendarData ={this.state.allCalendarEntries}
@@ -206,7 +209,9 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser} />
                     <NavBar
                         changeView={this.setView}
-                        getGraphData={this.getGraphData}
+                        getNapsData={this.getNapsData}
+                        getFeedingsData={this.getFeedingsData}
+                        getDiaperChangesData={this.getDiaperChangesData}
                     />
                     <LogActionButtons
                         currentUser={this.state.currentUser}
@@ -232,7 +237,10 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                     <NavBar
                         changeView={this.setView}
-                        getGraphData={this.getGraphData} />
+                        getNapsData={this.getNapsData}
+                        getFeedingsData={this.getFeedingsData}
+                        getDiaperChangesData={this.getDiaperChangesData}
+                    />
                     <Graph
                         feedings={this.state.feedingsData}
                         changes={this.state.diaperChangesData}

@@ -3,7 +3,7 @@ import React from 'react';
 export default class NavBar extends React.Component {
 
         constructor(props){
-            super(props)
+            super(props);
             this.changeViewtoHome = this.changeViewtoHome.bind(this);
             this.changeViewtoGraph = this.changeViewtoGraph.bind(this);
             this.changeViewtoCalendar = this.changeViewtoCalendar.bind(this);
@@ -13,6 +13,9 @@ export default class NavBar extends React.Component {
         }
         changeViewtoGraph(){
             this.props.changeView("graph");
+            this.props.getNapsData();
+            this.props.getDiaperChangesData();
+            this.props.getFeedingsData();
         }
         changeViewtoCalendar(){
             this.props.changeView("calendar");
