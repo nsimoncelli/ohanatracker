@@ -24,36 +24,32 @@ export default class CalendarEntryDetails extends React.Component{
     formatAMPM(date) {
         date = new Date(date);
         date = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var ampm = hours >= 12 ? 'pm' : 'am';
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let ampm = hours >= 12 ? 'pm' : 'am';
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'
         minutes = minutes < 10 ? '0'+minutes : minutes;
-        var strTime = hours + ':' + minutes + ' ' + ampm;
+        let strTime = hours + ':' + minutes + ' ' + ampm;
         return strTime;
-        }
+    }
 
-    render(){
-        // var finalBabyTime= this.formatAMPM(this.props.children.finished_at);
-        // var babyEventTime = new Date(this.props.children.finished_at);
-        // this.formatAMPM(new Date(this.props.children.finished_at));
-        // babyEventTime = new Date(babyEventTime.getTime() + (babyEventTime.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT
-        
-        var finalBabyTime = this.formatAMPM(this.props.children.finished_at)
-        
-        var entryType;
+    setEntryTypeIcon() {
+        let entryTypeIcon;
         if(this.props.children.entry_type==="naps"){
-            entryType = <img src="/images/napButtonIcon.png" height="25px" width="auto" />;
+            entryTypeIcon = <img src="/images/napButtonIcon.png" height="25px" width="auto" />;
         }else if(this.props.children.entry_type==="feedings"){
-            entryType = <img src="/images/bottle2.png" height="25px" width="auto" />;
+            entryTypeIcon = <img src="/images/bottle2.png" height="25px" width="auto" />;
         }else if(this.props.children.other_info==='{"change_type": 1}'){
-            entryType = <img src="/images/pee3.png" height="25px" width="auto" />;
+            entryTypeIcon = <img src="/images/pee3.png" height="25px" width="auto" />;
         }else if(this.props.children.other_info==='{"change_type": 2}'){
-            entryType = <img src="/images/poop4.png" height="25px" width="auto" />;
+            entryTypeIcon = <img src="/images/poop4.png" height="25px" width="auto" />;
         }
+        return entryTypeIcon;
+    }
 
-        var backgroundColorForDiv = "";
+    setEntryBackgroudColor() {
+        let backgroundColorForDiv = "";
         if (this.props.children.user_id===1){
             backgroundColorForDiv = "#EDFFD1"
         }else if (this.props.children.user_id===2){
@@ -61,6 +57,20 @@ export default class CalendarEntryDetails extends React.Component{
         }else if(this.props.children.user_id===3){
             backgroundColorForDiv = "#EAFFFC"
         }
+        return backgroundColorForDiv;
+    }
+
+    render(){
+        // var finalBabyTime= this.formatAMPM(this.props.children.finished_at);
+        // var babyEventTime = new Date(this.props.children.finished_at);
+        // this.formatAMPM(new Date(this.props.children.finished_at));
+        // babyEventTime = new Date(babyEventTime.getTime() + (babyEventTime.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT
+        
+        // var finalBabyTime = this.formatAMPM(this.props.children.finished_at)
+        
+
+
+
 
         // if(this.props.children.other_info==='{"change_type": 1}'){
         //     changeType = this.props.children.other_info==='{"change_type": 1}'
@@ -69,9 +79,9 @@ export default class CalendarEntryDetails extends React.Component{
         // }
         
         return (
-            <tr style ={{backgroundColor: backgroundColorForDiv}} className="text-center">
-                <th scope="row">{finalBabyTime}</th>
-                <td>{entryType}</td>
+            <tr style ={{backgroundColor: this.setEntryBackgroudColor()}} className="text-center">
+                <th scope="row">{this.formatAMPM(this.props.children.finished_at)}</th>
+                <td>{this.setEntryTypeIcon()}</td>
                 <td>
                     <button 
                         onClick={this.modifyClickHandler}
