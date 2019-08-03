@@ -35,7 +35,7 @@ export default class CalendarEntryDetails extends React.Component{
         }
 
     render(){
-       
+        
         var finalBabyTime = this.formatAMPM(this.props.children.finished_at)
         
         var entryType;
@@ -72,7 +72,7 @@ export default class CalendarEntryDetails extends React.Component{
                     </button>
                 </td>
                 <td>
-                    <button 
+                    <button
                         onClick={this.deleteClickHandler}
                         type="button" 
                         className="btn" 

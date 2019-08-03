@@ -151,6 +151,7 @@ export default class Calendar extends React.Component{
             {this.renderDays()}
             {this.renderCells()}
             <CalendarDetails
+                updateEntry={this.props.updateEntry}
                 removeEntry={this.props.removeEntry}
                 getDateDataFromDatabase={this.props.getDateDataFromDatabase}
                 currentDate={this.state.selectedDate}

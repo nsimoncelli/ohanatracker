@@ -114,6 +114,19 @@ export default class App extends React.Component {
         })
     }
 
+    updateEntry(id, newData){
+        fetch('http://localhost:3001/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
+        .then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+           console.log("successfull update", myJson);
+        })
+        .catch(error => {
+            console.error('error: ', error);
+        })
+    }
+
     postNap(userId, babyId, startedAt) {
 
         fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
@@ -214,6 +227,7 @@ export default class App extends React.Component {
                           getDiaperChangesData={this.getDiaperChangesData}
                       />
                       <Calendar
+                        updateEntry={this.updateEntry}
                         removeEntry={this.removeEntry}
                         getAllCalendarEntries={this.getAllCalendarEntries}
                         calendarData ={this.state.allCalendarEntries}
