@@ -284,6 +284,7 @@ app.post('/create/feedings', (req, res, next) => {
 });
 
 app.post('/delete', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
     const { id } = req.query;
     let query = `DELETE FROM \`baby_entries\` 
                     WHERE \`baby_entries\`.\`id\` = ${id}`

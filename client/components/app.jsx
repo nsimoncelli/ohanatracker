@@ -13,7 +13,7 @@ export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "homepage",
+            view: "login",
             currentUser: "Mom",
             data: [],
             napsData: [],
