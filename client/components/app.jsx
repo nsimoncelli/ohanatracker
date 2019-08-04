@@ -179,10 +179,6 @@ export default class App extends React.Component {
         this.setState({startedAt: dateTime})
     }
 
-<<<<<<< HEAD
-    changeModalState(newModalState){
-        this.setState({showModal : newModalState})
-=======
     removeEntry(id){
         console.log("id", id)
         fetch('http://localhost:3001/delete?id='+id, {"method": "POST"})
@@ -198,7 +194,6 @@ export default class App extends React.Component {
         .catch(error => {
             console.error('error: ', error);
         })
->>>>>>> dev
     }
 
     render() {

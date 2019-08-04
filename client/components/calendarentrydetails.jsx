@@ -34,16 +34,8 @@ export default class CalendarEntryDetails extends React.Component{
         return strTime;
     }
 
-<<<<<<< HEAD
     setEntryTypeIcon() {
         let entryTypeIcon;
-=======
-    render(){
-        
-        var finalBabyTime = this.formatAMPM(this.props.children.finished_at)
-        
-        var entryType;
->>>>>>> dev
         if(this.props.children.entry_type==="naps"){
             entryTypeIcon = <img src="/images/napButtonIcon.png" height="25px" width="auto" />;
         }else if(this.props.children.entry_type==="feedings"){
@@ -74,7 +66,6 @@ export default class CalendarEntryDetails extends React.Component{
         
         // var finalBabyTime = this.formatAMPM(this.props.children.finished_at)  
 
-<<<<<<< HEAD
         // if(this.props.children.other_info==='{"change_type": 1}'){
         //     changeType = this.props.children.other_info==='{"change_type": 1}'
         // }else if(this.props.children.other_info==='{"change_type": 2}'){
@@ -82,8 +73,6 @@ export default class CalendarEntryDetails extends React.Component{
         // }
 
     render(){      
-=======
->>>>>>> dev
         return (
             <tr style ={{backgroundColor: this.setEntryBackgroudColor()}} className="text-center ">
                 <th scope="row" className="pt-3">{this.formatAMPM(this.props.children.finished_at)}</th>
