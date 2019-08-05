@@ -1,0 +1,37 @@
+const dateTest = require('../functions/date-test.js');
+
+app.get('/api/entries', (req, res, next) => {
+    const { date } = req.query;
+    //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
+    if (!date) {
+        return res.status(400).send({
+            errors: ['No date provided'],
+        });
+    }
+    if (!dateTest(date)) {
+        return res.status(400).send({
+            errors: ["date must be in the following format YYYY-MM-DD"]
+        })
+    }
+    const startDate = date.concat(" 00:00:00");
+    const endDate = date.concat(" 23:59:59");
+    let query = `SELECT id, user_id, baby_id, entry_type, other_info, finished_at 
+                FROM \`baby_entries\` WHERE finished_at 
+                BETWEEN "${startDate}" AND "${endDate}"`;
+    connection.query(query, (err, result) => {
+        if (err) return next(err);
+        res.status(200).send(JSON.stringify({
+            "entries": result
+        }));
+    });
+});
+
+app.get('/api/entries/all', (req, res, next) => {
+    let query = `SELECT * FROM \`baby_entries\``;
+    connection.query(query, (err, result) => {
+        if (err) return next(err);
+        res.send(JSON.stringify({
+            data: result
+        }));
+    })
+});
