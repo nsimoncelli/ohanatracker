@@ -23,7 +23,7 @@ connection.connect(err => {
     console.log('connected to database');
 });
 
-app.get('/entries', (req, res, next) => {
+app.get('/api/entries', (req, res, next) => {
     const { date } = req.query;
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
     if (!date) {
@@ -49,7 +49,7 @@ app.get('/entries', (req, res, next) => {
     });
 });
 
-app.get('/entries/all', (req, res, next) => {
+app.get('/api/entries/all', (req, res, next) => {
     let query = `SELECT * FROM \`baby_entries\``;
     connection.query(query, (err, result) => {
         if (err) return next(err);
@@ -59,7 +59,7 @@ app.get('/entries/all', (req, res, next) => {
     })
 });
 
-app.get('/graph/changes', async (req, res, next) => {
+app.get('/api/graph/changes', async (req, res, next) => {
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
     let today = timeConvert("now", 0).slice(0, 11);
@@ -103,7 +103,7 @@ app.get('/graph/changes', async (req, res, next) => {
         });
 });
 
-app.get('/graph/feedings', async (req, res, next) => {
+app.get('/api/graph/feedings', async (req, res, next) => {
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
     let today = timeConvert("now", 0).slice(0, 11);
@@ -146,7 +146,7 @@ app.get('/graph/feedings', async (req, res, next) => {
             })
         });
 });
-app.get('/graph/naps', async (req, res, next) => {
+app.get('/api/graph/naps', async (req, res, next) => {
     const napsArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
     let today = timeConvert("now", 0).slice(0, 11);
@@ -189,7 +189,7 @@ app.get('/graph/naps', async (req, res, next) => {
             })
         });
 });
-app.post('/create/naps', (req, res, next) => {
+app.post('/api/create/naps', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
         // userId = user_id(db)
         // babyId
@@ -218,7 +218,7 @@ app.post('/create/naps', (req, res, next) => {
     })
 });
 
-app.post('/create/changes', (req, res, next) => {
+app.post('/api/create/changes', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
@@ -256,7 +256,7 @@ app.post('/create/changes', (req, res, next) => {
     })
 })
 
-app.post('/create/feedings', (req, res, next) => {
+app.post('/api/create/feedings', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
@@ -280,7 +280,7 @@ app.post('/create/feedings', (req, res, next) => {
     })
 });
 
-app.post('/delete', (req, res, next) => {
+app.post('/api/delete', (req, res, next) => {
     const { id } = req.query;
     let query = `DELETE FROM \`baby_entries\` 
                     WHERE \`baby_entries\`.\`id\` = ${id}`
@@ -294,7 +294,7 @@ app.post('/delete', (req, res, next) => {
     })
 });
 
-app.post('/update', (req, res, next) => {
+app.post('/api/update', (req, res, next) => {
     const { id, finishedAt, date, entryType, otherInfo } = req.query;
     if (!id) {
         res.status(400).send({
