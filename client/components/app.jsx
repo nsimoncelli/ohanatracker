@@ -232,7 +232,6 @@ export default class App extends React.Component {
                         calendarData ={this.state.allCalendarEntries}
                         individualDateData={this.state.data}
                         getDateDataFromDatabase={this.getEntries} />
-
                    </React.Fragment>
             )
         } else if (this.state.view === "homepage") {

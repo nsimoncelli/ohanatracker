@@ -12,18 +12,8 @@ export default class Header extends React.Component {
     }
     handleInfoPageViewChange(e) {
         e.preventDefault();
-
-        if (this.props.infoPageView === 'teamMembers' || this.props.infoPageView === 'mission' || this.props.infoPageView === 'howTo') {          
-            this.props.sendInfoPageView('mainInfo');
-        } else if (this.props.infoPageView === 'mainInfo') {
-            this.props.changeView('infoPage')
-        }
-
-        if (this.props.currentView === 'homepage' || this.props.currentView === 'graph' || this.props.currentView === 'calendar') {
-            this.props.changeView('infoPage');
-        } else if (this.props.currentView === 'infoPage' && this.props.infoPageView === 'mainInfo') {
-            this.props.changeView('homepage');
-        }
+        this.props.sendInfoPageView('landingPage');
+        this.props.changeView('landingPage');
     }
     render() {
         return(

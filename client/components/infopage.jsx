@@ -37,38 +37,16 @@ export default class InfoPage extends React.Component {
     }
 
     render() {
-        if (this.props.infoPageView === 'mainInfo') {
-            return(
-                <div className="container py-3">  
-                    <div className='row text-center'>
-                        <div className="missionButtonContainer col-12 my-3">
-                            <button type="button" className="btn" onClick={this.missionButtonHandler}>
-                                <h2>Our Mission</h2>
-                            </button>
-                        </div>
-                        <div className="teamButtonContainer col-12 my-3">
-                            <button type="button" className="btn" onClick={this.teamButtonHandler}>
-                                <h2>Our Team</h2>
-                            </button>
-                        </div>
-                        <div className="howToButtonContainer col-12 my-3">
-                            <button type="button" className="btn" onClick={this.howToButtonHandler}>
-                                <h2>How To</h2>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )
-        } else if (this.props.infoPageView === 'landingPage') {
+        if (this.props.infoPageView === 'landingPage') {
             return(
                 <div>
                     <div className="container py-3">
                         <br/><br/>
                         <div className="row">
-                            <div className="col-4 text-right">
+                            <div className="col-5 text-right p-0">
                                 <img className="ducky" src="images/logo.png"/>
                             </div>
-                            <div className="col-8 title text-left poiret">Ohana</div>
+                            <div className="col-7 title poiret pl-0">hana</div>
                         </div>    
                         <br/><br/><br/><br/>
                         <div className='row'>
@@ -77,11 +55,15 @@ export default class InfoPage extends React.Component {
                                     <div className="poiretBody">Our Mission</div>
                                 </button>
                             </div>
+                        </div>
+                        <div className="row mt-2">
                             <div className="teamButtonContainer col-12 ">
                                 <button type="button" className="btn" onClick={this.teamButtonHandler}>
                                     <div className="poiretBody">Our Team</div>
                                 </button>
                             </div>
+                        </div>    
+                        <div className="row mt-2">
                             <div className="howToButtonContainer col-12 ">
                                 <button type="button" className="btn" onClick={this.howToButtonHandler}>
                                     <div className="poiretBody">How To</div>
@@ -89,10 +71,10 @@ export default class InfoPage extends React.Component {
                             </div>
                         </div>
                         <br/>
-                        <div className="row">
+                        <div className="row mt-2">
                             <div className="col ml-2">
                                 <div onClick={this.homePageButtonHandler} className="pinkButton">
-                                    Begin
+                                    <i className="fas fa-baby"></i>
                                 </div>
                             </div>
                         </div>
@@ -142,13 +124,13 @@ export default class InfoPage extends React.Component {
             )
         } else if (this.props.infoPageView === "mission") {
             return(
-                <div className="container missionContainer text-center py-3">
+                <div className="container missionContainer py-3">
                     <div className="row my-3">
-                        <div className="col-12 p-2">
+                        <div className="col-12 text-center">
                             <h1>Our Mission</h1>
                         </div>
                     </div>
-                    <div className="row text-center missionStatement">
+                    <div className="row missionStatement">
                         <p>Ohana helps new parents track information about their child.
                             With a simple click of a button: feeding times, naps, and diaper changes are recorded.
                         </p>
@@ -165,7 +147,7 @@ export default class InfoPage extends React.Component {
             )
         } else if (this.props.infoPageView === 'howTo') {
             return(
-                <div className="container howToContainer text-center py-3">
+                <div className="container howToContainer py-3">
                     <div className="row my-3">
                         <div className="col-12 p-2">
                             <h1>How To</h1>
