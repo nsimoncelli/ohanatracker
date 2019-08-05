@@ -40,7 +40,6 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        this.getEntries();
         this.getNapsData();
         this.getFeedingsData();
         this.getDiaperChangesData();
