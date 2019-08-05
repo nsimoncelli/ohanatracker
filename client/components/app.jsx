@@ -7,20 +7,19 @@ import LogActionButtons from './logActionButtons';
 import Calendar from './calendar';
 import Graph from './graph';
 import InfoPage from './infopage';
-import Login from './login';
 
 export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "login",
+            view: "landingPage",
             currentUser: "Mom",
             data: [],
             napsData: [],
             feedingsData: [],
             diaperChangesData: [],
             awake: true,
-            infoPageView: 'mission',
+            infoPageView: 'landingPage',
             allCalendarEntries: [],
             startedAt: null
         };
@@ -285,6 +284,15 @@ export default class App extends React.Component {
                     <Footer/>
                 </React.Fragment>
             )
+        } else if(this.state.view === "landingPage") {
+            return(
+                <React.Fragment>
+                    <InfoPage
+                        infoPageView={this.state.infoPageView}
+                        sendInfoPageView={this.receiveInfoPageView} 
+                        setView={this.setView} />
+                </React.Fragment>
+            )
         } else if (this.state.view === "infoPage") {
             return (
                 <React.Fragment>
@@ -296,17 +304,11 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                     <InfoPage
                         infoPageView={this.state.infoPageView}
-                        sendInfoPageView={this.receiveInfoPageView} />
+                        sendInfoPageView={this.receiveInfoPageView} 
+                        setView={this.setView} />
                     <Footer />
                 </React.Fragment>
             )
-        } else if(this.state.view === "login") {
-            return (
-                <React.Fragment>
-                    <Login 
-                        changeView={this.setView} />
-                </React.Fragment>
-            )
-        }
+        } 
     }
 }

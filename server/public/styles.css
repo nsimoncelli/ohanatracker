@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Poiret+One&display=swap);
 
 * {
   margin: 0;
@@ -7,7 +8,21 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100vh;
+  width: 100vw;
+}
 
+.poiret {
+  font-family: 'Poiret one', cursive;
+  font-size: 4.3rem;
+  font-weight: bold;
+  color: #434343;
+}
+.poiretBody {
+  font-family: 'Poiret one', cursive;
+  font-size: 2rem;
+}
 .icon {
   font-family: 'Material Icons', serif;
   font-style: normal;
@@ -300,11 +315,8 @@ thead, tbody tr {
   width: 250px;
   height: 250px;
   right: 0;
+  bottom: 0;
   position: absolute;
-}
-
-.title {
-  font-size: 4rem;
 }
 
 input,
