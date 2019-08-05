@@ -1,6 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 .icon {
   font-family: 'Material Icons', serif;
   font-style: normal;
@@ -62,6 +69,29 @@ header #logo {
 
 header #logo .icon {
   padding-right: .25em;
+}
+
+.headerTop {
+  background-color: #B9CEF3;
+}
+.ohanaLogo {
+  width: 50px;
+  height: 50px;
+}
+.logoButton {
+  background-color: transparent;
+  border: none
+}
+.headerButton {
+  color: #fff;
+  background: #ff9cbd;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  cursor: pointer;
+  margin-top: 4px;
 }
 
 main {
@@ -254,15 +284,27 @@ thead, tbody tr {
 /*  Log In Page  */
 
 .ducky {
-  height: 50px;
-  width: 50px;
-  display: inline-block;
+  height: 100px;
+  width: 100px;
 }
 
-.loginPage {
-  background-image: url(./images/sunflower.jpg);
+.front-page {
+  height: 100%;
+  width: 100%;
+}
+
+.frontFlower {
+  background-image: url(./images/flowers.png);
   background-size: contain;
   background-repeat: no-repeat;
+  width: 250px;
+  height: 250px;
+  right: 0;
+  position: absolute;
+}
+
+.title {
+  font-size: 4rem;
 }
 
 input,
@@ -273,7 +315,6 @@ label {
   margin: 10px;
   padding: 5px;
   border: none;
-  font-size: 22px;
 }
 
 input:focus {
@@ -282,7 +323,7 @@ input:focus {
 /* Question */
 
 input.question {
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 300;
   border-radius: 2px;
   margin: 0;
@@ -290,7 +331,7 @@ input.question {
   width: 80%;
   background: rgba(0, 0, 0, 0);
   transition: padding-top 0.2s ease, margin-top 0.2s ease;
-  overflow-x: hidden; /* Hack to make "rows" attribute apply in Firefox. */
+  overflow-x: hidden; 
 }
 /* Underline and Placeholder */
 
@@ -324,7 +365,7 @@ input.question:valid + label > span {
 }
 
 input.question:valid + label {
-  border-color: green;
+  border-color: rgb(216, 70, 126);
 }
 
 input.question:invalid {
@@ -356,12 +397,10 @@ input.question + label > span {
   }
 }
 
-.example_a {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
+.pinkButton {
+  color: #fff;
   background: #f679a3;
-  padding: 20px;
+  padding: 15px;
   border-radius: 5px;
   display: inline-block;
   border: none;
@@ -369,7 +408,7 @@ input.question + label > span {
   cursor: pointer;
   }
 
-.example_a:hover {
+.pinkButton:hover {
   background: #434343;
   letter-spacing: 1px;
   -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
