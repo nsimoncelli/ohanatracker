@@ -2,7 +2,6 @@ const dateTest = require('../functions/date-test.js');
 
 app.get('/api/entries', (req, res, next) => {
     const { date } = req.query;
-    //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
     if (!date) {
         return res.status(400).send({
             errors: ['No date provided'],
