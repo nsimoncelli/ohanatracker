@@ -6,44 +6,98 @@ export default class InfoPage extends React.Component {
         this.missionButtonHandler = this.missionButtonHandler.bind(this);
         this.teamButtonHandler = this.teamButtonHandler.bind(this);
         this.howToButtonHandler = this.howToButtonHandler.bind(this);
+        this.mainPageButtonHandler = this.mainPageButtonHandler.bind(this);
+        this.homePageButtonHandler = this.homePageButtonHandler.bind(this);
     }
 
     missionButtonHandler(e) {
         e.preventDefault();
         this.props.sendInfoPageView('mission');
+        this.mainPageButtonHandler();
     }
 
     teamButtonHandler(e) {
         e.preventDefault();
         this.props.sendInfoPageView('teamMembers');
+        this.mainPageButtonHandler();
     }
 
     howToButtonHandler(e) {
         e.preventDefault();
         this.props.sendInfoPageView('howTo');
+        this.mainPageButtonHandler();
+    }
+
+    mainPageButtonHandler() {
+        this.props.setView('infoPage');
+    }
+
+    homePageButtonHandler() {
+        this.props.setView('homepage');
     }
 
     render() {
         if (this.props.infoPageView === 'mainInfo') {
             return(
-                <div className="container py-3">
+                <div className="container py-3">  
                     <div className='row text-center'>
                         <div className="missionButtonContainer col-12 my-3">
                             <button type="button" className="btn" onClick={this.missionButtonHandler}>
-                                <h1>Our Mission</h1>
+                                <h2>Our Mission</h2>
                             </button>
                         </div>
                         <div className="teamButtonContainer col-12 my-3">
                             <button type="button" className="btn" onClick={this.teamButtonHandler}>
-                                <h1>Our Team</h1>
+                                <h2>Our Team</h2>
                             </button>
                         </div>
                         <div className="howToButtonContainer col-12 my-3">
                             <button type="button" className="btn" onClick={this.howToButtonHandler}>
-                                <h1>How To</h1>
+                                <h2>How To</h2>
                             </button>
                         </div>
                     </div>
+                </div>
+            )
+        } else if (this.props.infoPageView === 'landingPage') {
+            return(
+                <div>
+                    <div className="container py-3">
+                        <br/><br/>
+                        <div className="row">
+                            <div className="col-4 text-right">
+                                <img className="ducky" src="images/logo.png"/>
+                            </div>
+                            <div className="col-8 title text-left poiret">Ohana</div>
+                        </div>    
+                        <br/><br/><br/><br/>
+                        <div className='row'>
+                            <div className="missionButtonContainer col-12">
+                                <button type="button" className="btn" onClick={this.missionButtonHandler}>
+                                    <div className="poiretBody">Our Mission</div>
+                                </button>
+                            </div>
+                            <div className="teamButtonContainer col-12 ">
+                                <button type="button" className="btn" onClick={this.teamButtonHandler}>
+                                    <div className="poiretBody">Our Team</div>
+                                </button>
+                            </div>
+                            <div className="howToButtonContainer col-12 ">
+                                <button type="button" className="btn" onClick={this.howToButtonHandler}>
+                                    <div className="poiretBody">How To</div>
+                                </button>
+                            </div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                            <div className="col ml-2">
+                                <div onClick={this.homePageButtonHandler} className="pinkButton">
+                                    Begin
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div className="frontFlower"></div>
                 </div>
             )
         } else if (this.props.infoPageView === 'teamMembers') {
