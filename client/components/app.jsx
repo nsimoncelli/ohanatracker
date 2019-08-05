@@ -55,7 +55,7 @@ export default class App extends React.Component {
     }
 
     getNapsData() {
-        fetch('http://localhost:3001/graph/naps', {
+        fetch('api/graph/naps', {
             method: 'GET'
         })
         .then(res => res.json())
@@ -66,7 +66,7 @@ export default class App extends React.Component {
     }
 
     getFeedingsData() {
-        fetch('http://localhost:3001/graph/feedings', {
+        fetch('api/graph/feedings', {
             method: 'GET'
         })
             .then(res => res.json())
@@ -77,7 +77,7 @@ export default class App extends React.Component {
     }
 
     getDiaperChangesData() {
-        fetch('http://localhost:3001/graph/changes', {
+        fetch('api/graph/changes', {
             method: 'GET'
         })
             .then(res => res.json())
@@ -88,7 +88,7 @@ export default class App extends React.Component {
     }
 
     getEntries(targetDate) {
-        fetch('http://localhost:3001/entries?date=' + targetDate)
+        fetch('api/entries?date=' + targetDate)
         .then(response => {
             return response.json();
         })
@@ -101,7 +101,7 @@ export default class App extends React.Component {
         })
     }
     getAllCalendarEntries() {
-        fetch('http://localhost:3001/entries/all')
+        fetch('api/entries/all')
         .then(response => {
             return response.json();
         })
@@ -114,12 +114,12 @@ export default class App extends React.Component {
     }
 
     updateEntry(id, newData){
-        fetch('http://localhost:3001/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
+        fetch('api/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
         .then(response => {
             return response.json();
         })
         .then(myJson => {
-           console.log("successfull update", myJson);
+           console.log("successful update", myJson);
         })
         .catch(error => {
             console.error('error: ', error);
@@ -128,7 +128,7 @@ export default class App extends React.Component {
 
     postNap(userId, babyId, startedAt) {
 
-        fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
+        fetch(`api/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data)
@@ -140,7 +140,7 @@ export default class App extends React.Component {
     }
 
     postChanges(userId, babyId, changeType) {
-        fetch(`http://localhost:3001/create/changes?userId=${userId}&babyId=${babyId}&otherInfo=${changeType}`, {
+        fetch(`api/create/changes?userId=${userId}&babyId=${babyId}&otherInfo=${changeType}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data))
@@ -151,7 +151,7 @@ export default class App extends React.Component {
     }
 
     postFeedings(userId, babyId) {
-        fetch(`http://localhost:3001/create/feedings?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
+        fetch(`api/create/feedings?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data))
@@ -179,7 +179,7 @@ export default class App extends React.Component {
 
     removeEntry(id){
         console.log("id", id)
-        fetch('http://localhost:3001/delete?id='+id, {"method": "POST"})
+        fetch('api/delete?id='+id, {"method": "POST"})
         .then(response => {
             return response.json();
         })
