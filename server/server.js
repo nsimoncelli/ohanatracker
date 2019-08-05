@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const cors = require('cors');
 const app = express();
-app.use(cors())
+const path = require('path');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(3001, err => {
     if (err) throw err;
@@ -24,7 +24,6 @@ connection.connect(err => {
 });
 
 app.get('/entries', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const { date } = req.query;
     //date = 2019-02-16 15:23:16 -> YYYY-MM-DD HH:mm:ss
     if (!date) {
@@ -51,7 +50,6 @@ app.get('/entries', (req, res, next) => {
 });
 
 app.get('/entries/all', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', "*");
     let query = `SELECT * FROM \`baby_entries\``;
     connection.query(query, (err, result) => {
         if (err) return next(err);
@@ -62,7 +60,6 @@ app.get('/entries/all', (req, res, next) => {
 });
 
 app.get('/graph/changes', async (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
     let today = timeConvert("now", 0).slice(0, 11);
@@ -107,7 +104,6 @@ app.get('/graph/changes', async (req, res, next) => {
 });
 
 app.get('/graph/feedings', async (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
     let today = timeConvert("now", 0).slice(0, 11);
@@ -151,7 +147,6 @@ app.get('/graph/feedings', async (req, res, next) => {
         });
 });
 app.get('/graph/naps', async (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const napsArr = [0, 0, 0, 0, 0, 0, 0];
 // look up cross joins to get this down to 1 query
     let today = timeConvert("now", 0).slice(0, 11);
@@ -195,7 +190,6 @@ app.get('/graph/naps', async (req, res, next) => {
         });
 });
 app.post('/create/naps', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
         // userId = user_id(db)
         // babyId
@@ -225,7 +219,6 @@ app.post('/create/naps', (req, res, next) => {
 });
 
 app.post('/create/changes', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
@@ -264,7 +257,6 @@ app.post('/create/changes', (req, res, next) => {
 })
 
 app.post('/create/feedings', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); 
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
@@ -289,7 +281,6 @@ app.post('/create/feedings', (req, res, next) => {
 });
 
 app.post('/delete', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); 
     const { id } = req.query;
     let query = `DELETE FROM \`baby_entries\` 
                     WHERE \`baby_entries\`.\`id\` = ${id}`
