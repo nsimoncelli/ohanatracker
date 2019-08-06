@@ -106,6 +106,7 @@ export default class App extends React.Component {
             return response.json();
         })
         .then(myJson => {
+            console.log("all entires:", myJson);
             this.setState({allCalendarEntries: myJson});
         })
         .catch(error => {
