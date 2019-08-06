@@ -55,6 +55,9 @@ app.get('/entries/all', (req, res, next) => {
     let query = `SELECT * FROM \`baby_entries\``;
     connection.query(query, (err, result) => {
         if (err) return next(err);
+        result.forEach(element => {
+            element["finished_at"] = timeConvert(element["finished_at"], 8);
+        });
         res.send(JSON.stringify({
             data: result
         }));
