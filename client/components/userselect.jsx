@@ -1,4 +1,5 @@
 import React from 'react';
+import {CSSTransition} from 'react-transition-group';
 
 export default class UserSelect extends React.Component{
     constructor(props){
@@ -21,8 +22,14 @@ export default class UserSelect extends React.Component{
     }
     render(){
         return(
-            <div>
-            <div className="container userSelectContainer text-center py-3">
+            <CSSTransition
+                in={true}
+                appear={true}
+                timeout={400}
+                classNames="fade"
+            >
+                <div>
+                <div className="container userSelectContainer text-center py-3">
                 <div className="row my-3 justify-content-center">
                     <div className="col-12 p-2 col-lg-6">
                         <div className="poiretTitle selectUser">Select User</div>
@@ -51,8 +58,11 @@ export default class UserSelect extends React.Component{
                     </div>
                 </div>
             </div>
-            <div className="frontFlower frontFlower2"></div>
-            </div>
+                <div className="frontFlower frontFlower2"></div>
+                </div>
+            </CSSTransition>
+            
+            
         )
     }
 }

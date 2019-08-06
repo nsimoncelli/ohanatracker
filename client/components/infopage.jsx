@@ -1,4 +1,5 @@
 import React from 'react';
+import {CSSTransition} from 'react-transition-group';
 
 export default class InfoPage extends React.Component {
     constructor(props) {
@@ -45,6 +46,12 @@ export default class InfoPage extends React.Component {
     render() {
         if (this.props.infoPageView === 'landingPage') {
             return(
+                <CSSTransition
+                in={true}
+                appear={true}
+                timeout={600}
+                classNames="fade"
+                >
                 <div>
                     <div className="container py-3">
                         <br/><br/>
@@ -87,6 +94,9 @@ export default class InfoPage extends React.Component {
                     </div>
                     <div className="frontFlower"></div>
                 </div>
+                </CSSTransition>
+                
+                
             )
         } else if (this.props.infoPageView === 'teamMembers') {
             return(
