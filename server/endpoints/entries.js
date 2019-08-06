@@ -16,8 +16,8 @@ router.post('/create/naps', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-
     const finishedAt = timeConvert("now", 0);
+    console.log(finishedAt);
     const date = finishedAt.slice(0,11);
     const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
     const entryType = "naps";
