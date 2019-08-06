@@ -1,10 +1,13 @@
 const express = require('express');
-
+const mysql = require('mysql');
 const router = express.Router();
 
 const timeConvert = require('../functions/time-convert.js');
-
 const dateTest = require('../functions/date-test.js');
+const cred = require('../../mysql_credentials');
+
+const connection = mysql.createConnection(cred);
+
 
 router.post('/create/naps', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query; 
