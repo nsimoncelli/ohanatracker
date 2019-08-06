@@ -93,7 +93,7 @@ export default class InfoPage extends React.Component {
                 <div className="container membersContainer text-center py-3">
                     <div className="row my-3">
                         <div className="col-12">
-                            <h1>Our Team</h1>
+                            <div className="poiretTitle">Our Team</div>
                         </div>
                     </div>
                     <div className="row pt-3 align-items-center">
@@ -133,7 +133,7 @@ export default class InfoPage extends React.Component {
                 <div className="container missionContainer py-3">
                     <div className="row my-3">
                         <div className="col-12 text-center">
-                            <h1>Our Mission</h1>
+                            <div className="poiretTitle">Our Mission</div>
                         </div>
                     </div>
                     <div className="row missionStatement">
