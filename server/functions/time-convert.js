@@ -1,10 +1,9 @@
-timeConvert = ( timestamp, change ) => {
-    let offset = new Date().getTimezoneOffset();
+timeConvert = ( timestamp, change, offset ) => {
     if (timestamp === "now") {
         let d = new Date();
         let nowUtc = new Date( d.getTime() + (d.getTimezoneOffset() * 60000));
         d = new Date(nowUtc);
-        d.setHours(d.getHours() - 7);
+        d.setHours(d.getHours() - offset);
         let day = d.getDate().toString();
         let month = (d.getMonth()+1).toString();
         day = (day.length < 2) ? day = "0" + day : day;
@@ -17,7 +16,7 @@ timeConvert = ( timestamp, change ) => {
         let d = new Date(timestamp);
         let nowUtc = new Date( d.getTime() + (d.getTimezoneOffset() * 60000));
         d = new Date(nowUtc);
-        d.setHours(d.getHours() - 7);
+        d.setHours(d.getHours() - offset);
         d.setDate( d.getDate() - change );
         let day = d.getDate().toString();
         let month = (d.getMonth()+1).toString();

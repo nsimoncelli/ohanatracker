@@ -16,8 +16,8 @@ router.post('/create/naps', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-
     const finishedAt = timeConvert("now", 0);
+    console.log(finishedAt);
     const date = finishedAt.slice(0,11);
     const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
     const entryType = "naps";
@@ -54,7 +54,7 @@ router.post('/create/changes', (req, res, next) => {
         });
     }
 
-    const finishedAt = timeConvert("now", 0);
+    const finishedAt = timeConvert("now", 0, 0);
     const date = finishedAt.slice(0,11);
     const entryType = "changes";
     let query = `INSERT INTO \`baby_entries\` 
@@ -79,7 +79,7 @@ router.post('/create/feedings', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-    const finishedAt = timeConvert("now", 0);
+    const finishedAt = timeConvert("now", 0, 0);
     const date = finishedAt.slice(0,11);
     const entryType = "feedings";
     let query = `INSERT INTO \`baby_entries\` 
@@ -119,8 +119,8 @@ router.post('/update', (req, res, next) => {
     }
     const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
     if (!dateTest(date) || !dateTest(finishedAt)) {
-        finishedAt = timeConvert(finishedAt);
-        date = timeConvert(date);
+        finishedAt = timeConvert(finishedAt, 0, 0);
+        date = timeConvert(date, 0, 0);
         if (!dateTest(date) || !dateTest(finishedAt)) {
             res.status(400).send({
                 errors: ["date must be in the following format YYYY-MM-DD"]
