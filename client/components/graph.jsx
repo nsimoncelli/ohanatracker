@@ -66,7 +66,7 @@ export default class Graph extends React.Component {
 
   render() {
     return (
-      <div className="graphContainer">
+      <div className="graphContainer mt-1">
         <Line data={this.generateFeedingGraphData()}/>
         <Line data={this.generateDiaperingGraphData()}/>
         <Line data={this.generateNapGraphData()}/>

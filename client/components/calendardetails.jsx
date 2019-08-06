@@ -36,7 +36,7 @@ export default class CalendarDetails extends React.Component{
       <React.Fragment>
         {this.state.deleteModal && <SubmitModal deleteRow={true} removeEntry={this.props.removeEntry} idToDelete={this.state.idToDelete} resetDeleteModal={this.renderDeleteModal}/>}
         <div className="table-wrapper-scroll-y my-custom-scrollbar dayEntryDetails border-top">
-          <h4 className="my-2 text-center">{this.displaySelectedDate()}</h4>
+          <div className="my-2 text-center calendarDetailHeader">{this.displaySelectedDate()}</div>
           <table className="table table-bordered table-striped my-0">
             <thead>
               <tr className="text-center">

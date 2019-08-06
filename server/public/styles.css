@@ -61,7 +61,7 @@ Line {
 }
 
 .missionStatement {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 /* VARIABLES */
 
@@ -312,14 +312,6 @@ input.question + label > span {
   color: var(--main-color);
 }
 
-.calendar .header .icon:first-of-type {
-  margin-left: 1em;
-}
-
-.calendar .header .icon:last-of-type {
-  margin-right: 1em;
-}
-
 .calendar .days {
   text-transform: uppercase;
   font-weight: 400;
@@ -400,6 +392,10 @@ input.question + label > span {
   width: calc(100%/7);
 }
 
+.calendarDetailHeader {
+  font-size: 1.4rem;
+}
+
 .hide {
   display: none;
 }
@@ -450,7 +446,7 @@ thead, tbody tr {
   width: 230px;
   height: 250px;
   right: 0;
-  bottom: 10px;
+  bottom: 50px;
   position: absolute;
 }
 
@@ -459,8 +455,7 @@ span,
 label {
   font-family: 'Ubuntu', sans-serif;
   display: block;
-  margin: 10px;
-  padding: 5px;
+  padding: 3px;
   border: none;
 }
 

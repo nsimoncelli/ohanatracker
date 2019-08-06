@@ -293,6 +293,7 @@ export default class App extends React.Component {
                         infoPageView={this.state.infoPageView}
                         sendInfoPageView={this.receiveInfoPageView} 
                         setView={this.setView} />
+                    <Footer />
                 </React.Fragment>
             )
         } else if (this.state.view === "infoPage") {
