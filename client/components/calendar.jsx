@@ -1,8 +1,9 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import CalendarDetails from './calendardetails';
-import DeleteModal from './deletemodal';
+import SubmitModal from './submitModal';
 var format = require('date-fns/format');
+
 
 export default class Calendar extends React.Component{
 
@@ -65,7 +66,7 @@ export default class Calendar extends React.Component{
         let days = [];
         let day = startDate;
         let formattedDate = "";
-
+        // debugger;
         while(day<=endDate){
             for (var dayIndex = 0; dayIndex <7; dayIndex++){
                 formattedDate = dateFns.format(day, dateFormat);
@@ -77,8 +78,10 @@ export default class Calendar extends React.Component{
 
                 for (var calendarDataIndex = 0; calendarDataIndex < calendarDataDateFromDB.length; calendarDataIndex++){
                     var cutData =calendarDataDateFromDB[calendarDataIndex].finished_at;
-                    cutData = cutData.substr(0,10);
-                    if(cutData===reformattedDay){
+                    var gotDate = new Date(cutData);
+                    gotDate = gotDate.toString();
+                    gotDate = format(gotDate, "YYYY-MM-DD")
+                    if(gotDate===reformattedDay){
                         calendarColorIndex++
                     }
                 }
@@ -118,18 +121,18 @@ export default class Calendar extends React.Component{
         return <div className="body">{rows}</div>
 
     }
+
     onDateClick(day){
         this.setState({
             selectedDate: day
-        })
-        if(this.state.selectedDate===null){
-            return;
-        }
-        var reformattedDate= format(
-            this.state.selectedDate,
-            'YYYY-MM-DD'
+        }, () => { 
+            this.props.getDateDataFromDatabase(
+                format(
+                    this.state.selectedDate,
+                    'YYYY-MM-DD'
+                )
+            )}
         )
-        this.props.getDateDataFromDatabase(reformattedDate);
     }
     nextMonth() {
         this.setState({
@@ -146,7 +149,6 @@ export default class Calendar extends React.Component{
         // console.log("data from db", this.props);
         return(
         <div className="calendar">
-
             {this.renderHeader()}
             {this.renderDays()}
             {this.renderCells()}

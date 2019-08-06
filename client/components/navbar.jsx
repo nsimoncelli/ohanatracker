@@ -23,7 +23,7 @@ export default class NavBar extends React.Component {
 
         render(){
             return(
-                <div className="row py-3">
+                <div className="row py-1 text-center">
                     <div className="homepageButtonContainer col-4">
                         <button onClick={this.changeViewtoHome}  className="btn p-2" type="button">
                             <img src="/images/home.png" width="80" />

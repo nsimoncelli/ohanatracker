@@ -8,6 +8,7 @@ const cred = require('../../mysql_credentials');
 
 const connection = mysql.createConnection(cred);
 
+
 router.post('/create/naps', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query; 
     if (!userId || !babyId || !otherInfo) {
