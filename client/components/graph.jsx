@@ -53,24 +53,10 @@ class Graph extends React.Component {
           }]
         };
         return (
-          <div className="container">
-            <br/>
-            <div className="row justify-content-center">
-              <div className="col-sm-12 col-lg-8">
-                <Line data={feedings}/>
-              </div>
-            </div>
-            <div className="row justify-content-center">
-              <div className="col-sm-12 col-lg-8">
-                <Line data={diaperChanges}/>
-              </div>
-            </div>
-            <div className="row justify-content-center">
-              <div className="col-sm-12 col-lg-8">
-                <Line data={naps}/>
-              </div>
-              
-            </div>
+          <div className="graphContainer">
+              <Line data={feedings}/>
+              <Line data={diaperChanges}/>
+              <Line data={naps}/>
           </div>
         );
       }

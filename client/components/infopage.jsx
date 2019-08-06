@@ -93,7 +93,7 @@ export default class InfoPage extends React.Component {
                 <div className="container membersContainer text-center py-3">
                     <div className="row my-3">
                         <div className="col-12">
-                            <h1>Our Team</h1>
+                            <div className="poiretTitle">Our Team</div>
                         </div>
                     </div>
                     <div className="row pt-3 align-items-center">
@@ -130,13 +130,14 @@ export default class InfoPage extends React.Component {
             )
         } else if (this.props.infoPageView === "mission") {
             return(
-                <div className="container missionContainer py-3">
+                <div className="container missionContainer mt-2">
                     <div className="row my-3">
                         <div className="col-12 text-center">
-                            <h1>Our Mission</h1>
+                            <div className="poiretTitle">Our Mission</div>
                         </div>
                     </div>
-                    <div className="row missionStatement">
+                    <div className="row missionStatement justify-content-center">
+                        <div className="col-lg-6">
                         <p>Ohana helps new parents track information about their child.
                             With a simple click of a button: feeding times, naps, and diaper changes are recorded.
                         </p>
@@ -148,25 +149,23 @@ export default class InfoPage extends React.Component {
                             It takes a village to raise a child.
                         </p>
                         <p>Welcome to Ohana</p>
+                        </div>
                     </div>
                 </div>
             )
         } else if (this.props.infoPageView === 'howTo') {
             return(
-                <div className="container howToContainer py-3">
+                <div className="container missionContainer py-3">
                     <div className="row my-3">
                         <div className="col-12 p-2">
-                            <h1>How To</h1>
+                            <div className="poiretTitle">How To</div>
                         </div>
                     </div>
-                    <div className="row howToStatement">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nulla, 
-                            fugiat pariatur laudantium cumque ullam nostrum. Animi ullam error tempora 
-                            excepturi voluptatum magni voluptas facere incidunt, fugit repellat. Beatae, 
-                            praesentium mollitia labore ullam nobis velit soluta nihil, minima libero 
-                            est debitis laborum voluptatum? Placeat blanditiis laboriosam quas inventore 
-                            nihil dicta?
-                        </p>
+                    <div className="row">
+                        <div className="col-lg-6 missionStatement">
+                            <p>Go fuck yourself
+                            </p>
+                        </div>
                     </div>
                 </div>
             )

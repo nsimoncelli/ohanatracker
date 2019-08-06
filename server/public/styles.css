@@ -60,6 +60,9 @@ Line {
   font-feature-settings: 'liga';
 }
 
+.missionStatement {
+  font-size: 1.6rem;
+}
 /* VARIABLES */
 
 :root {
@@ -108,8 +111,9 @@ header #logo .icon {
   background-color: rgb(170, 198, 245);
 }
 .ohanaLogo {
-  width: 70px;
-  height: 70px;
+  margin-top: 3px;
+  width: 82px;
+  border-radius: 10px;
 }
 .logoButton {
   background-color: transparent;
@@ -118,14 +122,15 @@ header #logo .icon {
 .headerButton {
   color: #fff;
   background: #ff9cbd;
-  padding: 10px 18px;
+  padding: 8px 16px;
   border-radius: 10px;
   display: inline-block;
   border: none;
   transition: all 0.4s ease 0s;
   cursor: pointer;
-  margin-top: 6px;
-  font-size: 1.5rem;
+  margin-top: 3px;
+  font-size: 1.6rem;
+  font-weight: bolder;
 }
 
 main {
@@ -135,6 +140,13 @@ main {
   max-width: 50em;
 }
 
+.graphContainer {
+  padding: 10px 10px;
+}
+
+.selectUser {
+  border-bottom: 2px solid rgb(255, 160, 174);
+}
 
 /* GRID */
 
