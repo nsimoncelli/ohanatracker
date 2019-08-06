@@ -195,6 +195,7 @@ export default class App extends React.Component {
         .catch(error => {
             console.error('error: ', error);
         })
+        this.getAllCalendarEntries();
     }
 
     render() {
