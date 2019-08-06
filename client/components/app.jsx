@@ -7,13 +7,14 @@ import LogActionButtons from './logActionButtons';
 import Calendar from './calendar';
 import Graph from './graph';
 import InfoPage from './infopage';
+import SubmitModal from './submitModal';
 
 
 export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "userSelect",
+            view: "homepage",
             currentUser: "Mom",
             data: [],
             napsData: [],
@@ -41,7 +42,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        this.getEntries();
+        // this.getEntries();
         this.getNapsData();
         this.getFeedingsData();
         this.getDiaperChangesData();
@@ -301,6 +302,6 @@ export default class App extends React.Component {
                     <Footer />
                 </React.Fragment>
             )
-        }
+        } 
     }
 }

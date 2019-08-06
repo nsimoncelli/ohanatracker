@@ -1,7 +1,7 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import CalendarDetails from './calendardetails';
-import DeleteModal from './deletemodal';
+import SubmitModal from './submitModal';
 var format = require('date-fns/format');
 
 export default class Calendar extends React.Component{
@@ -118,18 +118,18 @@ export default class Calendar extends React.Component{
         return <div className="body">{rows}</div>
 
     }
+
     onDateClick(day){
         this.setState({
             selectedDate: day
-        })
-        if(this.state.selectedDate===null){
-            return;
-        }
-        var reformattedDate= format(
-            this.state.selectedDate,
-            'YYYY-MM-DD'
+        }, () => { 
+            this.props.getDateDataFromDatabase(
+                format(
+                    this.state.selectedDate,
+                    'YYYY-MM-DD'
+                )
+            )}
         )
-        this.props.getDateDataFromDatabase(reformattedDate);
     }
     nextMonth() {
         this.setState({

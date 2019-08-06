@@ -243,3 +243,11 @@ thead, tbody tr {
 /* thead {
   width: calc( 100% - 1em )
 } */
+
+
+/* MODAL STYLING */
+
+.modal {
+
+  top: 30vh;
+}

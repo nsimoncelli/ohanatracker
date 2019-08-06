@@ -1,16 +1,17 @@
 import React from 'react';
 import dateFns from 'date-fns';
-import DeleteModal from './deletemodal';
+import SubmitModal from './submitModal';
 const format = require('date-fns/format');
 
 
 export default class CalendarEntryDetails extends React.Component{
 
     constructor(props){
-        super(props)
+        super(props);
         this.formatAMPM = this.formatAMPM.bind(this);
         this.modifyClickHandler = this.modifyClickHandler.bind(this);
         this.deleteClickHandler = this.deleteClickHandler.bind(this);
+
     }
 
     modifyClickHandler() {
@@ -18,7 +19,9 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     deleteClickHandler() {
-        this.props.delete(this.props.children.id);
+        console.log('deleteClickHandler');
+        this.props.renderDeleteModal();
+        this.props.getIdToDelete(this.props.children.id);
     }
 
     formatAMPM(date) {
@@ -59,43 +62,34 @@ export default class CalendarEntryDetails extends React.Component{
         }
         return backgroundColorForDiv;
     }
-        // var finalBabyTime= this.formatAMPM(this.props.children.finished_at);
-        // var babyEventTime = new Date(this.props.children.finished_at);
-        // this.formatAMPM(new Date(this.props.children.finished_at));
-        // babyEventTime = new Date(babyEventTime.getTime() + (babyEventTime.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT
-        
-        // var finalBabyTime = this.formatAMPM(this.props.children.finished_at)  
 
-        // if(this.props.children.other_info==='{"change_type": 1}'){
-        //     changeType = this.props.children.other_info==='{"change_type": 1}'
-        // }else if(this.props.children.other_info==='{"change_type": 2}'){
-        //     changeType = <img src="/images/poop4.png" height="25px" width="auto" />;
-        // }
-
-    render(){      
+    render(){ 
         return (
-            <tr style ={{backgroundColor: this.setEntryBackgroudColor()}} className="text-center ">
-                <th scope="row" className="pt-3">{this.formatAMPM(this.props.children.finished_at)}</th>
-                <td className="pt-3">{this.setEntryTypeIcon()}</td>
-                <td>
-                    <button 
-                        onClick={this.modifyClickHandler}
-                        type="button" 
-                        className="btn" 
-                        style={{backgroundColor: 'transparent', border: 'none'}}>
-                            <img src="/images/edit.png" height="25px" width="auto" />
-                    </button>
-                </td>
-                <td>
-                    <button
-                        onClick={this.deleteClickHandler}
-                        type="button" 
-                        className="btn" 
-                        style={{backgroundColor: 'transparent', border: 'none'}}>
-                            <img src="/images/x-button.png" height="25px" width="auto" />
-                    </button>
-                </td>
-            </tr>
+            <React.Fragment>
+                <tr style ={{backgroundColor: this.setEntryBackgroudColor()}} className="text-center ">
+                    <th scope="row" className="pt-3">{this.formatAMPM(this.props.children.finished_at)}</th>
+                    <td className="pt-3">{this.setEntryTypeIcon()}</td>
+                    <td>
+                        <button 
+                            onClick={this.modifyClickHandler}
+                            type="button" 
+                            className="btn" 
+                            style={{backgroundColor: 'transparent', border: 'none'}}>
+                                <img src="/images/edit.png" height="25px" width="auto" />
+                        </button>
+                    </td>
+                    <td>
+                        <button
+                            onClick={this.deleteClickHandler}
+                            type="button" 
+                            className="btn" 
+                            style={{backgroundColor: 'transparent', border: 'none'}}>
+                                <img src="/images/x-button.png" height="25px" width="auto" />
+                        </button>
+                    </td>
+                </tr>
+
+            </React.Fragment>
         )
     }
 }
