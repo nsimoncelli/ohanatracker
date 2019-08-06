@@ -8,6 +8,7 @@ export default class InfoPage extends React.Component {
         this.howToButtonHandler = this.howToButtonHandler.bind(this);
         this.mainPageButtonHandler = this.mainPageButtonHandler.bind(this);
         this.homePageButtonHandler = this.homePageButtonHandler.bind(this);
+        this.userSelectHandler = this.userSelectHandler.bind(this);
     }
 
     missionButtonHandler(e) {
@@ -20,6 +21,11 @@ export default class InfoPage extends React.Component {
         e.preventDefault();
         this.props.sendInfoPageView('teamMembers');
         this.mainPageButtonHandler();
+    }
+
+    userSelectHandler(e) {
+        e.preventDefault();
+        this.props.setView('userSelect')
     }
 
     howToButtonHandler(e) {
@@ -73,8 +79,8 @@ export default class InfoPage extends React.Component {
                         <br/>
                         <div className="row mt-2">
                             <div className="col ml-2">
-                                <div onClick={this.homePageButtonHandler} className="pinkButton">
-                                    <i className="fas fa-baby"></i>
+                                <div onClick={this.userSelectHandler} className="pinkButton">
+                                    Explore
                                 </div>
                             </div>
                         </div>
