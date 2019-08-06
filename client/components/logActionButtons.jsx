@@ -1,4 +1,5 @@
 import React from 'react';
+import SubmitModal from './submitModal';
 
 export default class LogActionButtons extends React.Component {
     
@@ -18,17 +19,19 @@ export default class LogActionButtons extends React.Component {
         this.sendAwakeState = this.sendAwakeState.bind(this);
         this.handlePostFeedings = this.handlePostFeedings.bind(this);
         this.handlePostChange = this.handlePostChange.bind(this);
+        this.setView = this.setView.bind(this);
     }
 
     showNotification() {
         this.setState({ show: true,
         });
-        setTimeout(() => {
-             this.setState({
-                show: false,
-                view: 'main'
-            });
-        }, 1500);
+    }
+
+    setView(){
+        this.setState({
+            show: false,
+            view: 'main'
+        })
     }
 
     diaperClickHandler(e) {
@@ -122,9 +125,7 @@ export default class LogActionButtons extends React.Component {
                             <img src="/images/sleeping-baby2.png" id="babyButton" height="142px" width="auto" onClick={this.nappingClickHandler} />}        
                         </div>
                     </div>
-                    <div className="row text-center my-5">
-                        <span className={this.state.show ? 'col-12' : 'hide'}>New baby entry has been made!</span>
-                    </div>                    
+                    {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}                  
                 </div>
             )            
         } else if (this.state.view === 'diapering') {
@@ -146,12 +147,9 @@ export default class LogActionButtons extends React.Component {
                     <div className="cancelButton row my-3">
                         <div className="cancelButtonContainer col-12 text-center">
                             <img className={this.state.show ? 'hide' : ''} src="/images/x-button.png" height="60px" width="auto" onClick={this.cancelDiapering} />
-                            <img className={this.state.show ? '' : 'hide'} src="/images/check2.png" height="60px" width="auto" />
                         </div>
                     </div>
-                    <div className="row text-center my-5">
-                        <span className={this.state.show ? 'col-12' : 'hide'}>New baby entry has been made!</span>
-                    </div>                    
+                    {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}
                 </div>
             )
         }

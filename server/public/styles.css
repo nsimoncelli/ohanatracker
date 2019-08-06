@@ -406,13 +406,24 @@ input.question + label > span {
 
 tbody {
   display:block;
-  height:255px;
+  height:214px;
   overflow:auto;
 }
 thead, tbody tr {
   display:table;
   width:100%;
   table-layout:fixed;
+}
+/* thead {
+  width: calc( 100% - 1em )
+} */
+
+
+/* MODAL STYLING */
+
+
+.modal {
+  top: 30vh;
 }
 
 /* ********USER SELECT STYLING******** */
@@ -456,4 +467,5 @@ label {
 input:focus {
   outline: 0;
 }
+
 
