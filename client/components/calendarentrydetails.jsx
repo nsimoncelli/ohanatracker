@@ -25,16 +25,10 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     formatAMPM(date) {
+        console.log("date", date);
         date = new Date(date);
-        date = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000)); //convert to local time from GMT
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let ampm = hours >= 12 ? 'P' : 'A';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0'+minutes : minutes;
-        let strTime = hours + ':' + minutes + ' ' + ampm;
-        return strTime;
+        var newDate = date.toLocaleTimeString('en-US')
+        return newDate;
     }
 
     setEntryTypeIcon() {
