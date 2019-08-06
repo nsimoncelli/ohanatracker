@@ -9,7 +9,7 @@ const connection = mysql.createConnection(cred);
 
 router.get('/graph/changes', async (req, res, next) => {
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
-    let today = timeConvert("now", 0).slice(0, 11);
+    let today = timeConvert("now", 0, 0).slice(0, 11);
     let entryType = "changes";
         let query = `SELECT COUNT(*),
                         dates.date,
@@ -52,7 +52,7 @@ router.get('/graph/changes', async (req, res, next) => {
 
 router.get('/graph/feedings', async (req, res, next) => {
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
-    let today = timeConvert("now", 0).slice(0, 11);
+    let today = timeConvert("now", 0, 0).slice(0, 11);
     let entryType = "feedings";
         let query = `SELECT COUNT(*),
                         dates.date,
@@ -95,7 +95,7 @@ router.get('/graph/feedings', async (req, res, next) => {
 
 router.get('/graph/naps', async (req, res, next) => {
     const napsArr = [0, 0, 0, 0, 0, 0, 0];
-    let today = timeConvert("now", 0).slice(0, 11);
+    let today = timeConvert("now", 0, 0).slice(0, 11);
     let entryType = "naps";
         let query = `SELECT COUNT(*),
                         dates.date,
