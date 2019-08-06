@@ -14,14 +14,14 @@ export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "homepage",
+            view: "landingPage",
             currentUser: "Mom",
             data: [],
             napsData: [],
             feedingsData: [],
             diaperChangesData: [],
             awake: true,
-            infoPageView: 'mission',
+            infoPageView: 'landingPage',
             allCalendarEntries: [],
             startedAt: null
         };
@@ -42,7 +42,6 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        // this.getEntries();
         this.getNapsData();
         this.getFeedingsData();
         this.getDiaperChangesData();
@@ -58,7 +57,7 @@ export default class App extends React.Component {
     }
 
     getNapsData() {
-        fetch('http://localhost:3001/graph/naps', {
+        fetch('api/graph/naps', {
             method: 'GET'
         })
         .then(res => res.json())
@@ -69,7 +68,7 @@ export default class App extends React.Component {
     }
 
     getFeedingsData() {
-        fetch('http://localhost:3001/graph/feedings', {
+        fetch('api/graph/feedings', {
             method: 'GET'
         })
             .then(res => res.json())
@@ -80,7 +79,7 @@ export default class App extends React.Component {
     }
 
     getDiaperChangesData() {
-        fetch('http://localhost:3001/graph/changes', {
+        fetch('api/graph/changes', {
             method: 'GET'
         })
             .then(res => res.json())
@@ -91,7 +90,7 @@ export default class App extends React.Component {
     }
 
     getEntries(targetDate) {
-        fetch('http://localhost:3001/entries?date=' + targetDate)
+        fetch('api/entries?date=' + targetDate)
         .then(response => {
             return response.json();
         })
@@ -104,11 +103,12 @@ export default class App extends React.Component {
         })
     }
     getAllCalendarEntries() {
-        fetch('http://localhost:3001/entries/all')
+        fetch('api/entries/all')
         .then(response => {
             return response.json();
         })
         .then(myJson => {
+            console.log("all entires:", myJson);
             this.setState({allCalendarEntries: myJson});
         })
         .catch(error => {
@@ -117,12 +117,12 @@ export default class App extends React.Component {
     }
 
     updateEntry(id, newData){
-        fetch('http://localhost:3001/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
+        fetch('api/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
         .then(response => {
             return response.json();
         })
         .then(myJson => {
-           console.log("successfull update", myJson);
+           console.log("successful update", myJson);
         })
         .catch(error => {
             console.error('error: ', error);
@@ -131,7 +131,7 @@ export default class App extends React.Component {
 
     postNap(userId, babyId, startedAt) {
 
-        fetch(`http://localhost:3001/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
+        fetch(`api/create/naps?userId=${userId}&babyId=${babyId}&otherInfo={}&startedAt=${startedAt}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data)
@@ -143,7 +143,7 @@ export default class App extends React.Component {
     }
 
     postChanges(userId, babyId, changeType) {
-        fetch(`http://localhost:3001/create/changes?userId=${userId}&babyId=${babyId}&otherInfo=${changeType}`, {
+        fetch(`api/create/changes?userId=${userId}&babyId=${babyId}&otherInfo=${changeType}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data))
@@ -154,7 +154,7 @@ export default class App extends React.Component {
     }
 
     postFeedings(userId, babyId) {
-        fetch(`http://localhost:3001/create/feedings?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
+        fetch(`api/create/feedings?userId=${userId}&babyId=${babyId}&otherInfo={}`, {
             method: 'POST',
         })
         .then(data => console.log('Request Successful:', data))
@@ -182,7 +182,7 @@ export default class App extends React.Component {
 
     removeEntry(id){
         console.log("id", id)
-        fetch('http://localhost:3001/delete?id='+id, {"method": "POST"})
+        fetch('api/delete?id='+id, {"method": "POST"})
         .then(response => {
             return response.json();
         })
@@ -235,7 +235,6 @@ export default class App extends React.Component {
                         calendarData ={this.state.allCalendarEntries}
                         individualDateData={this.state.data}
                         getDateDataFromDatabase={this.getEntries} />
-
                    </React.Fragment>
             )
         } else if (this.state.view === "homepage") {
@@ -287,6 +286,15 @@ export default class App extends React.Component {
                     <Footer/>
                 </React.Fragment>
             )
+        } else if(this.state.view === "landingPage") {
+            return(
+                <React.Fragment>
+                    <InfoPage
+                        infoPageView={this.state.infoPageView}
+                        sendInfoPageView={this.receiveInfoPageView} 
+                        setView={this.setView} />
+                </React.Fragment>
+            )
         } else if (this.state.view === "infoPage") {
             return (
                 <React.Fragment>
@@ -298,7 +306,8 @@ export default class App extends React.Component {
                         currentUser={this.state.currentUser}/>
                     <InfoPage
                         infoPageView={this.state.infoPageView}
-                        sendInfoPageView={this.receiveInfoPageView} />
+                        sendInfoPageView={this.receiveInfoPageView} 
+                        setView={this.setView} />
                     <Footer />
                 </React.Fragment>
             )

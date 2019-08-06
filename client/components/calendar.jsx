@@ -4,6 +4,7 @@ import CalendarDetails from './calendardetails';
 import SubmitModal from './submitModal';
 var format = require('date-fns/format');
 
+
 export default class Calendar extends React.Component{
 
     constructor(props){
@@ -65,7 +66,7 @@ export default class Calendar extends React.Component{
         let days = [];
         let day = startDate;
         let formattedDate = "";
-
+        // debugger;
         while(day<=endDate){
             for (var dayIndex = 0; dayIndex <7; dayIndex++){
                 formattedDate = dateFns.format(day, dateFormat);
@@ -77,8 +78,10 @@ export default class Calendar extends React.Component{
 
                 for (var calendarDataIndex = 0; calendarDataIndex < calendarDataDateFromDB.length; calendarDataIndex++){
                     var cutData =calendarDataDateFromDB[calendarDataIndex].finished_at;
-                    cutData = cutData.substr(0,10);
-                    if(cutData===reformattedDay){
+                    var gotDate = new Date(cutData);
+                    gotDate = gotDate.toString();
+                    gotDate = format(gotDate, "YYYY-MM-DD")
+                    if(gotDate===reformattedDay){
                         calendarColorIndex++
                     }
                 }
