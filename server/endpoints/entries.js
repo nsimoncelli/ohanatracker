@@ -1,12 +1,15 @@
+const express = require('express');
+
+const router = express.Router();
+
 const timeConvert = require('../functions/time-convert.js');
+
 const dateTest = require('../functions/date-test.js');
 
-app.post('/api/create/naps', (req, res, next) => {
-    const { userId, babyId, otherInfo } = req.query;
-        // userId = user_id(db)
-        // babyId
-        // otherInfo -> {}, changes -> otherInfo = 1/2/3
-        //date = same format above post MVP.    
+const connection = require('../server');
+
+router.post('/create/naps', (req, res, next) => {
+    const { userId, babyId, otherInfo } = req.query; 
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
@@ -30,7 +33,7 @@ app.post('/api/create/naps', (req, res, next) => {
     })
 });
 
-app.post('/api/create/changes', (req, res, next) => {
+router.post('/create/changes', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
@@ -68,7 +71,7 @@ app.post('/api/create/changes', (req, res, next) => {
     })
 })
 
-app.post('/api/create/feedings', (req, res, next) => {
+router.post('/create/feedings', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
     if (!userId || !babyId || !otherInfo) {
         return res.status(400).send({
@@ -92,7 +95,7 @@ app.post('/api/create/feedings', (req, res, next) => {
     })
 });
 
-app.post('/api/delete', (req, res, next) => {
+router.post('/delete', (req, res, next) => {
     const { id } = req.query;
     let query = `DELETE FROM \`baby_entries\` 
                     WHERE \`baby_entries\`.\`id\` = ${id}`
@@ -106,7 +109,7 @@ app.post('/api/delete', (req, res, next) => {
     })
 });
 
-app.post('/api/update', (req, res, next) => {
+router.post('/update', (req, res, next) => {
     const { id, finishedAt, date, entryType, otherInfo } = req.query;
     if (!id) {
         res.status(400).send({
@@ -158,3 +161,4 @@ app.post('/api/update', (req, res, next) => {
     })
 });
 
+module.exports = router;

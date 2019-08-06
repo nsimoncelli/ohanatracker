@@ -1,6 +1,10 @@
+const express = require('express');
+
+const router = express.Router();
+
 const dateTest = require('../functions/date-test.js');
 
-app.get('/api/entries', (req, res, next) => {
+router.get('/api/entries', (req, res, next) => {
     const { date } = req.query;
     if (!date) {
         return res.status(400).send({
@@ -25,7 +29,7 @@ app.get('/api/entries', (req, res, next) => {
     });
 });
 
-app.get('/api/entries/all', (req, res, next) => {
+router.get('/api/entries/all', (req, res, next) => {
     let query = `SELECT * FROM \`baby_entries\``;
     connection.query(query, (err, result) => {
         if (err) return next(err);
@@ -34,3 +38,5 @@ app.get('/api/entries/all', (req, res, next) => {
         }));
     })
 });
+
+module.exports = router;

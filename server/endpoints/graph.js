@@ -1,6 +1,10 @@
+const express = require('express');
+
+const router = express.Router();
+
 const timeConvert = require('../functions/time-convert.js');
 
-app.get('/api/graph/changes', async (req, res, next) => {
+router.get('/api/graph/changes', async (req, res, next) => {
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
     let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "changes";
@@ -43,7 +47,7 @@ app.get('/api/graph/changes', async (req, res, next) => {
         });
 });
 
-app.get('/api/graph/feedings', async (req, res, next) => {
+router.get('/api/graph/feedings', async (req, res, next) => {
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
     let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "feedings";
@@ -85,7 +89,8 @@ app.get('/api/graph/feedings', async (req, res, next) => {
             })
         });
 });
-app.get('/api/graph/naps', async (req, res, next) => {
+
+router.get('/api/graph/naps', async (req, res, next) => {
     const napsArr = [0, 0, 0, 0, 0, 0, 0];
     let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "naps";
@@ -127,3 +132,5 @@ app.get('/api/graph/naps', async (req, res, next) => {
             })
         });
 });
+
+module.exports = router;

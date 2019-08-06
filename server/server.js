@@ -12,6 +12,10 @@ const calendarData = require('./endpoints/calendar.js');
 const entries = require('./endpoints/entries.js');
 const graph = require('./endpoints/graph.js');
 
+app.use('/api', calendarData);
+app.use('/api', entries);
+app.use('/api', graph);
+
 app.listen(3001, err => {
     if (err) throw err;
     console.log('started server on port 3001');
@@ -23,12 +27,6 @@ connection.connect(err => {
     if (err) throw err;
     console.log('connected to database');
 });
-
-
-
-app.use('/api', calendarData);
-app.use('/api', entries);
-app.use('/api', graph);
 
 
 app.all('*', (err, req, res, next) => {
