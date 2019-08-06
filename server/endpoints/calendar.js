@@ -1,10 +1,16 @@
 const express = require('express');
 
+const mysql = require('mysql');
+
 const router = express.Router();
 
 const dateTest = require('../functions/date-test.js');
 
-router.get('/api/entries', (req, res, next) => {
+const cred = require('../../mysql_credentials');
+
+const connection = mysql.createConnection(cred);
+
+router.get('/entries', (req, res, next) => {
     const { date } = req.query;
     if (!date) {
         return res.status(400).send({
@@ -29,7 +35,7 @@ router.get('/api/entries', (req, res, next) => {
     });
 });
 
-router.get('/api/entries/all', (req, res, next) => {
+router.get('/entries/all', (req, res, next) => {
     let query = `SELECT * FROM \`baby_entries\``;
     connection.query(query, (err, result) => {
         if (err) return next(err);

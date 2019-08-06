@@ -8,11 +8,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const calendarData = require('./endpoints/calendar.js');
+const calendar = require('./endpoints/calendar.js');
 const entries = require('./endpoints/entries.js');
 const graph = require('./endpoints/graph.js');
 
-app.use('/api', calendarData);
+app.use('/api', calendar);
 app.use('/api', entries);
 app.use('/api', graph);
 
@@ -27,7 +27,6 @@ connection.connect(err => {
     if (err) throw err;
     console.log('connected to database');
 });
-
 
 app.all('*', (err, req, res, next) => {
     res.sendStatus(500);

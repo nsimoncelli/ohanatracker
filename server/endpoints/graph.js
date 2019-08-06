@@ -1,10 +1,13 @@
 const express = require('express');
-
+const mysql = require('mysql');
 const router = express.Router();
 
 const timeConvert = require('../functions/time-convert.js');
+const cred = require('../../mysql_credentials');
 
-router.get('/api/graph/changes', async (req, res, next) => {
+const connection = mysql.createConnection(cred);
+
+router.get('/graph/changes', async (req, res, next) => {
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
     let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "changes";
@@ -47,7 +50,7 @@ router.get('/api/graph/changes', async (req, res, next) => {
         });
 });
 
-router.get('/api/graph/feedings', async (req, res, next) => {
+router.get('/graph/feedings', async (req, res, next) => {
     const feedingsArr = [0, 0, 0, 0, 0, 0, 0];
     let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "feedings";
@@ -90,7 +93,7 @@ router.get('/api/graph/feedings', async (req, res, next) => {
         });
 });
 
-router.get('/api/graph/naps', async (req, res, next) => {
+router.get('/graph/naps', async (req, res, next) => {
     const napsArr = [0, 0, 0, 0, 0, 0, 0];
     let today = timeConvert("now", 0).slice(0, 11);
     let entryType = "naps";
