@@ -22,15 +22,15 @@ export default class UserSelect extends React.Component{
     render(){
         return(
             <div className="container userSelectContainer text-center py-3">
-                <div className="row my-3">
-                    <div className="col-12 p-2">
-                        <h1>Select User</h1>
+                <div className="row my-3 justify-content-center">
+                    <div className="col-12 p-2 col-lg-6">
+                        <div className="poiretTitle selectUser">Select User</div>
                     </div>
                 </div>
                 <div className="row my-3">
                     <div className="col-12 momButtonContainer">
                         <button onClick={this.setUserToMom} className="btn py-3" type="button">
-                            <h3>Mom</h3>
+                            <div className="poiretBody">Mom</div>
                         </button>
                     </div>
                 </div>
@@ -38,14 +38,14 @@ export default class UserSelect extends React.Component{
                 <div className="row my-3">
                     <div className="col-12 dadButtonContainer">
                         <button onClick={this.setUserToDad} className="btn py-3" type="button">
-                            <h3>Dad</h3>
+                            <div className="poiretBody">Dad</div>
                         </button>
                     </div>
                 </div>
                 <div className="row my-3">
                     <div className="col-12 caretakerButtonContainer">
                         <button onClick={this.setUserToCaregiver} className="btn py-3" type="button">
-                            <h3>Caregiver</h3>
+                            <div className="poiretBody">Caregiver</div>
                         </button>
                     </div>
                 </div>
