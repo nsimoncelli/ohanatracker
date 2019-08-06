@@ -19,10 +19,10 @@ export default class CalendarDetails extends React.Component{
         <table className="table table-bordered table-striped my-0">
           <thead>
             <tr>
-              <th scope="col">Time</th>
-              <th scope="col">Type</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Modify</th>
+              <th className="col text-center">Time</th>
+              <th className="col text-center">Type</th>
+              <th className="col text-center">Edit</th>
+              <th className="col text-center">Modify</th>
             </tr>
           </thead>
           <tbody>

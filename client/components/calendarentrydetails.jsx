@@ -61,7 +61,14 @@ export default class CalendarEntryDetails extends React.Component{
         return (
             <tr style ={{backgroundColor: backgroundColorForDiv}} className="text-center">
                 <th scope="row">{finalBabyTime}</th>
-                <td>{entryType}</td>
+                <td>
+                    <button 
+                        type="button" 
+                        className="btn"
+                        style={{backgroundColor: 'transparent', border: 'none'}}>
+                        {entryType}
+                    </button>
+                </td>
                 <td>
                     <button 
                         onClick={this.modifyClickHandler}
