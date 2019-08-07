@@ -1,12 +1,9 @@
 const express = require('express');
-const mysql = require('mysql');
 const router = express.Router();
 
 const dateTest = require('../functions/date-test.js');
-const cred = require('../../mysql_credentials');
 const timeConvert = require('../functions/time-convert.js');
-
-const connection = mysql.createConnection(cred);
+const connection = require('../db.js');
 
 router.get('/entries', (req, res, next) => {
     const { date } = req.query;
