@@ -14,7 +14,7 @@ export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "landingPage",
+            view: "homepage",
             currentUser: "Mom",
             data: [],
             napsData: [],
@@ -117,16 +117,17 @@ export default class App extends React.Component {
     }
 
     updateEntry(id, newData){
-        fetch('api/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
-        .then(response => {
-            return response.json();
-        })
-        .then(myJson => {
-           console.log("successful update", myJson);
-        })
-        .catch(error => {
-            console.error('error: ', error);
-        })
+        console.log('updateEntry function id:', id, newData)
+        // fetch('api/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
+        // .then(response => {
+        //     return response.json();
+        // })
+        // .then(myJson => {
+        //    console.log("successful update", myJson);
+        // })
+        // .catch(error => {
+        //     console.error('error: ', error);
+        // })
     }
 
     postNap(userId, babyId, startedAt) {

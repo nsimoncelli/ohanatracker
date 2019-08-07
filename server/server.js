@@ -196,6 +196,7 @@ app.get('/api/graph/naps', async (req, res, next) => {
             })
         });
 });
+
 app.post('/api/create/naps', (req, res, next) => {
     const { userId, babyId, otherInfo } = req.query;
         // userId = user_id(db)
