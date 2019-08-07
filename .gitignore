@@ -4,3 +4,4 @@ node_modules
 personal-notes
 519ohana_dump.sql
 .env
+mysql_credentials.js

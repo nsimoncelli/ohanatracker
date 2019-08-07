@@ -12,7 +12,6 @@ export default class LogActionButtons extends React.Component {
         };
         this.showNotification = this.showNotification.bind(this);
         this.diaperClickHandler = this.diaperClickHandler.bind(this);
-        this.feedingClickHandler = this.feedingClickHandler.bind(this);
         this.nappingClickHandler = this.nappingClickHandler.bind(this);
         this.handlePostNap = this.handlePostNap.bind(this);
         this.cancelDiapering = this.cancelDiapering.bind(this);
@@ -23,26 +22,19 @@ export default class LogActionButtons extends React.Component {
     }
 
     showNotification() {
-        this.setState({ show: true,
-        });
+        this.setState({ show: true });
     }
 
     setView(){
         this.setState({
             show: false,
             view: 'main'
-        })
+        });
     }
 
     diaperClickHandler(e) {
         e.preventDefault();
-        let diaperingView = "diapering";
-        this.setState({view : diaperingView})
-    }
-
-    feedingClickHandler(e) {
-        e.preventDefault();
-        this.showNotification();
+        this.setState({view : "diapering"})
     }
 
     nappingClickHandler(e) {
@@ -59,8 +51,7 @@ export default class LogActionButtons extends React.Component {
 
     cancelDiapering(e) {
         e.preventDefault();
-        let mainView = 'main';
-        this.setState({view : mainView})
+        this.setState({view : 'main'})
     }
 
     getCurrentTime(e) {
@@ -93,7 +84,8 @@ export default class LogActionButtons extends React.Component {
         this.props.postNap(this.handleCurrentUser(), 1, this.props.startedTime);
     }
 
-    handlePostFeedings() {
+    handlePostFeedings(e) {
+        e.preventDefault();
         this.props.postFeedings(this.handleCurrentUser(), 1);
         this.showNotification();
     }

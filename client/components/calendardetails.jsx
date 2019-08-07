@@ -7,11 +7,11 @@ export default class CalendarDetails extends React.Component{
   constructor(props){
       super(props); 
       this.state = {
-        deleteModal : false,
-        idToDelete: ''
+        modal : '',
+        id: ''
       };
-      this.renderDeleteModal = this.renderDeleteModal.bind(this);
-      this.getIdToDelete = this.getIdToDelete.bind(this);
+      this.renderModal = this.renderModal.bind(this);
+      this.getId = this.getId.bind(this);
   }
 
   displaySelectedDate() {
@@ -23,18 +23,33 @@ export default class CalendarDetails extends React.Component{
     return selectedDate;
   }
 
-  renderDeleteModal(){
-    this.setState({ deleteModal : !this.state.deleteModal})
+  renderModal(modalView){
+    this.setState({ modal : modalView})
   }
 
-  getIdToDelete(id){
-    this.setState({ idToDelete : id})
+  getId(id){
+    this.setState({ id : id})
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.state.deleteModal && <SubmitModal deleteRow={true} removeEntry={this.props.removeEntry} idToDelete={this.state.idToDelete} resetDeleteModal={this.renderDeleteModal}/>}
+        {this.state.modal === 'delete' && 
+          <SubmitModal  
+            delete={true} 
+            removeEntry={this.props.removeEntry} 
+            id={this.state.id} 
+            resetModal={this.renderModal}
+          />
+        }
+        {this.state.modal === 'modify' && 
+          <SubmitModal  
+            modify={true} 
+            updateEntry={this.props.updateEntry}
+            id={this.state.id} 
+            resetModal={this.renderModal}
+          />
+        }
         <div className="table-wrapper-scroll-y my-custom-scrollbar dayEntryDetails border-top">
           <div className="my-2 text-center calendarDetailHeader">{this.displaySelectedDate()}</div>
           <table className="table table-bordered table-striped my-0">
@@ -51,9 +66,8 @@ export default class CalendarDetails extends React.Component{
                 this.props.dataFromSelectedDate.map(babyInfo=>{
                   return(
                     <CalendarEntryDetails 
-                      renderDeleteModal={this.renderDeleteModal}
-                      getIdToDelete = {this.getIdToDelete}
-                      // updateEntry={this.props.updateEntry}
+                      renderModal={this.renderModal}
+                      getId = {this.getId}
                       key={babyInfo.id}
                     >
                       {babyInfo}
