@@ -61,7 +61,7 @@ export default class SubmitModal extends React.Component {
     this.props.resetModal(''); 
     let time;
     let entryType;
-    let otherInfo = {};
+    let otherInfo = '{}';
     if(this.state.timeOfDay === 'PM') {
       let militaryHours = parseInt(this.state.hour) + 12;
       if(militaryHours === 24) {

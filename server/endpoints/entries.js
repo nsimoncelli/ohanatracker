@@ -107,23 +107,12 @@ router.post('/delete', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
-    const { id, date, entryType, otherInfo } = req.query;
+    const { id, finishedAt, entryType, otherInfo } = req.query;
     if (!id) {
         res.status(400).send({
             errors: ['Please make sure you provided an entry (id) from table baby_entries']
         });
     }
-    const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
-    if (date) {
-        if (!dateTest(date)) {
-            res.status(400).send({
-                errors: ["date must be in the following format YYYY-MM-DD"]
-            });
-        }
-    }
-    console.log(req.query.finishedAt);
-    const finishedAt = timeConvert(req.query.finishedAt);
-    console.log('finat:', finishedAt);
     if (entryType === "changes") {
         if (otherInfo == 1) {
             changeType = '{"change_type": 1}';
@@ -142,14 +131,12 @@ router.post('/update', (req, res, next) => {
             errors: ["Please make sure you provided both the entryType and otherInfo"]
         });
     } 
-    let query = 'UPDATE \`baby_entries\` \
-                SET started_at = ?, \
-                    finished_at = ?, \
-                    date = ?, \
-                    entry_type = ?, \
-                    other_info = ? \
-                WHERE baby_entries.id = ?';
-    let insert = [startedAt, finishedAt, date, entryType, otherInfo, id];
+    let query = 'UPDATE `baby_entries` \
+                    SET `finished_at` = ?, \
+                        `entry_type` = ?, \
+                        `other_info` = ? \
+                WHERE `baby_entries`.`id` = ?';
+    let insert = [finishedAt, entryType, otherInfo, id];
     connection.query(query, insert, (err, result) => {
         if (err) return next(err);
         const output = {
@@ -161,3 +148,10 @@ router.post('/update', (req, res, next) => {
 });
 
 module.exports = router;
+
+
+/*UPDATE `baby_entries` 
+SET `finished_at` = '2019-08-13 11:43:31', 		`date` = '2019-08-13', 
+`entry_type` = 'feedings', 				`other_info` = '{}' 
+WHERE `baby_entries`.`id` = 87;
+*/
