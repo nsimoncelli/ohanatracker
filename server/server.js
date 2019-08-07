@@ -1,10 +1,11 @@
 const express = require('express');
+require('dotenv').config();
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
 
 const app = express();
 const path = require('path');
-
+const connection = require('./db.js');
+const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,19 +19,24 @@ app.use('/api', calendar);
 app.use('/api', entries);
 app.use('/api', graph);
 
-app.listen(3001, err => {
-    if (err) throw err;
-    console.log('started server on port 3001');
+app.listen(PORT, err => {
+    if (err) {
+        console.error(err);
+        process.exit(1);
+    }
+    console.log(`started server on port ${PORT}`);
 });
 
-const cred = require('../mysql_credentials');
-const connection = mysql.createConnection(cred);
 connection.connect(err => {
-    if (err) throw err;
+    if (err) {
+        console.error(err);
+        process.exit(1);
+    }
     console.log('connected to database');
 });
 
 
 app.all('*', (err, req, res, next) => {
+    console.error(err);
     res.sendStatus(500);
 });

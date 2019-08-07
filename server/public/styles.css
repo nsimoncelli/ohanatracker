@@ -421,7 +421,7 @@ thead, tbody tr {
 /* MODAL STYLING */
 
 
-.modal {
+.modal-dialog {
   top: 30vh;
 }
 

@@ -16,17 +16,17 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     modifyClickHandler() {
-        console.log('ID TO MODIFY:', this.props.children.id)
+        console.log('ID TO MODIFY:', this.props.children.id);
+        this.props.renderModal('modify');
+        this.props.getId(this.props.children.id);
     }
 
     deleteClickHandler() {
-        console.log('deleteClickHandler');
-        this.props.renderDeleteModal();
-        this.props.getIdToDelete(this.props.children.id);
+        this.props.renderModal('delete');
+        this.props.getId(this.props.children.id);
     }
 
     formatAMPM(date) {
-        console.log("date", date);
         date = new Date(date);
         var newDate = date.toLocaleTimeString('en-US')
         return newDate;
