@@ -117,9 +117,9 @@ export default class App extends React.Component {
     }
 
     updateEntry(id, newData){
-        console.log('updateEntry function id:', id, newData);
-        
-        fetch('api/update?id='+id+'&finishedAt='+newData.time+'&date='+newData.date+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo, {
+        let call = 'api/update?id='+id+'&finishedAt='+newData.date+' '+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo;
+        console.log('updateEntry function id:', call);
+        fetch('api/update?id='+id+'&finishedAt='+newData.date+' '+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo, {
             method: 'POST',
         })
         .then(response => {
