@@ -202,7 +202,6 @@ export default class App extends React.Component {
     render() {
         if(this.state.view ==="userSelect"){
             return (
-                <TransitionGroup>
                 <CSSTransition
                 appear={true}
                 timeout={300}
@@ -219,7 +218,6 @@ export default class App extends React.Component {
                     <Footer/>
                 </div>
                 </CSSTransition>
-                </TransitionGroup>
             )
         }else if(this.state.view==="calendar"){
             return (
