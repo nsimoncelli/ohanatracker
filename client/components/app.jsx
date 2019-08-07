@@ -8,13 +8,13 @@ import Calendar from './calendar';
 import Graph from './graph';
 import InfoPage from './infopage';
 import SubmitModal from './submitModal';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            view: "homepage",
+            view: "landingPage",
             currentUser: "Mom",
             data: [],
             napsData: [],
