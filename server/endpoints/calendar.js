@@ -20,16 +20,15 @@ router.get('/entries', (req, res, next) => {
     const startDate = date.concat(" 00:00:00");
     const endDate = date.concat(" 23:59:59");
 
-    let query = `SELECT id, user_id, baby_id, entry_type, other_info, finished_at 
-                FROM \`baby_entries\` WHERE finished_at 
-                BETWEEN "${startDate}" AND "${endDate}"`;
-    connection.query(query, (err, result) => {
+    let query = 'SELECT id, user_id, baby_id, entry_type, other_info, finished_at \
+                FROM \`baby_entries\` WHERE finished_at \
+                BETWEEN ? AND ?';
+    let insert = [startDate, endDate];
+    connection.query(query, insert, (err, result) => {
         if (err) return next(err);
-        console.log("results before:", result);
         result.forEach(element => {
             element['finished_at'] = timeConvert(element['finished_at'], 0, 8);
         });
-        console.log('results:', result);
         res.status(200).send(JSON.stringify({
             "entries": result
         }));
@@ -37,7 +36,7 @@ router.get('/entries', (req, res, next) => {
 });
 
 router.get('/entries/all', (req, res, next) => {
-    let query = `SELECT * FROM \`baby_entries\``;
+    let query = 'SELECT * FROM \`baby_entries\`';
     connection.query(query, (err, result) => {
         if (err) return next(err);
         res.send(JSON.stringify({
