@@ -8,7 +8,8 @@ export default class CalendarDetails extends React.Component{
       super(props); 
       this.state = {
         modal : '',
-        id: ''
+        id: '',
+        date : ''
       };
       this.renderModal = this.renderModal.bind(this);
       this.getId = this.getId.bind(this);
@@ -27,8 +28,8 @@ export default class CalendarDetails extends React.Component{
     this.setState({ modal : modalView})
   }
 
-  getId(id){
-    this.setState({ id : id})
+  getId(id, date){
+    this.setState({ id : id, date : date })
   }
 
   render() {
@@ -46,6 +47,7 @@ export default class CalendarDetails extends React.Component{
           <SubmitModal  
             modify={true} 
             updateEntry={this.props.updateEntry}
+            date={this.state.date}
             id={this.state.id} 
             resetModal={this.renderModal}
           />

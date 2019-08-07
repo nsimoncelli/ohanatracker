@@ -118,7 +118,10 @@ export default class App extends React.Component {
 
     updateEntry(id, newData){
         console.log('updateEntry function id:', id, newData);
-        fetch('api/update?id='+id+'&finishedAt='+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo)// NEEDS REFACTORING FOR BACKEND
+        
+        fetch('api/update?id='+id+'&finishedAt='+newData.time+'&date='+newData.date+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo, {
+            method: 'POST',
+        })
         .then(response => {
             return response.json();
         })

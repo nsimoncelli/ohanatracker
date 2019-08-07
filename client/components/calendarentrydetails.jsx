@@ -15,9 +15,9 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     modifyClickHandler() {
-        console.log('ID TO MODIFY:', this.props.children.id);
+        let date = this.props.children.finished_at.split(' ')[0];
         this.props.renderModal('modify');
-        this.props.getId(this.props.children.id);
+        this.props.getId(this.props.children.id, date);
     }
 
     deleteClickHandler() {
