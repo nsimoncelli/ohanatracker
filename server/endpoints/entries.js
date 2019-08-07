@@ -14,7 +14,7 @@ router.post('/create/naps', (req, res, next) => {
     }
     const finishedAt = timeConvert("now", 0, 0);
     const date = finishedAt.slice(0,10);
-    const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
+    const startedAt = (req.query.startedAt) ? req.query.startedAt : null;
     const entryType = "naps";
     let query = 'INSERT INTO \`baby_entries\` \
                 ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`) \
