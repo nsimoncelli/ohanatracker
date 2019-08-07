@@ -1,11 +1,8 @@
 const express = require('express');
-const mysql = require('mysql');
 const router = express.Router();
+const connection = require('../db.js');
 
 const timeConvert = require('../functions/time-convert.js');
-const cred = require('../../mysql_credentials');
-
-const connection = mysql.createConnection(cred);
 
 router.get('/graph/changes', async (req, res, next) => {
     const changesArr = [0, 0, 0, 0, 0, 0, 0];
