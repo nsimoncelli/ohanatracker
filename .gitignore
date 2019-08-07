@@ -1,6 +1,7 @@
 node_modules
 .idea
 .DS_Store
-mysql_credentials.js
 personal-notes
 519ohana_dump.sql
+.env
+mysql_credentials.js

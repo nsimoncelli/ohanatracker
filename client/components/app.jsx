@@ -117,17 +117,17 @@ export default class App extends React.Component {
     }
 
     updateEntry(id, newData){
-        console.log('updateEntry function id:', id, newData)
-        // fetch('api/update?id='+id, newData)// NEEDS REFACTORING FOR BACKEND
-        // .then(response => {
-        //     return response.json();
-        // })
-        // .then(myJson => {
-        //    console.log("successful update", myJson);
-        // })
-        // .catch(error => {
-        //     console.error('error: ', error);
-        // })
+        console.log('updateEntry function id:', id, newData);
+        fetch('api/update?id='+id+'&finishedAt='+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo)// NEEDS REFACTORING FOR BACKEND
+        .then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+           console.log("successful update", myJson);
+        })
+        .catch(error => {
+            console.error('error: ', error);
+        })
     }
 
     postNap(userId, babyId, startedAt) {
@@ -196,6 +196,7 @@ export default class App extends React.Component {
         .catch(error => {
             console.error('error: ', error);
         })
+        this.getAllCalendarEntries();
     }
 
     render() {
@@ -294,6 +295,7 @@ export default class App extends React.Component {
                         infoPageView={this.state.infoPageView}
                         sendInfoPageView={this.receiveInfoPageView} 
                         setView={this.setView} />
+                    <Footer />
                 </React.Fragment>
             )
         } else if (this.state.view === "infoPage") {

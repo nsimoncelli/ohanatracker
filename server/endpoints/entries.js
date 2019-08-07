@@ -1,9 +1,8 @@
 const express = require('express');
-
 const router = express.Router();
+const connection = require('../db.js');
 
 const timeConvert = require('../functions/time-convert.js');
-
 const dateTest = require('../functions/date-test.js');
 
 router.post('/create/naps', (req, res, next) => {
@@ -13,15 +12,15 @@ router.post('/create/naps', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-
-    const finishedAt = timeConvert("now", 0);
-    const date = finishedAt.slice(0,11);
+    const finishedAt = timeConvert("now", 0, 0);
+    const date = finishedAt.slice(0,10);
     const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
     const entryType = "naps";
-    let query = `INSERT INTO \`baby_entries\` 
-                ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
-                VALUES ("${babyId}", "${userId}", ${startedAt}, "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
-    connection.query(query, (err, result) => {
+    let query = 'INSERT INTO \`baby_entries\` \
+                ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`) \
+                VALUES ( ?, ?, ?, ?, ?, ?, ?)';
+    let insert = [babyId, userId, startedAt, finishedAt, date, entryType, otherInfo];
+    connection.query(query, insert, (err, result) => {
         if (err) return next(err);
         const output = {
             success: true,
@@ -40,26 +39,25 @@ router.post('/create/changes', (req, res, next) => {
     }
     let changeType;
     if (otherInfo == 1) {
-        changeType = `{\\"change_type\\": 1}`;
+        changeType = '{"change_type": 1}';
     } else if (otherInfo == 2) {
-        changeType = `{\\"change_type\\": 2}`;
+        changeType = '{"change_type": 2}';
     } else if (otherInfo == 3) {
-        changeType = '{\\"change_type\\": 3}';
+        changeType = '{"change_type": 3}';
     } else {
         return res.status(422).send({
             "error": ["otherInfo must be 1,2, or 3"]
         });
     }
 
-    const finishedAt = timeConvert("now", 0);
-    const date = finishedAt.slice(0,11);
+    const finishedAt = timeConvert("now", 0, 0);
+    const date = finishedAt.slice(0,10);
     const entryType = "changes";
-    let query = `INSERT INTO \`baby_entries\` 
-                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
-
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${date}", "${entryType}", "${changeType}")`;
-
-    connection.query(query, (err, result) => {
+    let query = 'INSERT INTO \`baby_entries\` \
+                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`) \
+                VALUES (NULL, ?, ?, NULL, ?, ?, ?, ?)'; 
+    let insert = [babyId, userId, finishedAt, date, entryType, changeType];
+    connection.query(query, insert, (err, result) => {
         if (err) return next(err);
         const output = {
             success: true,
@@ -76,14 +74,14 @@ router.post('/create/feedings', (req, res, next) => {
             "error": ["ensure that userId, babyId, AND otherInfo are all provided.", "if no otherInfo - should be an empty object {}"]
         })
     }
-    const finishedAt = timeConvert("now", 0);
-    const date = finishedAt.slice(0,11);
+    const finishedAt = timeConvert("now", 0, 0);
+    const date = finishedAt.slice(0,10);
     const entryType = "feedings";
-    let query = `INSERT INTO \`baby_entries\` 
-                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`)
-                VALUES (NULL, "${babyId}", "${userId}", NULL, "${finishedAt}", "${date}", "${entryType}", "${otherInfo}")`;
-
-    connection.query(query, (err, result) => {
+    let query = 'INSERT INTO \`baby_entries\` \
+                (\`id\`, \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`) \
+                VALUES (NULL, ?, ?, NULL, ?, ?, ?, ?)';
+    let insert = [babyId, userId, finishedAt, date, entryType, otherInfo];
+    connection.query(query, insert, (err, result) => {
         if (err) return next(err);
         const output = {
             success: true,
@@ -95,9 +93,10 @@ router.post('/create/feedings', (req, res, next) => {
 
 router.post('/delete', (req, res, next) => {
     const { id } = req.query;
-    let query = `DELETE FROM \`baby_entries\` 
-                    WHERE \`baby_entries\`.\`id\` = ${id}`
-    connection.query(query, (err, result) => {
+    let query = 'DELETE FROM \`baby_entries\` \
+                    WHERE \`baby_entries\`.\`id\` = ?';
+    let insert = [id];
+    connection.query(query, insert, (err, result) => {
         if (err) return next(err);
         const output = {
             success: true,
@@ -116,8 +115,8 @@ router.post('/update', (req, res, next) => {
     }
     const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
     if (!dateTest(date) || !dateTest(finishedAt)) {
-        finishedAt = timeConvert(finishedAt);
-        date = timeConvert(date);
+        finishedAt = timeConvert(finishedAt, 0, 0);
+        date = timeConvert(date, 0, 0);
         if (!dateTest(date) || !dateTest(finishedAt)) {
             res.status(400).send({
                 errors: ["date must be in the following format YYYY-MM-DD"]
@@ -126,11 +125,11 @@ router.post('/update', (req, res, next) => {
     }
     if (entryType === "changes") {
         if (otherInfo == 1) {
-            changeType = `{\\"change_type\\": 1}`;
+            changeType = '{"change_type": 1}';
         } else if (otherInfo == 2) {
-            changeType = `{\\"change_type\\": 2}`;
+            changeType = '{"change_type": 2}';
         } else if (otherInfo == 3) {
-            changeType = '{\\"change_type\\": 3}';
+            changeType = '{"change_type": 3}';
         } else {
             res.status(400).send({
                 errors: ['Please make sure that otherInfo is 1,2, or 3']
@@ -142,14 +141,15 @@ router.post('/update', (req, res, next) => {
             errors: ["Please make sure you provided both the entryType and otherInfo"]
         });
     } 
-    let query = `UPDATE \`baby_entries\`
-                SET started_at = ${startedAt}, 
-                    finished_at = "${finishedAt}", 
-                    date = "${date}", 
-                    entry_type = "${entryType}", 
-                    other_info = "${otherInfo}" 
-                WHERE baby_entries.id = ${id}`;
-    connection.query(query, (err, result) => {
+    let query = 'UPDATE \`baby_entries\` \
+                SET started_at = ?, \
+                    finished_at = ?, \
+                    date = ?, \
+                    entry_type = ?, \
+                    other_info = ? \
+                WHERE baby_entries.id = ?';
+    let insert = [startedAt, finishedAt, date, entryType, otherInfo, id];
+    connection.query(query, insert, (err, result) => {
         if (err) return next(err);
         const output = {
             success: true,

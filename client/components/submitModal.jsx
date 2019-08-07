@@ -8,10 +8,10 @@ export default class SubmitModal extends React.Component {
     super(props);
     this.state = {
       modal: true,
-      minute : 0,
+      minute : "00",
       hour : 1,
       modifiedType : null,
-      timeOfDay : null,
+      timeOfDay : "AM",
     };
 
     this.toggle = this.toggle.bind(this);
@@ -54,20 +54,40 @@ export default class SubmitModal extends React.Component {
   }
 
   updateEntry () {
-    if( this.state.modifiedType === null || this.state.timeOfDay === null ) {
-      console.log('all entries need to be made');
-      return
+    if( this.state.modifiedType === null ) {
+      console.log('Please select an entry type.');
+      return;
     }
-
     this.props.resetModal(''); 
-    let time = this.state.hour+':'+this.state.minute;
-
-    let updateEntryObject = {
-      time : time,
-      changeType : this.state.modifiedType
+    let time;
+    let entryType;
+    let otherInfo = {};
+    if(this.state.timeOfDay === 'PM') {
+      let militaryHours = parseInt(this.state.hour) + 12;
+      if(militaryHours === 24) {
+        militaryHours = 0;
+      }
+      time = militaryHours+':'+this.state.minute+':00';
+    } else {
+      time = this.state.hour+':'+this.state.minute+':00';
     }
-    console.log('updateEntryObject', updateEntryObject);
-    this.props.updateEntry();
+    if(this.state.modifiedType === 'pee' || this.state.modifiedType === 'poop') {
+      entryType = 'changes';
+    } else {
+      entryType = this.state.modifiedType;
+    }
+    if(this.state.modifiedType === 'pee') {
+      otherInfo = 1;
+    } else if (this.state.modifiedType === 'poop') {
+      otherInfo = 2;
+    }
+    let updateEntryObject = {
+      'entryType' : entryType,
+      'time' : time,
+      'otherInfo' : otherInfo,
+    }
+    console.log(updateEntryObject);
+    this.props.updateEntry(this.props.id, updateEntryObject);
   }
 
   handleHourSlide(e) {
@@ -79,19 +99,19 @@ export default class SubmitModal extends React.Component {
   } 
 
   modifyToFeeding() {
-    this.setState({ modifiedType : 'feeding' }, () => {console.log(this.state)})
+    this.setState({ modifiedType : 'feedings' })
   }
 
   modifyToDiapering1() {
-    this.setState({ modifiedType : 'pee' }, () => {console.log(this.state)})
+    this.setState({ modifiedType : 'pee' })
   }
 
   modifyToDiapering2() {
-    this.setState({ modifiedType : 'poop' }, () => {console.log(this.state)})
+    this.setState({ modifiedType : 'poop' })
   }
 
   modifyToNap() {
-    this.setState({ modifiedType : 'nap' }, () => {console.log(this.state)})
+    this.setState({ modifiedType : 'naps' })
   }
 
   AMclickHanlder() {
@@ -100,6 +120,33 @@ export default class SubmitModal extends React.Component {
 
   PMclickHanlder() {
     this.setState({ timeOfDay : "PM" })
+  }
+
+  timeDisplay() {
+    let correctTimeDisplay;
+    if(this.state.minute.length === 1){
+      console.log('minute.length')
+      correctTimeDisplay = this.state.hour+':0'+this.state.minute+' '+this.state.timeOfDay
+    } else {
+      correctTimeDisplay = this.state.hour+':'+this.state.minute+' '+this.state.timeOfDay
+    }
+    return correctTimeDisplay;
+  }
+
+  setModifyType(){
+    let modifyType;
+    if(this.state.modifiedType === null) {
+      return null;
+    } else if (this.state.modifiedType === "feedings"){
+      modifyType = <img src="/images/bottle2.png" height="25px" width="auto" />
+    } else if (this.state.modifiedType === 'pee') {
+      modifyType = <img src="/images/pee3.png" height="25px" width="auto" />
+    } else if (this.state.modifiedType === 'poop') {
+      modifyType = <img src="/images/poop4.png" height="25px" width="auto" />
+    } else if (this.state.modifiedType === 'naps'){
+      modifyType = <img src="/images/napButtonIcon.png"height="25px" width="auto" />
+    }
+    return modifyType;
   }
 
   render() {
@@ -179,7 +226,10 @@ export default class SubmitModal extends React.Component {
                 <div className="row p-2">
                   <p className="mb-0">Are you sure you want to modify this entry?</p>
                 </div>
-                <div className="row">{this.state.hour}:{this.state.minute}{this.state.timeOfDay}{this.state.modifiedType}</div>
+                <div className="row">
+                  <div className="col-6">{this.timeDisplay()}</div>
+                  <div className="col-6">{this.setModifyType()}</div>
+                </div>
               </div>              
 
             </ModalBody>
