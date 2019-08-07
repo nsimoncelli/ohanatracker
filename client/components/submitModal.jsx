@@ -83,10 +83,10 @@ export default class SubmitModal extends React.Component {
     }
     let updateEntryObject = {
       'entryType' : entryType,
+      'date' : this.props.date,
       'time' : time,
       'otherInfo' : otherInfo,
     }
-    console.log(updateEntryObject);
     this.props.updateEntry(this.props.id, updateEntryObject);
   }
 
@@ -181,7 +181,7 @@ export default class SubmitModal extends React.Component {
           <Modal isOpen={this.state.modal} toggle={this.toggle} >
             <ModalBody>
               <div className="container text-center">
-                <div className="row pb-2">
+                <div className="row pb-3">
                   <div className="col-3 feedingButtonContainer">
                     <button className="btn p-2" style={{"backgroundColor" : "transparent", "border" : "none"}} value="feeding" onClick={this.modifyToFeeding}>
                       <img src="/images/bottle2.png" id="feedingButton" height="40px" width="auto" /> 
@@ -205,16 +205,16 @@ export default class SubmitModal extends React.Component {
                 </div>
 
                 <div className="row sliderContainer">
-                  <div className="col-9">
+                  <div className="col-8">
                     <input type="range" min={1} max={12} value={this.state.hour} className="hourSlider" onChange={this.handleHourSlide} />
                   </div> 
-                  <div className="col-3 pt-3">
+                  <div className="col-4 text-left">
                     <p>Hour</p>  
                   </div>
-                  <div className="col-9">
+                  <div className="col-8">
                     <input type="range" min={0} max={59} value={this.state.minute} className="minuteSlider" onChange={this.handleMinuteSlide} />
                   </div>
-                  <div className="col-3 pt-3">
+                  <div className="col-4 text-left">
                     <p>Minutes</p>
                   </div>
                   <div className="col-12">
@@ -224,7 +224,7 @@ export default class SubmitModal extends React.Component {
                 </div>
 
                 <div className="row p-2">
-                  <p className="mb-0">Are you sure you want to modify this entry?</p>
+                  <p className="text-center">This entry will be modified to:</p>
                 </div>
                 <div className="row">
                   <div className="col-6">{this.timeDisplay()}</div>
