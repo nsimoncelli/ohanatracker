@@ -74,7 +74,7 @@ export default class InfoPage extends React.Component {
                                     <div className="poiretBody">Our Team</div>
                                 </button>
                             </div>
-                        </div>    
+                        </div>
                         <div className="row mt-2">
                             <div className="howToButtonContainer col-12 ">
                                 <button type="button" className="btn" onClick={this.howToButtonHandler}>
@@ -103,39 +103,45 @@ export default class InfoPage extends React.Component {
                 timeout={200}
                 classNames="fade"> 
                 <div className="container membersContainer text-center py-3">
-                    <div className="row my-3">
+                    <div className="row my-2">
                         <div className="col-12">
                             <div className="poiretTitle">Our Team</div>
                         </div>
                     </div>
                     <div className="row pt-3 align-items-center">
-                        <img src="images/Steve.png" alt="" className="col-4"/>
+                        <img src="images/Steve.png" alt="steve" className="col-4"/>
                         <div className="col-8">
                             <p style={{"fontSize":"1.65rem"}}>Steve Min</p>
                         </div>
                     </div>
                     <div className="row pt-3 align-items-center">
-                        <img src="images/Nick.png" alt="" className="col-4"/>
+                        <img src="images/Nick.png" alt="nick" className="col-4"/>
                         <div className="col-8">
                             <p style={{"fontSize":"1.65rem"}}>Nick Simoncelli</p>
                         </div>
                     </div>
                     <div className="row pt-3 align-items-center">
-                        <img src="images/Tony.jpeg" alt="" className="col-4"/>
+                        <img src="images/Tony.jpeg" alt="tony" className="col-4"/>
                         <div className="col-8">
                             <p style={{"fontSize":"1.65rem"}}>Tony Jin</p>
                         </div>
                     </div>
                     <div className="row pt-3 align-items-center">
-                        <img src="images/Elliot.jpeg" alt="" className="col-4"/>
+                        <img src="images/Elliot.jpeg" alt="elliot" className="col-4"/>
                         <div className="col-8">
                             <p style={{"fontSize":"1.65rem"}}>Elliot Han</p>
                         </div>
                     </div>
                     <div className="row pt-3 align-items-center">
-                        <img src="images/Bisham.JPG" alt="" className="col-4"/>
+                        <img src="images/Bisham.JPG" alt="bisham" className="col-4"/>
                         <div className="col-8">
                             <p style={{"fontSize":"1.65rem"}}>Bisham Mohabir</p>
+                        </div>
+                    </div>
+                    <div className="row pt-3 align-items-center">
+                        <img src="images/cody.jpg" alt="cody" className="col-4"/>
+                        <div className="col-8">
+                            <p style={{"fontSize":"1.65rem"}}>Cody Miller</p>
                         </div>
                     </div>
                 </div>

@@ -107,22 +107,23 @@ router.post('/delete', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
-    const { id, finishedAt, date, entryType, otherInfo } = req.query;
+    const { id, date, entryType, otherInfo } = req.query;
     if (!id) {
         res.status(400).send({
             errors: ['Please make sure you provided an entry (id) from table baby_entries']
         });
     }
     const startedAt = (req.query.startedAt) ? `"${req.query.startedAt}"` : null;
-    if (!dateTest(date) || !dateTest(finishedAt)) {
-        finishedAt = timeConvert(finishedAt, 0, 0);
-        date = timeConvert(date, 0, 0);
-        if (!dateTest(date) || !dateTest(finishedAt)) {
+    if (date) {
+        if (!dateTest(date)) {
             res.status(400).send({
                 errors: ["date must be in the following format YYYY-MM-DD"]
             });
         }
     }
+    console.log(req.query.finishedAt);
+    const finishedAt = timeConvert(req.query.finishedAt);
+    console.log('finat:', finishedAt);
     if (entryType === "changes") {
         if (otherInfo == 1) {
             changeType = '{"change_type": 1}';
