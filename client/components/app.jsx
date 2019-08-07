@@ -8,7 +8,7 @@ import Calendar from './calendar';
 import Graph from './graph';
 import InfoPage from './infopage';
 import SubmitModal from './submitModal';
-
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export default class App extends React.Component {
     constructor(props){
@@ -201,7 +201,12 @@ export default class App extends React.Component {
     render() {
         if(this.state.view ==="userSelect"){
             return (
-                <React.Fragment>
+                <TransitionGroup>
+                <CSSTransition
+                appear={true}
+                timeout={300}
+                classNames="fade"> 
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -211,12 +216,13 @@ export default class App extends React.Component {
                         setUser={this.changeUser}
                         changeView={this.setView}/>
                     <Footer/>
-                </React.Fragment>
+                </div>
+                </CSSTransition>
+                </TransitionGroup>
             )
-
         }else if(this.state.view==="calendar"){
             return (
-                <React.Fragment>
+                <div className="backgroundImage">
                       <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -236,10 +242,11 @@ export default class App extends React.Component {
                         calendarData ={this.state.allCalendarEntries}
                         individualDateData={this.state.data}
                         getDateDataFromDatabase={this.getEntries} />
-                   </React.Fragment>
+                   </div>
             )
         } else if (this.state.view === "homepage") {
-           return( <React.Fragment>
+           return( 
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -263,11 +270,11 @@ export default class App extends React.Component {
                         startedTime={this.state.startedAt}
                         changeView={this.setView} />
                     <Footer/>
-                </React.Fragment>
+                </div>
            )
         } else if(this.state.view === "graph") {
             return (
-                <React.Fragment>
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -285,21 +292,21 @@ export default class App extends React.Component {
                         changes={this.state.diaperChangesData}
                         naps={this.state.napsData}/>
                     <Footer/>
-                </React.Fragment>
+                </div>
             )
         } else if(this.state.view === "landingPage") {
             return(
-                <React.Fragment>
+                <div>
                     <InfoPage
                         infoPageView={this.state.infoPageView}
                         sendInfoPageView={this.receiveInfoPageView} 
                         setView={this.setView} />
                     <Footer />
-                </React.Fragment>
+                </div>
             )
         } else if (this.state.view === "infoPage") {
             return (
-                <React.Fragment>
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -311,7 +318,7 @@ export default class App extends React.Component {
                         sendInfoPageView={this.receiveInfoPageView} 
                         setView={this.setView} />
                     <Footer />
-                </React.Fragment>
+                </div>
             )
         } 
     }

@@ -10,18 +10,13 @@
   font-weight: bold;
 }
 
-body {
-  height: 100vh;
-  width: 100vw;
-}
-
 Line {
   height: 100px;
   width: 100px;
 }
 
 .footer {
-  background-color: rgb(170, 198, 245);
+  background-color: rgb(126, 124, 255);
   color: white;
 }
 .poiret {
@@ -86,6 +81,8 @@ body {
     color: var(--text-color);
     background: var(--bg-color);
     position: relative;
+    height: 100vh;
+    width: 100vw;
 }
 
 header {
@@ -106,14 +103,19 @@ header #logo {
 header #logo .icon {
   padding-right: .25em;
 }
-
+.backgroundImage {
+  background-image: url(./images/background4.jpg);
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+}
 .headerTop {
-  background-color: rgb(170, 198, 245);
+  background-color: rgb(126, 124, 253);
 }
 .ohanaLogo {
-  margin-top: 3px;
-  width: 82px;
-  border-radius: 10px;
+  width: 63px;
 }
 .logoButton {
   background-color: transparent;
@@ -121,14 +123,15 @@ header #logo .icon {
 }
 .headerButton {
   color: #fff;
-  background: #ff9cbd;
+  background: #fb8bb0;
   padding: 8px 16px;
   border-radius: 10px;
   display: inline-block;
   border: none;
   transition: all 0.4s ease 0s;
   cursor: pointer;
-  margin-top: 3px;
+  margin-top: 5px;
+  margin-right: 3px;
   font-size: 1.6rem;
   font-weight: bolder;
 }
@@ -423,15 +426,12 @@ thead, tbody tr {
 }
 
 /* ********USER SELECT STYLING******** */
-.userSelectContainer {
-  font-size: 1.75rem;
-}
 
 /*  Log In Page  */
 
 .ducky {
-  height: 100px;
-  width: 100px;
+  height: 130px;
+  width: 140px;
 }
 
 .front-page {
@@ -448,6 +448,7 @@ thead, tbody tr {
   right: 0;
   bottom: 50px;
   position: absolute;
+  z-index: -1;
 }
 
 input,
@@ -466,25 +467,28 @@ input:focus {
 
 .fade-appear {
   opacity: 0;
+  z-index: 1;
 }
 .fade-appear.fade-appear-active {
   opacity: 1;
-  transition: opacity 400ms linear;
+  transition: opacity 200ms linear;
 }
+
 .fade-exit {
   opacity: 1;;
 }
 .fade-exit.fade-exit-active {
   opacity: 0;
-  transition: opacity 400ms linear;
+  transition: opacity 200ms linear;
 }
 .fade-exit-done {
   opacity: 0;
 }
+
 .fade-enter {
   opacity: 0;
 }
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 400ms linear;
+  transition: opacity 200ms linear;
 }

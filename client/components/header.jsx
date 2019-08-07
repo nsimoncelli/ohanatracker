@@ -1,5 +1,5 @@
 import React from 'react';
-import {CSSTransition} from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -18,16 +18,15 @@ export default class Header extends React.Component {
     }
     render() {
         return(
+            <TransitionGroup>
             <CSSTransition
-                in={true}
                 appear={true}
-                timeout={600}
-                classNames="fade"
-            >
-                <div className="headerTop banner row py-3">
+                timeout={300}
+                classNames="fade"> 
+            <div className="headerTop banner row py-3">
                 <div className='col-6'>
                     <button type="button" className="logoButton" onClick={this.handleInfoPageViewChange}>
-                        <img src='images/logo4.png' className='img-fluid ohanaLogo' alt="Ohana Logo"/>
+                        <img src='images/logo.png' className='img-fluid ohanaLogo' alt="Ohana Logo"/>
                     </button>
                 </div>
                 <div className="col-6 text-right">
@@ -37,9 +36,9 @@ export default class Header extends React.Component {
                             {this.props.currentUser}
                     </div>
                 </div>
-                </div>
+            </div>   
             </CSSTransition>
-            
+            </TransitionGroup>         
         )
     }
 }

@@ -49,17 +49,16 @@ export default class InfoPage extends React.Component {
                 <CSSTransition
                 in={true}
                 appear={true}
-                timeout={600}
-                classNames="fade"
-                >
+                timeout={200}
+                classNames="fade"> 
                 <div>
                     <div className="container py-3">
                         <br/><br/>
                         <div className="row">
-                            <div className="col-5 text-right p-0">
-                                <img className="ducky" src="images/logo.png"/>
+                            <div className="col-5 text-right">
+                                <img className="ducky" src="images/logo8.png"/>
                             </div>
-                            <div className="col-7 title poiret pl-0">hana</div>
+                            <div className="col-7 title poiret pl-0 pt-3">hana</div>
                         </div>    
                         <br/><br/><br/><br/>
                         <div className='row'>
@@ -87,19 +86,22 @@ export default class InfoPage extends React.Component {
                         <div className="row mt-2">
                             <div className="col ml-2">
                                 <div onClick={this.userSelectHandler} className="pinkButton">
-                                    Explore
+                                    Start
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="frontFlower"></div>
-                </div>
-                </CSSTransition>
-                
-                
+                </div>   
+                </CSSTransition>   
             )
         } else if (this.props.infoPageView === 'teamMembers') {
             return(
+                <CSSTransition
+                in={true}
+                appear={true}
+                timeout={200}
+                classNames="fade"> 
                 <div className="container membersContainer text-center py-3">
                     <div className="row my-3">
                         <div className="col-12">
@@ -137,9 +139,15 @@ export default class InfoPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                </CSSTransition>
             )
         } else if (this.props.infoPageView === "mission") {
             return(
+                <CSSTransition
+                in={true}
+                appear={true}
+                timeout={200}
+                classNames="fade"> 
                 <div className="container missionContainer py-2">
                     <div className="row my-3">
                         <div className="col-12 text-left">
@@ -162,10 +170,16 @@ export default class InfoPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                </CSSTransition>
             )
         } else if (this.props.infoPageView === 'howTo') {
             return(
-                <div className="container missionContainer py-2">
+                <CSSTransition
+                in={true}
+                appear={true}
+                timeout={200}
+                classNames="fade"> 
+                <div className="container missionContainer py-2 mb-4">
                     <div className="row my-3">
                         <div className="col-12 text-left">
                             <div className="poiretTitle">How To</div>
@@ -173,16 +187,28 @@ export default class InfoPage extends React.Component {
                     </div>
                     <div className="row missionStatement">
                         <div className="col-lg-6">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nulla, 
-                                fugiat pariatur laudantium cumque ullam nostrum. Animi ullam error tempora 
-                                excepturi voluptatum magni voluptas facere incidunt, fugit repellat. Beatae, 
-                                praesentium mollitia labore ullam nobis velit soluta nihil, minima libero 
-                                est debitis laborum voluptatum? Placeat blanditiis laboriosam quas inventore 
-                                nihil dicta?
+                            <p>
+                                First, select one of three users Mom, Dad, or Caretaker
+                            </p>
+                            <p>
+                                For diaper change entry, tap the diaper icon and select one of two logos to make entry based on bowel movement type
+                            </p>
+                            <p>
+                                For feeding entry, tap the bottle icon 
+                            </p>
+                            <p>
+                                For nap entry, tap mobile icon when baby begins nap and tap baby icon when nap is finished
+                            </p>
+                            <p>
+                                To navigate, tap the house icon for homepage, graph for entry history, and calendar for monthly view
+                            </p>
+                            <p>
+                                Press any day on the calendar to view list of all entries for that day
                             </p>
                         </div>
                     </div>
                 </div>
+                </CSSTransition>
             )
         }
 

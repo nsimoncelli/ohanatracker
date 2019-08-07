@@ -2,6 +2,7 @@ import React from 'react';
 import dateFns from 'date-fns';
 import CalendarDetails from './calendardetails';
 import SubmitModal from './submitModal';
+import {CSSTransition} from 'react-transition-group';
 var format = require('date-fns/format');
 
 
@@ -147,20 +148,25 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-        // console.log("data from db", this.props);
         return(
-        <div className="calendar">
-            {this.renderHeader()}
-            {this.renderDays()}
-            {this.renderCells()}
-            <CalendarDetails
-                updateEntry={this.props.updateEntry}
-                removeEntry={this.props.removeEntry}
-                getDateDataFromDatabase={this.props.getDateDataFromDatabase}
-                currentDate={this.state.selectedDate}
-                dataFromSelectedDate={this.props.individualDateData}
-              />
-        </div>
+            <CSSTransition
+            in={true}
+            appear={true}
+            timeout={200}
+            classNames="fade"> 
+                <div className="calendar">
+                    {this.renderHeader()}
+                    {this.renderDays()}
+                    {this.renderCells()}
+                    <CalendarDetails
+                        updateEntry={this.props.updateEntry}
+                        removeEntry={this.props.removeEntry}
+                        getDateDataFromDatabase={this.props.getDateDataFromDatabase}
+                        currentDate={this.state.selectedDate}
+                        dataFromSelectedDate={this.props.individualDateData}
+                    />
+                </div>
+            </CSSTransition>
         )
     }
 }

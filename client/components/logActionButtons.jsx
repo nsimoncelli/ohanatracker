@@ -1,5 +1,6 @@
 import React from 'react';
 import SubmitModal from './submitModal';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export default class LogActionButtons extends React.Component {
     
@@ -110,7 +111,12 @@ export default class LogActionButtons extends React.Component {
     render() {
         if(this.state.view === 'main'){
             return(
-                <div className="container mt-5">
+                <TransitionGroup>
+                <CSSTransition
+                appear={true}
+                timeout={500}
+                classNames="fade"> 
+                <div className="container background1 mt-5">
                     <div className="diapering row">
                         <div className="diaperingButtonContainer col-12 text-center">
                             <img src="/images/diaper.png" height="142px" width="auto" onClick={this.diaperClickHandler} />
@@ -127,10 +133,17 @@ export default class LogActionButtons extends React.Component {
                     </div>
                     {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}                  
                 </div>
+                </CSSTransition>
+                </TransitionGroup>
             )            
         } else if (this.state.view === 'diapering') {
             return (
-                <div className="container mt-5">
+                <TransitionGroup>
+                <CSSTransition
+                appear={true}
+                timeout={300}
+                classNames="fade"> 
+                <div className="container background1 mt-5">
                     <div className="diapering row">
                         <div className="diaperingButtonContainer col-12 text-center">
                             <img src="/images/diaper.png" height="142px" width="auto" onClick={this.diaperClickHandler} />
@@ -151,6 +164,8 @@ export default class LogActionButtons extends React.Component {
                     </div>
                     {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}
                 </div>
+                </CSSTransition>
+                </TransitionGroup>
             )
         }
     }
