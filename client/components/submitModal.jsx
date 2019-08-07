@@ -7,7 +7,11 @@ export default class SubmitModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: true
+      modal: true,
+      minute : 0,
+      hour : 1,
+      modifiedType : null,
+      timeOfDay : null,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -15,6 +19,14 @@ export default class SubmitModal extends React.Component {
     this.updateEntry = this.updateEntry.bind(this);
     this.toggle = this.toggle.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.handleHourSlide = this.handleHourSlide.bind(this);
+    this.handleMinuteSlide = this.handleMinuteSlide.bind(this);
+    this.modifyToFeeding = this.modifyToFeeding.bind(this);
+    this.modifyToDiapering1 = this.modifyToDiapering1.bind(this);
+    this.modifyToDiapering2 = this.modifyToDiapering2.bind(this);
+    this.modifyToNap = this.modifyToNap.bind(this);
+    this.AMclickHanlder = this.AMclickHanlder.bind(this);
+    this.PMclickHanlder = this.PMclickHanlder.bind(this);
   }
 
   hideModal() {
@@ -31,6 +43,8 @@ export default class SubmitModal extends React.Component {
       }));
     } else if ( this.props.delete === true) {
       this.hideModal();
+    } else if ( this.props.modify === true) {
+      this.hideModal();
     }
   }
 
@@ -40,24 +54,63 @@ export default class SubmitModal extends React.Component {
   }
 
   updateEntry () {
-    this.props.resetModal();
-    console.log('updateEntry', this.props.id);
+    if( this.state.modifiedType === null || this.state.timeOfDay === null ) {
+      console.log('all entries need to be made');
+      return
+    }
+
+    this.props.resetModal(''); 
+    let time = this.state.hour+':'+this.state.minute;
+
+    let updateEntryObject = {
+      time : time,
+      changeType : this.state.modifiedType
+    }
+    console.log('updateEntryObject', updateEntryObject);
     this.props.updateEntry();
   }
 
+  handleHourSlide(e) {
+    this.setState({ hour: e.target.value })
+  } 
 
+  handleMinuteSlide(e) {
+    this.setState({ minute : e.target.value })
+  } 
+
+  modifyToFeeding() {
+    this.setState({ modifiedType : 'feeding' }, () => {console.log(this.state)})
+  }
+
+  modifyToDiapering1() {
+    this.setState({ modifiedType : 'pee' }, () => {console.log(this.state)})
+  }
+
+  modifyToDiapering2() {
+    this.setState({ modifiedType : 'poop' }, () => {console.log(this.state)})
+  }
+
+  modifyToNap() {
+    this.setState({ modifiedType : 'nap' }, () => {console.log(this.state)})
+  }
+
+  AMclickHanlder() {
+    this.setState({ timeOfDay : "AM" })
+  }
+
+  PMclickHanlder() {
+    this.setState({ timeOfDay : "PM" })
+  }
 
   render() {
     if(this.props.mainActionConfirm === true) {
       return (
         <div>
           <Modal isOpen={this.state.modal} toggle={this.toggle} >
-            <ModalBody className="text-center" >
-              New entry has been recorded!
+            <ModalBody className="text-center row p-3" >
+              <div className="col-3"><img src="/images/check2.png" height="25px" width="auto"/></div>
+               <div className="col-9 pl-0">New entry has been recorded!</div>
             </ModalBody>
-            <ModalFooter>
-              <img src="/images/check2.png" height="40px" width="auto" style={{"paddingRight": "135px"}}/>
-            </ModalFooter>
           </Modal>
         </div>
       );
@@ -79,11 +132,59 @@ export default class SubmitModal extends React.Component {
       return (
         <div>
           <Modal isOpen={this.state.modal} toggle={this.toggle} >
-            <ModalBody className="text-center" >
-              Are you sure you want to modify this entry?
+            <ModalBody>
+              <div className="container text-center">
+                <div className="row pb-2">
+                  <div className="col-3 feedingButtonContainer">
+                    <button className="btn p-2" style={{"backgroundColor" : "transparent", "border" : "none"}} value="feeding" onClick={this.modifyToFeeding}>
+                      <img src="/images/bottle2.png" id="feedingButton" height="40px" width="auto" /> 
+                    </button>                    
+                  </div>
+                  <div className="col-3 diapering1ButtonContainer">
+                    <button className="btn p-2" style={{"backgroundColor" : "transparent", "border" : "none"}} value="diapering1" onClick={this.modifyToDiapering1}>
+                      <img src="/images/pee3.png" id="diaper1Button" height="40px" width="auto" />
+                    </button>
+                  </div>
+                  <div className="col-3 diapering2ButtonContainer">
+                    <button className="btn p-2" style={{"backgroundColor" : "transparent", "border" : "none"}} value="diapering2" onClick={this.modifyToDiapering2}>
+                      <img src="/images/poop4.png" id="diaper2Button" height="40px" width="auto" />
+                    </button>
+                  </div>
+                  <div className="col-3 napButtonContainer">
+                    <button className="btn p-2" style={{"backgroundColor" : "transparent", "border" : "none"}} value="nap" onClick={this.modifyToNap}>
+                      <img src="/images/napButtonIcon.png" id="napButton" height="40px" width="auto" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="row sliderContainer">
+                  <div className="col-9">
+                    <input type="range" min={1} max={12} value={this.state.hour} className="hourSlider" onChange={this.handleHourSlide} />
+                  </div> 
+                  <div className="col-3 pt-3">
+                    <p>Hour</p>  
+                  </div>
+                  <div className="col-9">
+                    <input type="range" min={0} max={59} value={this.state.minute} className="minuteSlider" onChange={this.handleMinuteSlide} />
+                  </div>
+                  <div className="col-3 pt-3">
+                    <p>Minutes</p>
+                  </div>
+                  <div className="col-12">
+                    <button className="btn" onClick={this.AMclickHanlder}>AM</button>
+                    <button className="btn" onClick={this.PMclickHanlder}>PM</button>
+                  </div>
+                </div>
+
+                <div className="row p-2">
+                  <p className="mb-0">Are you sure you want to modify this entry?</p>
+                </div>
+                <div className="row">{this.state.hour}:{this.state.minute}{this.state.timeOfDay}{this.state.modifiedType}</div>
+              </div>              
+
             </ModalBody>
             <ModalFooter>
-              <button type="button" className="btn btn-success" data-dismiss="modal" onClick={this.updateEntry} >Submit</button>
+              <Button type="button" className="btn btn-success" data-dismiss="modal" onClick={this.updateEntry} >Submit</Button>
             </ModalFooter>
           </Modal>
         </div>
