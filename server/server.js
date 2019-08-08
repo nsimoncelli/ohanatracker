@@ -26,7 +26,7 @@ app.use('/api', graph(pool));
 app.use((err, req, res, next) => {
     res.sendStatus(500);
     console.error(err);
-    if (error.fatal) {
+    if (err.fatal) {
         process.exit(1);
     }
 });
