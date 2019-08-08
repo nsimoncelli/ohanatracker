@@ -90,6 +90,7 @@ export default class App extends React.Component {
     }
 
     getEntries(targetDate) {
+        console.log("target date", targetDate);
         fetch('api/entries?date=' + targetDate)
         .then(response => {
             return response.json();
