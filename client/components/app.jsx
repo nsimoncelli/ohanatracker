@@ -126,11 +126,11 @@ export default class App extends React.Component {
         })
         .then(myJson => {
            console.log("successful update", myJson);
-           this.getAllCalendarEntries();
+           
         })
         .catch(error => {
             console.error('error: ', error);
-        })
+        });
     }
 
     postNap(userId, babyId, startedAt) {

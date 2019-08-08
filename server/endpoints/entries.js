@@ -35,9 +35,9 @@ function entries ( connection ) {
         }
         let changeType;
         if (otherInfo == 1) {
-            changeType = '{"change_type": 1}';
+            changeType = '1';
         } else if (otherInfo == 2) {
-            changeType = '{"change_type": 2}';
+            changeType = '2';
         } else {
             return res.status(422).send({
                 "error": ["otherInfo must be 1 or 2"]
@@ -107,14 +107,12 @@ function entries ( connection ) {
         }
         if (entryType === "changes") {
             if (otherInfo == 1) {
-                changeType = '{"change_type": 1}';
+                changeType = '1';
             } else if (otherInfo == 2) {
-                changeType = '{"change_type": 2}';
-            } else if (otherInfo == 3) {
-                changeType = '{"change_type": 3}';
+                changeType = '2';
             } else {
                 res.status(400).send({
-                    errors: ['Please make sure that otherInfo is 1,2, or 3']
+                    errors: ['Please make sure that otherInfo is 1 or 2']
                 })
             }
         }
