@@ -8,7 +8,7 @@ function calendar( connection ) {
                 errors: ['No date provided'],
             });
         }
-        const date = new Date(req.query.date);
+        const date = (req.query.date);
         if (date.toString() === "Invalid Date") {
             return res.status(400).send({
                 errors: ["date must be a valid date string"]

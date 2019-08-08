@@ -27,8 +27,10 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     formatAMPM(date) {
-        date = new Date(date);
-        var newDate = date.toLocaleTimeString('en-US')
+        // console.log("date", date);
+        var dateObject = new Date(date);
+        // console.log("date in entry details", dateObject);
+        var newDate = dateObject.toLocaleTimeString('en-US')
         return newDate;
     }
 
@@ -59,7 +61,7 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     render(){ 
-        console.log("calendar entry details props", this.props.children);
+        // console.log("calendar entry details props", this.props.children);
         return (
             <CSSTransition
             in={true}

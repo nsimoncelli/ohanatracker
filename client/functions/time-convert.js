@@ -13,3 +13,5 @@ timeConvert = ( timestamp, change, offset ) => {
     let converted = date + ' ' + time;
     return converted;
 }
+
+export default timeConvert;
