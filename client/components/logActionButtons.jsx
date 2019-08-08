@@ -131,32 +131,27 @@ export default class LogActionButtons extends React.Component {
         } else if (this.state.view === 'diapering') {
             return (
                 <TransitionGroup>
-                <CSSTransition
-                appear={true}
-                timeout={300}
-                classNames="fade"> 
-                <div className="container background1 mt-5">
-                    <div className="diapering row">
-                        <div className="diaperingButtonContainer col-12 text-center">
-                            <img src="/images/diaper.png" height="142px" width="auto" onClick={this.diaperClickHandler} />
+                    <CSSTransition
+                        appear={true}
+                        timeout={300}
+                        classNames="fade mt-5"> 
+                        <div className="container background1 mt-5">
+                            <div className="diaperingButtonContainer row text-center pt-5">
+                                <div className="diapering1 col-6">
+                                    <img src="/images/pee3.png" id="pee" height="142px" width="auto" onClick={this.handlePostChange} />
+                                </div>
+                                <div className="diapering2 col-6">
+                                    <img src="/images/poop4.png" id="poop" height="142px" width="auto" onClick={this.handlePostChange} />    
+                                </div>
+                            </div>
+                            <div className="cancelButton row my-3">
+                                <div className="cancelButtonContainer col-12 text-center">
+                                    <img className={this.state.show ? 'hide' : ''} src="/images/x-button.png" height="60px" width="auto" onClick={this.cancelDiapering} />
+                                </div>
+                            </div>
+                            {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}
                         </div>
-                    </div>
-                    <div className="diaperingButtonContainer row text-center">
-                        <div className="diapering1 col-6">
-                            <img src="/images/pee3.png" id="pee" height="142px" width="auto" onClick={this.handlePostChange} />
-                        </div>
-                        <div className="diapering2 col-6">
-                            <img src="/images/poop4.png" id="poop" height="142px" width="auto" onClick={this.handlePostChange} />    
-                        </div>
-                    </div>
-                    <div className="cancelButton row my-3">
-                        <div className="cancelButtonContainer col-12 text-center">
-                            <img className={this.state.show ? 'hide' : ''} src="/images/x-button.png" height="60px" width="auto" onClick={this.cancelDiapering} />
-                        </div>
-                    </div>
-                    {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}
-                </div>
-                </CSSTransition>
+                    </CSSTransition>
                 </TransitionGroup>
             )
         }
