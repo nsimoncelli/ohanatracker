@@ -154,7 +154,7 @@ export default class InfoPage extends React.Component {
                 appear={true}
                 timeout={200}
                 classNames="fade"> 
-                <div className="container missionContainer py-2">
+                <div className="container missionContainer py-2 mb-3">
                     <div className="row my-3">
                         <div className="col-12 text-left">
                             <div className="poiretTitle">Our Mission</div>
@@ -185,7 +185,7 @@ export default class InfoPage extends React.Component {
                 appear={true}
                 timeout={200}
                 classNames="fade"> 
-                <div className="container missionContainer py-2 mb-4">
+                <div className="container missionContainer py-2 mb-4" id="backgroundImage2">
                     <div className="row my-3">
                         <div className="col-12 text-left">
                             <div className="poiretTitle">How To</div>

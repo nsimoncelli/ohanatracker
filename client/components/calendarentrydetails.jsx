@@ -27,8 +27,10 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     formatAMPM(date) {
-        date = new Date(date);
-        var newDate = date.toLocaleTimeString('en-US')
+        // console.log("date", date);
+        var dateObject = new Date(date);
+        // console.log("date in entry details", dateObject);
+        var newDate = dateObject.toLocaleTimeString('en-US')
         return newDate;
     }
 
@@ -49,11 +51,11 @@ export default class CalendarEntryDetails extends React.Component{
     setEntryBackgroudColor() {
         let backgroundColorForDiv = "";
         if (this.props.children.user_id===1){
-            backgroundColorForDiv = "#EDFFD1"
+            backgroundColorForDiv = "#FFCBEA"
         }else if (this.props.children.user_id===2){
-            backgroundColorForDiv = "#F5E5FF"
+            backgroundColorForDiv = "#CBE3FF"
         }else if(this.props.children.user_id===3){
-            backgroundColorForDiv = "#EAFFFC"
+            backgroundColorForDiv = "#FFE0CB"
         }
         return backgroundColorForDiv;
     }

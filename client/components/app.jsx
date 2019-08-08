@@ -90,12 +90,12 @@ export default class App extends React.Component {
     }
 
     getEntries(targetDate) {
+        console.log("target date", targetDate);
         fetch('api/entries?date=' + targetDate)
         .then(response => {
             return response.json();
         })
         .then(myJson => {
-            console.log("entries", myJson.entries)
             this.setState({data: myJson.entries});
         })
         .catch(error => {
@@ -108,7 +108,6 @@ export default class App extends React.Component {
             return response.json();
         })
         .then(myJson => {
-            console.log("all entires:", myJson);
             this.setState({allCalendarEntries: myJson});
         })
         .catch(error => {
