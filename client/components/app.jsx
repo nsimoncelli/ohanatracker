@@ -248,7 +248,7 @@ export default class App extends React.Component {
             )
         } else if (this.state.view === "homepage") {
            return( 
-                <div>
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
