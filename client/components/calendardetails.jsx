@@ -1,6 +1,7 @@
 import React from 'react';
 import CalendarEntryDetails from './calendarentrydetails';
 import SubmitModal from './submitModal';
+import {CSSTransition} from 'react-transition-group';
 
 export default class CalendarDetails extends React.Component{
 
@@ -34,6 +35,11 @@ export default class CalendarDetails extends React.Component{
 
   render() {
     return (
+      <CSSTransition
+      in={true}
+      appear={true}
+      timeout={200}
+      classNames="fade"> 
       <React.Fragment>
         {this.state.modal === 'delete' && 
           <SubmitModal  
@@ -82,6 +88,7 @@ export default class CalendarDetails extends React.Component{
           </table>
         </div>
       </React.Fragment>
+      </CSSTransition>
     );
   }
 }
