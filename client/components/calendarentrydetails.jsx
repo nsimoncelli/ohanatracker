@@ -34,15 +34,15 @@ export default class CalendarEntryDetails extends React.Component{
         return newDate;
     }
 
-    setEntryTypeIcon() {
+    setEntryTypeIcon() {      
         let entryTypeIcon;
         if(this.props.children.entry_type==="naps"){
             entryTypeIcon = <img src="/images/napButtonIcon.png" height="25px" width="auto" />;
         }else if(this.props.children.entry_type==="feedings"){
             entryTypeIcon = <img src="/images/bottle2.png" height="25px" width="auto" />;
-        }else if(this.props.children.other_info==='{"change_type": 1}'){
+        }else if(this.props.children.other_info=== "1"){
             entryTypeIcon = <img src="/images/pee3.png" height="25px" width="auto" />;
-        }else if(this.props.children.other_info==='{"change_type": 2}'){
+        }else if(this.props.children.other_info=== "2"){
             entryTypeIcon = <img src="/images/poop4.png" height="25px" width="auto" />;
         }
         return entryTypeIcon;
@@ -61,7 +61,6 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     render(){ 
-        console.log("calendar entry details props", this.props.children.other_info);
         return (
             <CSSTransition
             in={true}
