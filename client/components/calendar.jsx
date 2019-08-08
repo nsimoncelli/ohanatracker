@@ -124,7 +124,6 @@ export default class Calendar extends React.Component{
     }
 
     onDateClick(day){
-        // console.log("day", day);
         this.setState({
             selectedDate: day
         }, () => { 
