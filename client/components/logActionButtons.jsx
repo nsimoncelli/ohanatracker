@@ -57,11 +57,8 @@ export default class LogActionButtons extends React.Component {
 
     getCurrentTime(e) {
         let today = new Date();
-        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        let dateTime = `${date}+${time}`;
         if (e.currentTarget.id==="napButton") {
-            this.props.getCurrentTime(dateTime)
+            this.props.getCurrentTime(today);
         }
     }
 
