@@ -99,7 +99,7 @@ function entries ( connection ) {
     
     router.post('/update', (req, res, next) => {
         const { id, entryType, otherInfo } = req.query;
-        const finishedAt = new Date(req.query.finishedAt);
+        const finishedAt = (req.query.finishedAt);
         if (!id) {
             res.status(400).send({
                 errors: ['Please make sure you provided an entry (id) from table baby_entries']
