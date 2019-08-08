@@ -10,15 +10,6 @@
   font-weight: bold;
 }
 
-Line {
-  height: 100px;
-  width: 100px;
-}
-
-.footer {
-  background-color: rgb(126, 150, 230);
-  color: white;
-}
 .poiret {
   font-family: 'Poiret one', cursive;
   font-size: 4.3rem;
@@ -112,8 +103,14 @@ header #logo .icon {
   width: 100vw;
 }
 .headerTop {
-  background-color: rgb(126, 150, 230);
+  background-color: rgb(181, 198, 255);
 }
+
+.footer {
+  background-color: rgb(181, 198, 255);
+  color: white;
+}
+
 .ohanaLogo {
   width: 63px;
 }
@@ -141,10 +138,6 @@ main {
   margin: 0 auto;
   margin-top: 5em;
   max-width: 50em;
-}
-
-.graphContainer {
-  padding: 10px 10px;
 }
 
 .selectUser {
@@ -508,4 +501,18 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 300px;
   height: 4px;
   background: #ddd;
+}
+
+/* animation */
+
+.button {
+  cursor: pointer;
+  box-shadow: 0 9px #999;
+  border-radius: 50%;
+}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
