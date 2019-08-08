@@ -72,7 +72,7 @@ export default class Graph extends React.Component {
       appear={true}
       timeout={300}
       classNames="fade"> 
-      <div className="graphContainer mt-1">
+      <div className="p-2 mb-3">
         <Line data={this.generateFeedingGraphData()}/>
         <Line data={this.generateDiaperingGraphData()}/>
         <Line data={this.generateNapGraphData()}/>

@@ -85,9 +85,9 @@ export default class InfoPage extends React.Component {
                         <br/>
                         <div className="row mt-2">
                             <div className="col ml-2">
-                                <div onClick={this.userSelectHandler} className="pinkButton">
+                                <button onClick={this.userSelectHandler} className="pinkButton">
                                     Start
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -102,9 +102,9 @@ export default class InfoPage extends React.Component {
                 appear={true}
                 timeout={200}
                 classNames="fade"> 
-                <div className="container membersContainer text-center py-2">
-                    <div className="row mb-2">
-                        <div className="col-12">
+                <div className="container membersContainer text-center py-2 mb-5">
+                    <div className="row mb-1">
+                        <div className="col">
                             <div className="poiretTitle">Our Team</div>
                         </div>
                     </div>
