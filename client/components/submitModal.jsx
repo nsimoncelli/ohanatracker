@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { isThisSecond } from 'date-fns';
+var format = require('date-fns/format');
 
 export default class SubmitModal extends React.Component {
 
@@ -87,6 +88,10 @@ export default class SubmitModal extends React.Component {
       'time' : time,
       'otherInfo' : otherInfo,
     }
+    var newDate = format(this.props.date, 'YYYY-MM-DD');
+
+    // console.log("submit modal date", newDate);
+    this.props.getDateDataFromDatabase(newDate);
     this.props.updateEntry(this.props.id, updateEntryObject);
   }
 
