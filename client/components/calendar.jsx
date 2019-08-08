@@ -123,7 +123,6 @@ export default class Calendar extends React.Component{
     }
 
     onDateClick(day){
-        // console.log("day", day);
         this.setState({
             selectedDate: day
         }, () => { 
@@ -147,7 +146,6 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-        // console.log("data from db", this.props);
         return(
         <div className="calendar">
             {this.renderHeader()}

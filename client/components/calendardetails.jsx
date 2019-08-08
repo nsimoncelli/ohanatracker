@@ -44,7 +44,8 @@ export default class CalendarDetails extends React.Component{
           />
         }
         {this.state.modal === 'modify' && 
-          <SubmitModal  
+          <SubmitModal
+            getDateDataFromDatabase={this.props.getDateDataFromDatabase}  
             modify={true} 
             updateEntry={this.props.updateEntry}
             date={this.state.date}
