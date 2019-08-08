@@ -95,7 +95,6 @@ export default class App extends React.Component {
             return response.json();
         })
         .then(myJson => {
-            console.log("entries", myJson.entries)
             this.setState({data: myJson.entries});
         })
         .catch(error => {
@@ -108,7 +107,6 @@ export default class App extends React.Component {
             return response.json();
         })
         .then(myJson => {
-            console.log("all entires:", myJson);
             this.setState({allCalendarEntries: myJson});
         })
         .catch(error => {
@@ -249,7 +247,7 @@ export default class App extends React.Component {
             )
         } else if (this.state.view === "homepage") {
            return( 
-                <div className="backgroundImage">
+                <div>
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
