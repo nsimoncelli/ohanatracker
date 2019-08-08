@@ -9,8 +9,8 @@ function entries ( connection ) {
                 "error": ["ensure that userId, babyId, AND otherInfo are all provided."]
             })
         }
+        const startedAt = new Date(req.query.startedAt);
         const finishedAt = new Date();
-        const startedAt = (req.query.startedAt) ? req.query.startedAt : null;
         const entryType = "naps";
         let query = 'INSERT INTO \`baby_entries\` \
                     ( \`baby_id\`, \`user_id\`,\`started_at\`, \`finished_at\`, \`date\`, \`entry_type\`, \`other_info\`) \
@@ -43,7 +43,6 @@ function entries ( connection ) {
                 "error": ["otherInfo must be 1 or 2"]
             });
         }
-    
         const finishedAt = new Date();
         const entryType = "changes";
         let query = 'INSERT INTO \`baby_entries\` \
