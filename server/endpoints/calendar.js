@@ -15,13 +15,13 @@ function calendar( connection ) {
             })
         };
         let query = 'SELECT id, user_id, baby_id, entry_type, other_info, finished_at \
-                    FROM \`baby_entries\` WHERE date = ?';
+                    FROM \`baby_entries\` WHERE date = date(?)';
         let insert = [date];
         connection.query(query, insert, (err, result) => {
             if (err) return next(err);
             res.status(200).json({
                 "entries": result
-            });
+            }); 
         });
     });
     

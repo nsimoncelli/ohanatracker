@@ -38,11 +38,9 @@ function entries ( connection ) {
             changeType = '{"change_type": 1}';
         } else if (otherInfo == 2) {
             changeType = '{"change_type": 2}';
-        } else if (otherInfo == 3) {
-            changeType = '{"change_type": 3}';
         } else {
             return res.status(422).send({
-                "error": ["otherInfo must be 1,2, or 3"]
+                "error": ["otherInfo must be 1 or 2"]
             });
         }
     
