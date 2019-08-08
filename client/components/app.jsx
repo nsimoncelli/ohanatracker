@@ -229,10 +229,11 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser}/>
                       <NavBar
-                          changeView={this.setView}
-                          getNapsData={this.getNapsData}
-                          getFeedingsData={this.getFeedingsData}
-                          getDiaperChangesData={this.getDiaperChangesData}
+                        appView={this.state.view}
+                        changeView={this.setView}
+                        getNapsData={this.getNapsData}
+                        getFeedingsData={this.getFeedingsData}
+                        getDiaperChangesData={this.getDiaperChangesData}
                       />
                       <Calendar
                         updateEntry={this.updateEntry}
@@ -252,6 +253,7 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser} />
                     <NavBar
+                        appView={this.state.view}
                         changeView={this.setView}
                         getNapsData={this.getNapsData}
                         getFeedingsData={this.getFeedingsData}
@@ -280,6 +282,7 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser}/>
                     <NavBar
+                        appView={this.state.view}
                         changeView={this.setView}
                         getNapsData={this.getNapsData}
                         getFeedingsData={this.getFeedingsData}

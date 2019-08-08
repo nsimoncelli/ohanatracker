@@ -21,9 +21,21 @@ export default class NavBar extends React.Component {
             this.props.changeView("calendar");
         }
 
+        highlightCurrentNavLocation(){
+
+
+            if(this.props.appView === 'homepage'){
+
+            } else if (this.props.appView === 'graph'){
+
+            } else if (this.props.appView === 'calendar'){
+
+            }
+        }
+
         render(){
             return(
-                <div className="row py-1 text-center">
+                <div className="row py-2 text-center">
                     <div className="homepageButtonContainer col-4">
                         <button onClick={this.changeViewtoHome}  className="btn p-2" type="button">
                             <img src="/images/home.png" width="80" />
