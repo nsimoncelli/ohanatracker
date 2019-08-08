@@ -10,20 +10,6 @@
   font-weight: bold;
 }
 
-body {
-  height: 100vh;
-  width: 100vw;
-}
-
-Line {
-  height: 100px;
-  width: 100px;
-}
-
-.footer {
-  background-color: rgb(170, 198, 245);
-  color: white;
-}
 .poiret {
   font-family: 'Poiret one', cursive;
   font-size: 4.3rem;
@@ -86,6 +72,8 @@ body {
     color: var(--text-color);
     background: var(--bg-color);
     position: relative;
+    height: 100vh;
+    width: 100vw;
 }
 
 header {
@@ -106,14 +94,25 @@ header #logo {
 header #logo .icon {
   padding-right: .25em;
 }
-
-.headerTop {
-  background-color: rgb(170, 198, 245);
+.backgroundImage {
+  background-image: url(./images/background4.jpg);
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
 }
+.headerTop {
+  background-color: rgb(181, 198, 255);
+}
+
+.footer {
+  background-color: rgb(181, 198, 255);
+  color: white;
+}
+
 .ohanaLogo {
-  margin-top: 3px;
-  width: 82px;
-  border-radius: 10px;
+  width: 63px;
 }
 .logoButton {
   background-color: transparent;
@@ -121,14 +120,15 @@ header #logo .icon {
 }
 .headerButton {
   color: #fff;
-  background: #ff9cbd;
+  background: #fb8bb0;
   padding: 8px 16px;
   border-radius: 10px;
   display: inline-block;
   border: none;
   transition: all 0.4s ease 0s;
   cursor: pointer;
-  margin-top: 3px;
+  margin-top: 5px;
+  margin-right: 3px;
   font-size: 1.6rem;
   font-weight: bolder;
 }
@@ -138,10 +138,6 @@ main {
   margin: 0 auto;
   margin-top: 5em;
   max-width: 50em;
-}
-
-.graphContainer {
-  padding: 10px 10px;
 }
 
 .selectUser {
@@ -423,15 +419,12 @@ thead, tbody tr {
 }
 
 /* ********USER SELECT STYLING******** */
-.userSelectContainer {
-  font-size: 1.75rem;
-}
 
 /*  Log In Page  */
 
 .ducky {
-  height: 100px;
-  width: 100px;
+  height: 130px;
+  width: 140px;
 }
 
 .front-page {
@@ -448,6 +441,7 @@ thead, tbody tr {
   right: 0;
   bottom: 50px;
   position: absolute;
+  z-index: -1;
 }
 
 input,
@@ -464,6 +458,33 @@ input:focus {
 }
 
 
+.fade-appear {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transition: opacity 200ms linear;
+}
+
+.fade-exit {
+  opacity: 1;;
+}
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms linear;
+}
+.fade-exit-done {
+  opacity: 0;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms linear;
+}
 input[type=range] {
   -webkit-appearance: none;
   background: transparent;
@@ -480,4 +501,18 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 300px;
   height: 4px;
   background: #ddd;
+}
+
+/* animation */
+
+.button {
+  cursor: pointer;
+  box-shadow: 0 9px #999;
+  border-radius: 50%;
+}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

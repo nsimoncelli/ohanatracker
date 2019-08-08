@@ -1,48 +1,41 @@
 const express = require('express');
-const router = express.Router();
 
-const dateTest = require('../functions/date-test.js');
-const timeConvert = require('../functions/time-convert.js');
-const connection = require('../db.js');
-
-router.get('/entries', (req, res, next) => {
-    const { date } = req.query;
-    if (!date) {
-        return res.status(400).send({
-            errors: ['No date provided'],
+function calendar( connection ) {
+    const router = express.Router();
+    router.get('/entries', (req, res, next) => {
+        if (!req.query.date) {
+            return res.status(400).send({
+                errors: ['No date provided'],
+            });
+        }
+        const date = new Date(req.query.date);
+        if (date.toString() === "Invalid Date") {
+            return res.status(400).send({
+                errors: ["date must be a valid date string"]
+            })
+        };
+        let query = 'SELECT id, user_id, baby_id, entry_type, other_info, finished_at \
+                    FROM \`baby_entries\` WHERE date = ?';
+        let insert = [date];
+        connection.query(query, insert, (err, result) => {
+            if (err) return next(err);
+            res.status(200).json({
+                "entries": result
+            });
         });
-    }
-    if (!dateTest(date)) {
-        return res.status(400).send({
-            errors: ["date must be in the following format YYYY-MM-DD"]
-        })
-    }
-    const startDate = date.concat(" 00:00:00");
-    const endDate = date.concat(" 23:59:59");
-
-    let query = 'SELECT id, user_id, baby_id, entry_type, other_info, finished_at \
-                FROM \`baby_entries\` WHERE finished_at \
-                BETWEEN ? AND ?';
-    let insert = [startDate, endDate];
-    connection.query(query, insert, (err, result) => {
-        if (err) return next(err);
-        result.forEach(element => {
-            element['finished_at'] = timeConvert(element['finished_at'], 0, 8);
-        });
-        res.status(200).send(JSON.stringify({
-            "entries": result
-        }));
     });
-});
+    
+    router.get('/entries/all', (req, res, next) => {
+        let query = 'SELECT * FROM \`baby_entries\`';
+        connection.query(query, (err, result) => {
+            if (err) return next(err);
+            res.json({
+                data: result
+            });
+        })
+    });
+    return router;
+}
 
-router.get('/entries/all', (req, res, next) => {
-    let query = 'SELECT * FROM \`baby_entries\`';
-    connection.query(query, (err, result) => {
-        if (err) return next(err);
-        res.send(JSON.stringify({
-            data: result
-        }));
-    })
-});
 
-module.exports = router;
+module.exports = calendar;

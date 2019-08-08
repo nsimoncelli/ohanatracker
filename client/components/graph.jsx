@@ -1,5 +1,6 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export default class Graph extends React.Component {
   constructor(props) {
@@ -66,11 +67,18 @@ export default class Graph extends React.Component {
 
   render() {
     return (
-      <div className="graphContainer mt-1">
+      <TransitionGroup>
+      <CSSTransition
+      appear={true}
+      timeout={300}
+      classNames="fade"> 
+      <div className="p-2 mb-3">
         <Line data={this.generateFeedingGraphData()}/>
         <Line data={this.generateDiaperingGraphData()}/>
         <Line data={this.generateNapGraphData()}/>
       </div>
+      </CSSTransition>
+      </TransitionGroup>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import SubmitModal from './submitModal';
+import {CSSTransition} from 'react-transition-group';
 const format = require('date-fns/format');
 
 
@@ -58,8 +59,13 @@ export default class CalendarEntryDetails extends React.Component{
     }
 
     render(){ 
-        console.log("calendar entry details props", this.props.children);
+        console.log("calendar entry details props", this.props.children.other_info);
         return (
+            <CSSTransition
+            in={true}
+            appear={true}
+            timeout={200}
+            classNames="fade"> 
             <React.Fragment>
                 <tr style ={{backgroundColor: this.setEntryBackgroudColor()}} className="text-center ">
                     <th scope="row" className="pt-3">{this.formatAMPM(this.props.children.finished_at)}</th>
@@ -83,8 +89,8 @@ export default class CalendarEntryDetails extends React.Component{
                         </button>
                     </td>
                 </tr>
-
             </React.Fragment>
+            </CSSTransition>
         )
     }
 }
