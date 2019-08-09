@@ -116,67 +116,40 @@ export default class LogActionButtons extends React.Component {
     }
 
     render() {
-        if(this.state.view === 'main'){
-            return(
-                <CSSTransition
-                in={true}
-                appear={true}
-                timeout={200}
-                classNames="fade"> 
-                <div className="container background1 mt-5">
-                    <div className="diapering row">
-                        <div className="diaperingButtonContainer col-12 text-center">
-                            {this.state.view === 'main' ? <img src="/images/diaper.png" height="142px" width="auto" onClick={this.diaperClickHandler}/> : 
-                            <div style={{"height":"142px"}}></div> }
-                        </div>
+        return(
+            <CSSTransition
+            in={true}
+            appear={true}
+            timeout={200}
+            classNames="fade"> 
+            <div className="container background1 mt-5">
+                <div className="diapering row">
+                    <div className="diaperingButtonContainer col-12 text-center">
+                        {this.state.view === 'main' ? <img src="/images/diaper.png" height="142px" width="auto" onClick={this.diaperClickHandler}/> : 
+                        <div style={{"height":"142px"}}></div> }
                     </div>
-                    <div className="feedingNapping row text-center">
-                        <div className="feedingButtonContainer col-6">
-                            {this.state.view === 'main' ? 
-                                <img src="/images/bottle2.png" height="142px" width="auto" onClick={this.handlePostFeedings}/> :
-                                <img src="/images/pee3.png" id="pee" height="142px" width="auto" onClick={this.handlePostChange} />
-                            }
-                        </div>
-                        <div className="nappingButtonContainer col-6">
-                            {this.state.view === 'main' ? 
-                                this.currentNapStatusIcon() :    
-                                <img src="/images/poop4.png" id="poop" height="142px" width="auto" onClick={this.handlePostChange} />
-                            }
-                        </div>
-                    </div>
-                    <div className="cancelButton row my-3">
-                            {this.diaperingCancelButtonRender()}
-                  </div>
-                    {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}                  
                 </div>
-                </CSSTransition>
-            )            
-        } else if (this.state.view === 'diapering') {
-            return (
-                    <CSSTransition
-                        in={true}
-                        appear={true}
-                        timeout={200}
-                        classNames="fade mt-5"> 
-                        <div className="container background1 mt-5">
-                            <div className="diaperingButtonContainer row text-center pt-5">
-                                <div className="diapering1 col-6">
-                                    <img src="/images/pee3.png" id="pee" height="142px" width="auto" onClick={this.handlePostChange} />
-                                </div>
-                                <div className="diapering2 col-6">
-                                    <img src="/images/poop4.png" id="poop" height="142px" width="auto" onClick={this.handlePostChange} />    
-                                </div>
-                            </div>
-                            <div className="cancelButton row my-3">
-                                <div className="cancelButtonContainer col-12 text-center">
-                                    <img className={this.state.show ? 'hide' : ''} src="/images/x-button.png" height="60px" width="auto" onClick={this.cancelDiapering} />
-                                </div>
-                            </div>
-                            {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}
-                        </div>
-                    </CSSTransition>
-            )
-        }           
+                <div className="feedingNapping row text-center">
+                    <div className="feedingButtonContainer col-6">
+                        {this.state.view === 'main' ? 
+                            <img src="/images/bottle2.png" height="142px" width="auto" onClick={this.handlePostFeedings}/> :
+                            <img src="/images/pee3.png" id="pee" height="142px" width="auto" onClick={this.handlePostChange} />
+                        }
+                    </div>
+                    <div className="nappingButtonContainer col-6">
+                        {this.state.view === 'main' ? 
+                            this.currentNapStatusIcon() :    
+                            <img src="/images/poop4.png" id="poop" height="142px" width="auto" onClick={this.handlePostChange} />
+                        }
+                    </div>
+                </div>
+                <div className="cancelButton row my-3">
+                        {this.diaperingCancelButtonRender()}
+                </div>
+                {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}                  
+            </div>
+            </CSSTransition>
+        )            
     }
 }
 
