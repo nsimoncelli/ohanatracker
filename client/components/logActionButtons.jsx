@@ -97,6 +97,24 @@ export default class LogActionButtons extends React.Component {
         this.showNotification();
     }
 
+    currentNapStatusIcon() {
+        if(this.props.awakeState){
+            return <img src="/images/napButtonIcon.png" id="napButton" height="142px" width="auto" onClick={this.nappingClickHandler} />;
+        } else {
+            return <img src="/images/sleeping-baby2.png" id="babyButton" height="142px" width="auto" onClick={this.nappingClickHandler}/>;
+        }
+    }
+
+    diaperingCancelButtonRender() {
+        if(this.state.view === 'diapering'){
+            return (
+                <div className="cancelButtonContainer col-12 text-center">
+                    <img className={this.state.show ? 'hide' : ''} src="/images/x-button.png" height="60px" width="auto" onClick={this.cancelDiapering} />
+                </div>
+            )
+        }
+    }
+
     render() {
         if(this.state.view === 'main'){
             return(
@@ -108,18 +126,27 @@ export default class LogActionButtons extends React.Component {
                 <div className="container background1 mt-5">
                     <div className="diapering row">
                         <div className="diaperingButtonContainer col-12 text-center">
-                            <img src="/images/diaper.png" height="142px" width="auto" onClick={this.diaperClickHandler} />
+                            {this.state.view === 'main' ? <img src="/images/diaper.png" height="142px" width="auto" onClick={this.diaperClickHandler}/> : 
+                            <div style={{"height":"142px"}}></div> }
                         </div>
                     </div>
                     <div className="feedingNapping row text-center">
                         <div className="feedingButtonContainer col-6">
-                            <img src="/images/bottle2.png" height="142px" width="auto" onClick={this.handlePostFeedings} />
+                            {this.state.view === 'main' ? 
+                                <img src="/images/bottle2.png" height="142px" width="auto" onClick={this.handlePostFeedings}/> :
+                                <img src="/images/pee3.png" id="pee" height="142px" width="auto" onClick={this.handlePostChange} />
+                            }
                         </div>
-                        <div className="nappingButtonContainer col-6">{this.props.awakeState ? 
-                            <img src="/images/napButtonIcon.png" id="napButton" height="142px" width="auto" onClick={this.nappingClickHandler} /> :
-                            <img src="/images/sleeping-baby2.png" id="babyButton" height="142px" width="auto" onClick={this.nappingClickHandler} />}        
+                        <div className="nappingButtonContainer col-6">
+                            {this.state.view === 'main' ? 
+                                this.currentNapStatusIcon() :    
+                                <img src="/images/poop4.png" id="poop" height="142px" width="auto" onClick={this.handlePostChange} />
+                            }
                         </div>
                     </div>
+                    <div className="cancelButton row my-3">
+                            {this.diaperingCancelButtonRender()}
+                  </div>
                     {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}                  
                 </div>
                 </CSSTransition>
@@ -149,7 +176,7 @@ export default class LogActionButtons extends React.Component {
                         </div>
                     </CSSTransition>
             )
-        }
+        }           
     }
 }
 
