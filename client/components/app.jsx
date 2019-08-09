@@ -39,6 +39,7 @@ export default class App extends React.Component {
         this.getAllCalendarEntries = this.getAllCalendarEntries.bind(this);
         this.getCurrentTime = this.getCurrentTime.bind(this);
         this.removeEntry = this.removeEntry.bind(this);
+        this.updateEntry = this.updateEntry.bind(this);
     }
 
     componentDidMount() {
@@ -117,9 +118,7 @@ export default class App extends React.Component {
     }
 
     updateEntry(id, newData){
-        let call = 'api/update?id='+id+'&finishedAt='+newData.date+' '+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo;
-        console.log('updateEntry function id:', call);
-        fetch('api/update?id='+id+'&finishedAt='+newData.date+' '+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo, {
+        fetch('api/update?id='+id+'&finishedAt='+newData.dateTime+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo, {
             method: 'POST',
         })
         .then(response => {
@@ -233,6 +232,7 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser}/>
                       <NavBar
+                          appView={this.state.view}
                           changeView={this.setView}
                           getNapsData={this.getNapsData}
                           getFeedingsData={this.getFeedingsData}
@@ -257,6 +257,7 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser} />
                     <NavBar
+                    appView={this.state.view}
                         changeView={this.setView}
                         getNapsData={this.getNapsData}
                         getFeedingsData={this.getFeedingsData}
@@ -285,6 +286,7 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser}/>
                     <NavBar
+                    appView={this.state.view}
                         changeView={this.setView}
                         getNapsData={this.getNapsData}
                         getFeedingsData={this.getFeedingsData}

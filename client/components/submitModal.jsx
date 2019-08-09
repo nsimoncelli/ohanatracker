@@ -83,18 +83,18 @@ export default class SubmitModal extends React.Component {
       otherInfo = 2;
     }
 
-    var newDate = format(this.props.date, 'YYYY-MM-DD');
-    this.props.getDateDataFromDatabase(newDate);
+    let newDate = format(this.props.date, 'YYYY-MM-DD');
+    
 
-    newDate = newDate + " " + time;
+    let dateTime = newDate + " " + time;
     
     let updateEntryObject = {
       'entryType' : entryType,
-      'dateTime' : newDate,
+      'dateTime' : dateTime,
       'otherInfo' : otherInfo,
     }
-
     this.props.updateEntry(this.props.id, updateEntryObject);
+     this.props.getDateDataFromDatabase(newDate);  
   }
 
   handleHourSlide(e) {
