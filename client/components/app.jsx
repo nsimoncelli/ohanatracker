@@ -207,7 +207,7 @@ export default class App extends React.Component {
                 appear={true}
                 timeout={300}
                 classNames="fade"> 
-                <div className="backgroundImage">
+                <div>
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -222,7 +222,7 @@ export default class App extends React.Component {
             )
         }else if(this.state.view==="calendar"){
             return (
-                <div className="backgroundImage">
+                <div>
                       <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -247,7 +247,7 @@ export default class App extends React.Component {
             )
         } else if (this.state.view === "homepage") {
            return( 
-                <div className="backgroundImage">
+                <div>
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -276,7 +276,7 @@ export default class App extends React.Component {
            )
         } else if(this.state.view === "graph") {
             return (
-                <div className="backgroundImage">
+                <div>
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -304,12 +304,11 @@ export default class App extends React.Component {
                         infoPageView={this.state.infoPageView}
                         sendInfoPageView={this.receiveInfoPageView} 
                         setView={this.setView} />
-                    <Footer />
                 </div>
             )
         } else if (this.state.view === "infoPage") {
             return (
-                <div className="backgroundImage">
+                <div>
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
