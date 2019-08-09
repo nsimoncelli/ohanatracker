@@ -29,6 +29,7 @@ function calendar( connection ) {
         let query = 'SELECT * FROM \`baby_entries\`';
         connection.query(query, (err, result) => {
             if (err) return next(err);
+            console.log(result);
             res.json({
                 data: result
             });
