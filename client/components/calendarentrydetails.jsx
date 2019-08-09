@@ -34,7 +34,8 @@ export default class CalendarEntryDetails extends React.Component{
         return newDate;
     }
 
-    setEntryTypeIcon() {      
+    setEntryTypeIcon() { 
+        console.log("this.props.children.entry_type", this.props.children.other_info);   
         let entryTypeIcon;
         if(this.props.children.entry_type==="naps"){
             entryTypeIcon = <img src="/images/napButtonIcon.png" height="25px" width="auto" />;

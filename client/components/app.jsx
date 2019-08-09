@@ -15,7 +15,7 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             view: "landingPage",
-            currentUser: "User",
+            currentUser: "Mom",
             data: [],
             napsData: [],
             feedingsData: [],
@@ -90,12 +90,12 @@ export default class App extends React.Component {
     }
 
     getEntries(targetDate) {
-        console.log("target date", targetDate);
         fetch('api/entries?date=' + targetDate)
         .then(response => {
             return response.json();
         })
         .then(myJson => {
+            console.log("entries", myJson.entries)
             this.setState({data: myJson.entries});
         })
         .catch(error => {
@@ -108,6 +108,7 @@ export default class App extends React.Component {
             return response.json();
         })
         .then(myJson => {
+            console.log("all entires:", myJson);
             this.setState({allCalendarEntries: myJson});
         })
         .catch(error => {
@@ -116,7 +117,9 @@ export default class App extends React.Component {
     }
 
     updateEntry(id, newData){
-        fetch('api/update?id='+id+'&finishedAt='+newData.dateTime+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo, {
+        let call = 'api/update?id='+id+'&finishedAt='+newData.date+' '+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo;
+        console.log('updateEntry function id:', call);
+        fetch('api/update?id='+id+'&finishedAt='+newData.date+' '+newData.time+'&entryType='+newData.entryType+'&otherInfo='+newData.otherInfo, {
             method: 'POST',
         })
         .then(response => {
@@ -124,11 +127,11 @@ export default class App extends React.Component {
         })
         .then(myJson => {
            console.log("successful update", myJson);
-           
+           this.getAllCalendarEntries();
         })
         .catch(error => {
             console.error('error: ', error);
-        });
+        })
     }
 
     postNap(userId, babyId, startedAt) {
@@ -207,7 +210,7 @@ export default class App extends React.Component {
                 appear={true}
                 timeout={300}
                 classNames="fade"> 
-                <div>
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -222,7 +225,7 @@ export default class App extends React.Component {
             )
         }else if(this.state.view==="calendar"){
             return (
-                <div>
+                <div className="backgroundImage">
                       <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -230,11 +233,10 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser}/>
                       <NavBar
-                        appView={this.state.view}
-                        changeView={this.setView}
-                        getNapsData={this.getNapsData}
-                        getFeedingsData={this.getFeedingsData}
-                        getDiaperChangesData={this.getDiaperChangesData}
+                          changeView={this.setView}
+                          getNapsData={this.getNapsData}
+                          getFeedingsData={this.getFeedingsData}
+                          getDiaperChangesData={this.getDiaperChangesData}
                       />
                       <Calendar
                         updateEntry={this.updateEntry}
@@ -247,7 +249,7 @@ export default class App extends React.Component {
             )
         } else if (this.state.view === "homepage") {
            return( 
-                <div>
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -255,7 +257,6 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser} />
                     <NavBar
-                        appView={this.state.view}
                         changeView={this.setView}
                         getNapsData={this.getNapsData}
                         getFeedingsData={this.getFeedingsData}
@@ -276,7 +277,7 @@ export default class App extends React.Component {
            )
         } else if(this.state.view === "graph") {
             return (
-                <div>
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
@@ -284,7 +285,6 @@ export default class App extends React.Component {
                         changeView={this.setView}
                         currentUser={this.state.currentUser}/>
                     <NavBar
-                        appView={this.state.view}
                         changeView={this.setView}
                         getNapsData={this.getNapsData}
                         getFeedingsData={this.getFeedingsData}
@@ -304,11 +304,12 @@ export default class App extends React.Component {
                         infoPageView={this.state.infoPageView}
                         sendInfoPageView={this.receiveInfoPageView} 
                         setView={this.setView} />
+                    <Footer />
                 </div>
             )
         } else if (this.state.view === "infoPage") {
             return (
-                <div>
+                <div className="backgroundImage">
                     <Header
                         sendInfoPageView={this.receiveInfoPageView}
                         infoPageView={this.state.infoPageView}
