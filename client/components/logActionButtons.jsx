@@ -1,6 +1,6 @@
 import React from 'react';
 import SubmitModal from './submitModal';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class LogActionButtons extends React.Component {
     
@@ -116,11 +116,12 @@ export default class LogActionButtons extends React.Component {
     }
 
     render() {
-        return(
-            <TransitionGroup>
+        if(this.state.view === 'main'){
+            return(
                 <CSSTransition
+                in={true}
                 appear={true}
-                timeout={500}
+                timeout={200}
                 classNames="fade"> 
                 <div className="container background1 mt-5">
                     <div className="diapering row">
@@ -145,13 +146,37 @@ export default class LogActionButtons extends React.Component {
                     </div>
                     <div className="cancelButton row my-3">
                             {this.diaperingCancelButtonRender()}
-                    </div>
-                    
+                  </div>
                     {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}                  
                 </div>
                 </CSSTransition>
-            </TransitionGroup>
-        )             
+            )            
+        } else if (this.state.view === 'diapering') {
+            return (
+                    <CSSTransition
+                        in={true}
+                        appear={true}
+                        timeout={200}
+                        classNames="fade mt-5"> 
+                        <div className="container background1 mt-5">
+                            <div className="diaperingButtonContainer row text-center pt-5">
+                                <div className="diapering1 col-6">
+                                    <img src="/images/pee3.png" id="pee" height="142px" width="auto" onClick={this.handlePostChange} />
+                                </div>
+                                <div className="diapering2 col-6">
+                                    <img src="/images/poop4.png" id="poop" height="142px" width="auto" onClick={this.handlePostChange} />    
+                                </div>
+                            </div>
+                            <div className="cancelButton row my-3">
+                                <div className="cancelButtonContainer col-12 text-center">
+                                    <img className={this.state.show ? 'hide' : ''} src="/images/x-button.png" height="60px" width="auto" onClick={this.cancelDiapering} />
+                                </div>
+                            </div>
+                            {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}
+                        </div>
+                    </CSSTransition>
+            )
+        }           
     }
 }
 

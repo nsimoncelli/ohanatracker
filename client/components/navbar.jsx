@@ -1,5 +1,5 @@
 import React from 'react';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class NavBar extends React.Component {
 
@@ -24,10 +24,10 @@ export default class NavBar extends React.Component {
 
         render(){
             return(
-                <TransitionGroup>
                     <CSSTransition
+                        in={true}
                         appear={true}
-                        timeout={300}
+                        timeout={200}
                         classNames="fade"> 
                         <div className="row py-1 text-center">
                             <div className="homepageButtonContainer col-4">
@@ -47,8 +47,7 @@ export default class NavBar extends React.Component {
                             </div>
                         </div>
                     </CSSTransition>
-                </TransitionGroup>
-            )
+           )
         }
 
 }

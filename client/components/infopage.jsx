@@ -91,7 +91,6 @@ export default class InfoPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="frontFlower"></div> */}
                 </div>   
                 </CSSTransition>   
             )

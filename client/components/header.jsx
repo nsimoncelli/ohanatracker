@@ -1,5 +1,5 @@
 import React from 'react';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -16,12 +16,24 @@ export default class Header extends React.Component {
         this.props.sendInfoPageView('landingPage');
         this.props.changeView('landingPage');
     }
+    
     render() {
+        let currentUser = this.props.currentUser;
+        let currentClass;
+        if(currentUser==="Mom") {
+            currentClass="momButton headerButton"
+        }else if(currentUser==="Dad") {
+            currentClass="dadButton headerButton"
+        } else if(currentUser==="Caregiver") {
+            currentClass="careButton headerButton"
+        } else {
+            currentClass="defaultButton headerButton"
+        }
         return(
-            <TransitionGroup>
             <CSSTransition
+                in={true}
                 appear={true}
-                timeout={300}
+                timeout={200}
                 classNames="fade"> 
             <div className="headerTop banner row py-3">
                 <div className='col-6'>
@@ -31,14 +43,13 @@ export default class Header extends React.Component {
                 </div>
                 <div className="col-6 text-right">
                     <div 
-                        className="headerButton"
+                        className={currentClass}
                         onClick={this.handleUserChange}>
                             {this.props.currentUser}
                     </div>
                 </div>
             </div>   
             </CSSTransition>
-            </TransitionGroup>         
         )
     }
 }
