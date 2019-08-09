@@ -3,12 +3,13 @@ const express = require('express');
 function entries ( connection ) {
     const router = express.Router();
     router.post('/create/naps', (req, res, next) => {
-        const { userId, babyId, otherInfo, startedAt } = req.query; 
+        const { userId, babyId, otherInfo } = req.query; 
         if (!userId || !babyId || !otherInfo) {
             return res.status(400).send({
                 "error": ["ensure that userId, babyId, AND otherInfo are all provided."]
             })
         }
+        const startedAt = new Date(req.query.startedAt);
         const finishedAt = new Date();
         const entryType = "naps";
         let query = 'INSERT INTO \`baby_entries\` \
