@@ -1,5 +1,5 @@
 import React from 'react';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class UserSelect extends React.Component{
     constructor(props){
@@ -22,10 +22,10 @@ export default class UserSelect extends React.Component{
     }
     render(){
         return(
-            <TransitionGroup>
             <CSSTransition
+                in={true}
                 appear={true}
-                timeout={300}
+                timeout={200}
                 classNames="fade"> 
             <div>
                 <br/>
@@ -57,10 +57,8 @@ export default class UserSelect extends React.Component{
                         </div>
                     </div>
                 </div>
-                {/* <div className="frontFlower frontFlower2"></div> */}
             </div>  
             </CSSTransition>
-            </TransitionGroup>
         )
     }
 }

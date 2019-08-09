@@ -1,5 +1,5 @@
 import React from 'react';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -18,10 +18,10 @@ export default class Header extends React.Component {
     }
     render() {
         return(
-            <TransitionGroup>
             <CSSTransition
+                in={true}
                 appear={true}
-                timeout={300}
+                timeout={200}
                 classNames="fade"> 
             <div className="headerTop banner row py-3">
                 <div className='col-6'>
@@ -38,7 +38,6 @@ export default class Header extends React.Component {
                 </div>
             </div>   
             </CSSTransition>
-            </TransitionGroup>         
         )
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import SubmitModal from './submitModal';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class LogActionButtons extends React.Component {
     
@@ -100,10 +100,10 @@ export default class LogActionButtons extends React.Component {
     render() {
         if(this.state.view === 'main'){
             return(
-                <TransitionGroup>
                 <CSSTransition
+                in={true}
                 appear={true}
-                timeout={500}
+                timeout={200}
                 classNames="fade"> 
                 <div className="container background1 mt-5">
                     <div className="diapering row">
@@ -123,14 +123,13 @@ export default class LogActionButtons extends React.Component {
                     {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}                  
                 </div>
                 </CSSTransition>
-                </TransitionGroup>
             )            
         } else if (this.state.view === 'diapering') {
             return (
-                <TransitionGroup>
                     <CSSTransition
+                        in={true}
                         appear={true}
-                        timeout={300}
+                        timeout={200}
                         classNames="fade mt-5"> 
                         <div className="container background1 mt-5">
                             <div className="diaperingButtonContainer row text-center pt-5">
@@ -149,7 +148,6 @@ export default class LogActionButtons extends React.Component {
                             {this.state.show && <SubmitModal setView={this.setView} mainActionConfirm={true} />}
                         </div>
                     </CSSTransition>
-                </TransitionGroup>
             )
         }
     }
