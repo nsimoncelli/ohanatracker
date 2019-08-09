@@ -16,7 +16,19 @@ export default class Header extends React.Component {
         this.props.sendInfoPageView('landingPage');
         this.props.changeView('landingPage');
     }
+    
     render() {
+        let currentUser = this.props.currentUser;
+        let currentClass;
+        if(currentUser==="Mom") {
+            currentClass="momButton headerButton"
+        }else if(currentUser==="Dad") {
+            currentClass="dadButton headerButton"
+        } else if(currentUser==="Caregiver") {
+            currentClass="careButton headerButton"
+        } else {
+            currentClass="defaultButton headerButton"
+        }
         return(
             <CSSTransition
                 in={true}
@@ -31,7 +43,7 @@ export default class Header extends React.Component {
                 </div>
                 <div className="col-6 text-right">
                     <div 
-                        className="headerButton"
+                        className={currentClass}
                         onClick={this.handleUserChange}>
                             {this.props.currentUser}
                     </div>

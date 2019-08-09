@@ -38,21 +38,21 @@ export default class UserSelect extends React.Component{
                     <div className="row mt-3">
                         <div className="col-12 momButtonContainer">
                             <button onClick={this.setUserToMom} className="btn py-3" type="button">
-                                <div className="poiretBody">Mom</div>
+                                <div className="headerButton momButton">Mom</div>
                             </button>
                         </div>
                     </div>
                     <div className="row mt-2">
                         <div className="col-12 dadButtonContainer">
                             <button onClick={this.setUserToDad} className="btn py-3" type="button">
-                                <div className="poiretBody">Dad</div>
+                                <div className="headerButton dadButton">Dad</div>
                             </button>
                         </div>
                     </div>
                     <div className="row mt-2">
                         <div className="col-12 caretakerButtonContainer">
                             <button onClick={this.setUserToCaregiver} className="btn py-3" type="button">
-                                <div className="poiretBody">Caregiver</div>
+                                <div className="headerButton careButton">Caregiver</div>
                             </button>
                         </div>
                     </div>

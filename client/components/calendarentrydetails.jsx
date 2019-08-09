@@ -51,11 +51,11 @@ export default class CalendarEntryDetails extends React.Component{
     setEntryBackgroudColor() {
         let backgroundColorForDiv = "";
         if (this.props.children.user_id===1){
-            backgroundColorForDiv = "#FFCBEA"
+            backgroundColorForDiv = "#FFCADC"
         }else if (this.props.children.user_id===2){
-            backgroundColorForDiv = "#CBE3FF"
+            backgroundColorForDiv = "#D5B8E6"
         }else if(this.props.children.user_id===3){
-            backgroundColorForDiv = "#FFE0CB"
+            backgroundColorForDiv = "#FBC89E"
         }
         return backgroundColorForDiv;
     }
