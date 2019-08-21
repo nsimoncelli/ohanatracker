@@ -4,4 +4,4 @@ Application that allows users to log, track, and edit essential information pert
 
 Parent friendly UI that is easy-to-use and minimizes complications.
 
-[a link] (ohanatracker.com)
+[a link](ohanatracker.com)
