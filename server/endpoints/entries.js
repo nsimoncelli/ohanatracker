@@ -99,7 +99,7 @@ function entries ( connection ) {
     
     router.post('/update', (req, res, next) => {
         const { id, entryType, otherInfo } = req.query;
-        console.log(req.query.finishedAt);
+        console.log(id);
         const finishedAt = new Date(req.query.finishedAt);
         console.log(finishedAt);
         if (!id) {
@@ -131,6 +131,7 @@ function entries ( connection ) {
         let insert = [finishedAt, entryType, otherInfo, id];
         connection.query(query, insert, (err, result) => {
             if (err) return next(err);
+            console.log(result);
             const output = {
                 success: true,
                 data: result
